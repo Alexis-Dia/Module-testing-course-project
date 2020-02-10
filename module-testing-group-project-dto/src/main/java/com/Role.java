@@ -1,4 +1,4 @@
-package com.moduleTesting.rest;
+package com;
 
 public enum Role {
 

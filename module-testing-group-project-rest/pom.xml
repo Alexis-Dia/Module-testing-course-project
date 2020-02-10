@@ -19,10 +19,13 @@
     </parent>
 
     <dependencies>
+        <!--Main spring-boot app-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!--For spring-com.moduleTesting.rest.security functionality-->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
@@ -33,6 +36,15 @@
             <artifactId>spring-security-web</artifactId>
             <version>${some.version}</version>
         </dependency>
+
+        <!--For adding module-testing-group-project-dto-->
+        <dependency>
+            <groupId>com.module-testing-group-project</groupId>
+            <artifactId>module-testing-group-project-dto</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

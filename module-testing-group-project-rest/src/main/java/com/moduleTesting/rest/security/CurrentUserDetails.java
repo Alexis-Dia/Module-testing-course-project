@@ -1,5 +1,7 @@
-package com.moduleTesting.rest;
+package com.moduleTesting.rest.security;
 
+import com.Role;
+import com.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

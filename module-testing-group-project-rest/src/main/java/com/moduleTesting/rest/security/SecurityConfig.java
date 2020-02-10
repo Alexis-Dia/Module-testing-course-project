@@ -1,4 +1,4 @@
-package com.moduleTesting.rest;
+package com.moduleTesting.rest.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;

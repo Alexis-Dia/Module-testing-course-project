@@ -8,6 +8,8 @@
 
     <modules>
         <module>module-testing-group-project-rest</module>
+        <module>module-testing-group-project-common</module>
+        <module>module-testing-group-project-dto</module>
     </modules>
 
 </project>

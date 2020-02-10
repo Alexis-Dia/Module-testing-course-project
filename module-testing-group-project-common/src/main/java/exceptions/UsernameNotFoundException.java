@@ -1,4 +1,4 @@
-package com.moduleTesting.rest;
+package exceptions;
 
 public class UsernameNotFoundException extends Exception {
 

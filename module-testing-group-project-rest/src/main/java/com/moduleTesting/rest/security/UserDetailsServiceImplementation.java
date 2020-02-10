@@ -1,7 +1,8 @@
-package com.moduleTesting.rest;
+package com.moduleTesting.rest.security;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
+import com.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,11 +19,11 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
             //throw new UsernameNotFoundException("username is empty");
         }
 
-        //User foundUser = userRepository.findByEmailAddress(username);
+        //com.User foundUser = userRepository.findByEmailAddress(username);
         User foundUser = new User("Alex", "12345678");
         //if( foundUser != null ){
             System.out.println("FOUND");
-            return foundUser.toCurrentUserDetails();
+            return new SecurityUser(foundUser.getEmailAddress(), foundUser.getPassword(), foundUser.getRole().name());
 
         //}
         //throw new UsernameNotFoundException( username + "is not found");

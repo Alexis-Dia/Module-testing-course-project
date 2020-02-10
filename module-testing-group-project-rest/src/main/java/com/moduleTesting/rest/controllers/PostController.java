@@ -1,4 +1,4 @@
-package com.moduleTesting.rest;
+package com.moduleTesting.rest.controllers;
 
 import org.springframework.web.bind.annotation.*;
 
