@@ -1,4 +1,4 @@
-package com;
+package com.moduleTesting.portal.dto;
 
 public class User {
     /**
@@ -57,8 +57,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "com.User [userID=" + userID + ", emailAddress=" + emailAddress
-                + ", password=" + password + ", role=" + role + "]";
+        return "User{" +
+            "userID=" + userID +
+            ", emailAddress='" + emailAddress + '\'' +
+            ", password='" + password + '\'' +
+            ", role=" + role +
+            '}';
     }
-
 }

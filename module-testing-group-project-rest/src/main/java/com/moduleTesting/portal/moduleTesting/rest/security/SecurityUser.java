@@ -1,4 +1,4 @@
-package com.moduleTesting.rest.security;
+package com.moduleTesting.portal.moduleTesting.rest.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

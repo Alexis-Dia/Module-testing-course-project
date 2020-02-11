@@ -1,4 +1,4 @@
-package com.moduleTesting.rest;
+package com.moduleTesting.portal.moduleTesting.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

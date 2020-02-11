@@ -1,4 +1,4 @@
-package com.moduleTesting.rest.security;
+package com.moduleTesting.portal.moduleTesting.rest.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/first").hasAuthority("Service_Center")
                 .antMatchers("/login").permitAll()
                 .antMatchers("/post/load").permitAll()
+                .antMatchers("/post/all").permitAll()
                 .anyRequest().fullyAuthenticated()
                 .and().formLogin()
                 .loginPage("/login")
