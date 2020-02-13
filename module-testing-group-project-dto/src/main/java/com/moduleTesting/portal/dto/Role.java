@@ -9,7 +9,7 @@ public enum Role {
     private final String name;
     private final int securityLevel;
 
-    Role(String name, int securityLevel) {
+    Role (String name, int securityLevel) {
         this.name = name;
         this.securityLevel = securityLevel;
     }
