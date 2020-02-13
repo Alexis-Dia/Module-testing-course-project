@@ -2,6 +2,7 @@ package com.moduleTesting.portal.moduleTesting.rest.controllers;
 
 import com.moduleTesting.portal.dto.User;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,9 +10,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/post")
 public class PostController {
 
-    @GetMapping("/load")
-    public String getPosts() {
+/*    @Autowired(required=true)
+    private final CarStatusService carStatusService;
 
+    @Autowired(required=true)
+    public PostController(CarStatusService carStatusService) {
+        this.carStatusService = carStatusService;
+    }*/
+
+
+
+/*    @Autowired
+    public PostController(CarStatusService carStatusService) {
+        this.carStatusService = carStatusService;
+    }*/
+
+    @PostMapping("/load")
+    public String getPosts() {
+        //carStatusService.findAll();
         /*Page<PostDto> lll = null;
         try{
             lll = service.getProductPage(filter);
