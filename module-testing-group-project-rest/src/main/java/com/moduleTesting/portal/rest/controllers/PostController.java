@@ -1,33 +1,29 @@
-package com.moduleTesting.portal.moduleTesting.rest.controllers;
+package com.moduleTesting.portal.rest.controllers;
 
 import com.moduleTesting.portal.dto.User;
+import com.moduleTesting.portal.entity.CarStatus;
+import com.moduleTesting.portal.service.carStatus.CarStatusService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/post")
 public class PostController {
 
-/*    @Autowired(required=true)
     private final CarStatusService carStatusService;
 
-    @Autowired(required=true)
+    @Autowired
     public PostController(CarStatusService carStatusService) {
         this.carStatusService = carStatusService;
-    }*/
+    }
 
-
-
-/*    @Autowired
-    public PostController(CarStatusService carStatusService) {
-        this.carStatusService = carStatusService;
-    }*/
-
-    @PostMapping("/load")
+    @GetMapping("/load")
     public String getPosts() {
-        //carStatusService.findAll();
+
         /*Page<PostDto> lll = null;
         try{
             lll = service.getProductPage(filter);
@@ -43,6 +39,8 @@ public class PostController {
     @GetMapping("/all")
     public User getTasks() {
 
+        final List<CarStatus> all = carStatusService.findAll();
+        System.out.println(all);
         /*Page<PostDto> lll = null;
         try{
             lll = service.getProductPage(filter);

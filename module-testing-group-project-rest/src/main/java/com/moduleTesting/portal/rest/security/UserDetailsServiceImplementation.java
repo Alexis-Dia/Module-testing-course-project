@@ -1,4 +1,4 @@
-package com.moduleTesting.portal.moduleTesting.rest.security;
+package com.moduleTesting.portal.rest.security;
 
 import com.moduleTesting.portal.dto.User;
 import org.springframework.security.core.userdetails.UserDetails;

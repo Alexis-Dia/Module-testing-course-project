@@ -1,4 +1,4 @@
-package com.moduleTesting.service.carStatus;
+package com.moduleTesting.portal.service.carStatus;
 
 import com.moduleTesting.portal.entity.CarStatus;
 

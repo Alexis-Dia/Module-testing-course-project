@@ -1,8 +1,8 @@
-package com.moduleTesting.service.carStatus.impl;
+package com.moduleTesting.portal.service.carStatus.impl;
 
 import com.moduleTesting.portal.entity.CarStatus;
 import com.moduleTesting.portal.repository.CarStatusRepository;
-import com.moduleTesting.service.carStatus.CarStatusService;
+import com.moduleTesting.portal.service.carStatus.CarStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
