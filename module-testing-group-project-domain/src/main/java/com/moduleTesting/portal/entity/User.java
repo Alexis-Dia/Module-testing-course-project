@@ -34,16 +34,16 @@ public class User {
 
     @JoinColumn(name = "role_id")
     @ManyToOne
-    private Role roleId;
+    private Role role;
 
     @JoinColumn(name = "status_id")
     @ManyToOne
-    private UserStatus statusId;
+    private UserStatus status;
 
     public User() {
     }
 
-    public User(String lastName, String firstName, String patronymic, Date birthday, String login, String password, Float money, Role roleId, UserStatus statusId) {
+    public User(String lastName, String firstName, String patronymic, Date birthday, String login, String password, Float money, Role role, UserStatus status) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.patronymic = patronymic;
@@ -51,8 +51,8 @@ public class User {
         this.login = login;
         this.password = password;
         this.money = money;
-        this.roleId = roleId;
-        this.statusId = statusId;
+        this.role = role;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -119,20 +119,20 @@ public class User {
         this.money = money;
     }
 
-    public Role getRoleId() {
-        return roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(Role roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
-    public UserStatus getStatusId() {
-        return statusId;
+    public UserStatus getStatus() {
+        return status;
     }
 
-    public void setStatusId(UserStatus statusId) {
-        this.statusId = statusId;
+    public void setStatus(UserStatus status) {
+        this.status = status;
     }
 
     @Override
@@ -146,8 +146,8 @@ public class User {
             ", login='" + login + '\'' +
             ", password='" + password + '\'' +
             ", money='" + money + '\'' +
-            ", roleId=" + roleId +
-            ", statusId=" + statusId +
+            ", role=" + role +
+            ", status=" + status +
             '}';
     }
 }

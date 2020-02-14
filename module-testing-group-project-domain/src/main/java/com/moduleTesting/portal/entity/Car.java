@@ -25,17 +25,17 @@ public class Car {
 
     @JoinColumn(name = "status_id")
     @ManyToOne
-    private CarStatus statusId;
+    private CarStatus carStatus;
 
     public Car() {
     }
 
-    public Car(Integer brandId, Date year, String number, Date dateOfReceipt, CarStatus statusId) {
+    public Car(Integer brandId, Date year, String number, Date dateOfReceipt, CarStatus carStatus) {
         this.brandId = brandId;
         this.year = year;
         this.number = number;
         this.dateOfReceipt = dateOfReceipt;
-        this.statusId = statusId;
+        this.carStatus = carStatus;
     }
 
     public Integer getId() {
@@ -78,12 +78,12 @@ public class Car {
         this.dateOfReceipt = dateOfReceipt;
     }
 
-    public CarStatus getStatusId() {
-        return statusId;
+    public CarStatus getCarStatus() {
+        return carStatus;
     }
 
-    public void setStatusId(CarStatus statusId) {
-        this.statusId = statusId;
+    public void setCarStatus(CarStatus carStatus) {
+        this.carStatus = carStatus;
     }
 
     @Override
@@ -94,7 +94,7 @@ public class Car {
             ", year=" + year +
             ", number='" + number + '\'' +
             ", yearOfReceipt=" + dateOfReceipt +
-            ", statusId=" + statusId +
+            ", carStatus=" + carStatus +
             '}';
     }
 }

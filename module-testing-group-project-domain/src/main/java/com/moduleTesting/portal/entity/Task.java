@@ -21,15 +21,15 @@ public class Task {
 
     @JoinColumn(name="driver_id")
     @ManyToOne
-    private User driver_id;
+    private User driver;
 
     @JoinColumn(name="car_id")
     @ManyToOne
-    private Car carId;
+    private Car car;
 
     @JoinColumn(name="status_id")
     @ManyToOne
-    private TaskStatus statusId;
+    private TaskStatus status;
 
     @Column(name="reward")
     private Float reward;
@@ -37,13 +37,13 @@ public class Task {
     public Task() {
     }
 
-    public Task(String name, Float summaryDistance, Float weight, User driver_id, Car carId, TaskStatus statusId, Float reward) {
+    public Task(String name, Float summaryDistance, Float weight, User driver, Car car, TaskStatus status, Float reward) {
         this.name = name;
         this.summaryDistance = summaryDistance;
         this.weight = weight;
-        this.driver_id = driver_id;
-        this.carId = carId;
-        this.statusId = statusId;
+        this.driver = driver;
+        this.car = car;
+        this.status = status;
         this.reward = reward;
     }
 
@@ -79,28 +79,28 @@ public class Task {
         this.weight = weight;
     }
 
-    public User getDriver_id() {
-        return driver_id;
+    public User getDriver() {
+        return driver;
     }
 
-    public void setDriver_id(User driver_id) {
-        this.driver_id = driver_id;
+    public void setDriver(User driver) {
+        this.driver = driver;
     }
 
-    public Car getCarId() {
-        return carId;
+    public Car getCar() {
+        return car;
     }
 
-    public void setCarId(Car carId) {
-        this.carId = carId;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
-    public TaskStatus getStatusId() {
-        return statusId;
+    public TaskStatus getStatus() {
+        return status;
     }
 
-    public void setStatusId(TaskStatus statusId) {
-        this.statusId = statusId;
+    public void setStatus(TaskStatus status) {
+        this.status = status;
     }
 
     public Float getReward() {
@@ -118,9 +118,9 @@ public class Task {
             ", name='" + name + '\'' +
             ", summaryDistance=" + summaryDistance +
             ", weight=" + weight +
-            ", driver_id=" + driver_id +
-            ", carId=" + carId +
-            ", statusId=" + statusId +
+            ", driver=" + driver +
+            ", car=" + car +
+            ", status=" + status +
             ", reward=" + reward +
             '}';
     }
