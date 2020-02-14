@@ -16,6 +16,10 @@ public class CarStatus {
     public CarStatus() {
     }
 
+    public CarStatus(String name) {
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }

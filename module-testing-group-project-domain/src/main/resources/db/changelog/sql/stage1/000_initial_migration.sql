@@ -1,5 +1,6 @@
 USE [master]
 GO
+/****** Object:  Database [carriages_system]    Script Date: 2/14/2020 12:48:13 PM ******/
 ALTER DATABASE [carriages_system] SET COMPATIBILITY_LEVEL = 120
 GO
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
@@ -61,44 +62,51 @@ ALTER DATABASE [carriages_system] SET DELAYED_DURABILITY = DISABLED
 GO
 USE [carriages_system]
 GO
-/****** Object:  Table [dbo].[brand]    Script Date: 12.02.2020 14:01:55 ******/
+/****** Object:  Table [dbo].[brand]    Script Date: 2/14/2020 12:48:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+SET ANSI_PADDING ON
+GO
 CREATE TABLE [dbo].[brand](
 	[id] [int] NOT NULL,
-	[brand] [nvarchar](max) NOT NULL,
-	[cariagyingCapacity] [float] NOT NULL,
-	[model] [nvarchar](max) NULL,
+	[brand] [varchar](250) NOT NULL,
+	[carriagying_capacity] [float] NOT NULL,
+	[model] [varchar](250) NULL,
  CONSTRAINT [PK_brand] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[car]    Script Date: 12.02.2020 14:01:55 ******/
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[car]    Script Date: 2/14/2020 12:48:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+SET ANSI_PADDING ON
+GO
 CREATE TABLE [dbo].[car](
 	[id] [int] NOT NULL,
-	[brandId] [int] NOT NULL,
-	[year] [datetime] NOT NULL,
-	[number] [nvarchar](max) NOT NULL,
-	[shortYear] [int] NULL,
-	[yearOfReceipt] [datetime] NULL,
-	[statusId] [int] NOT NULL,
+	[brand_id] [int] NOT NULL,
+	[year] [date] NOT NULL,
+	[number] [varchar](50) NOT NULL,
+	[date_of_receipt] [date] NOT NULL,
+	[status_id] [int] NOT NULL,
  CONSTRAINT [PK_car] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[car_status]    Script Date: 12.02.2020 14:01:55 ******/
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[car_status]    Script Date: 2/14/2020 12:48:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -117,31 +125,43 @@ CREATE TABLE [dbo].[car_status](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[long_report]    Script Date: 12.02.2020 14:01:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/****** Object:  Table [dbo].[long_report]    Script Date: 2/14/2020 12:48:13 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
 CREATE TABLE [dbo].[long_report](
 	[id] [int] NOT NULL,
 	[carId] [int] NULL,
-	[driverId] [int] NULL,
+	[driver_id] [int] NULL,
 	[departure] [datetime] NULL,
 	[weight] [decimal](18, 0) NULL,
 	[distance] [decimal](18, 0) NULL,
 	[arrival] [datetime] NULL,
-	[departureDate] [nvarchar](max) NULL,
-	[departureTime] [nvarchar](max) NULL,
-	[arrivalDate] [nvarchar](max) NULL,
-	[arrivalTime] [nvarchar](max) NULL,
+	[departure_date] [varchar](250) NULL,
+	[departure_time] [varchar](250) NULL,
+	[arrival_date] [varchar](250) NULL,
+	[arrival_time] [varchar](250) NULL,
  CONSTRAINT [PK_long_journey] PRIMARY KEY CLUSTERED
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[report]    Script Date: 12.02.2020 14:01:55 ******/
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[report]    Script Date: 2/14/2020 12:48:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -160,7 +180,7 @@ CREATE TABLE [dbo].[report](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[role]    Script Date: 12.02.2020 14:01:55 ******/
+/****** Object:  Table [dbo].[role]    Script Date: 2/14/2020 12:48:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -179,7 +199,7 @@ CREATE TABLE [dbo].[role](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[task]    Script Date: 12.02.2020 14:01:55 ******/
+/****** Object:  Table [dbo].[task]    Script Date: 2/14/2020 12:48:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -199,7 +219,7 @@ CREATE TABLE [dbo].[task](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[task_status]    Script Date: 12.02.2020 14:01:55 ******/
+/****** Object:  Table [dbo].[task_status]    Script Date: 2/14/2020 12:48:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -218,19 +238,21 @@ CREATE TABLE [dbo].[task_status](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[user]    Script Date: 12.02.2020 14:01:55 ******/
+/****** Object:  Table [dbo].[user]    Script Date: 2/14/2020 12:48:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+SET ANSI_PADDING ON
+GO
 CREATE TABLE [dbo].[user](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[lastName] [nvarchar](max) NOT NULL,
-	[firstName] [nvarchar](max) NOT NULL,
-	[patronymic] [nvarchar](max) NOT NULL,
-	[birthDay] [datetime] NOT NULL,
-	[login] [nvarchar](max) NOT NULL,
-	[password] [nvarchar](max) NOT NULL,
+	[last_name] [varchar](250) NOT NULL,
+	[first_name] [varchar](250) NOT NULL,
+	[patronymic] [varchar](250) NOT NULL,
+	[birthday] [datetime] NOT NULL,
+	[login] [varchar](250) NOT NULL,
+	[password] [varchar](250) NOT NULL,
 	[money] [float] NOT NULL,
 	[roleId] [int] NOT NULL,
 	[statusId] [int] NOT NULL,
@@ -238,10 +260,12 @@ CREATE TABLE [dbo].[user](
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[user_status]    Script Date: 12.02.2020 14:01:55 ******/
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[user_status]    Script Date: 2/14/2020 12:48:13 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -260,21 +284,21 @@ CREATE TABLE [dbo].[user_status](
 GO
 SET ANSI_PADDING OFF
 GO
-INSERT [dbo].[brand] ([id], [brand], [cariagyingCapacity], [model]) VALUES (2, N'VW', 3540.5, N'Crafter')
-INSERT [dbo].[brand] ([id], [brand], [cariagyingCapacity], [model]) VALUES (3, N'VW', 1240.5, N'Caddy')
-INSERT [dbo].[brand] ([id], [brand], [cariagyingCapacity], [model]) VALUES (4, N'Ford', 1240.5, N'Transit')
-INSERT [dbo].[brand] ([id], [brand], [cariagyingCapacity], [model]) VALUES (5, N'Ford', 4500, N'F650')
-INSERT [dbo].[brand] ([id], [brand], [cariagyingCapacity], [model]) VALUES (6, N'Scania', 18000, N'R500')
-INSERT [dbo].[car] ([id], [brandId], [year], [number], [shortYear], [yearOfReceipt], [statusId]) VALUES (4, 4, CAST(N'1999-06-23 00:00:00.000' AS DateTime), N'OP-1871', 1999, CAST(N'2001-06-23 00:00:00.000' AS DateTime), 1)
-INSERT [dbo].[car] ([id], [brandId], [year], [number], [shortYear], [yearOfReceipt], [statusId]) VALUES (5, 3, CAST(N'2006-06-23 00:00:00.000' AS DateTime), N'YZ-5643', 2006, CAST(N'2008-06-23 00:00:00.000' AS DateTime), 1)
-INSERT [dbo].[car] ([id], [brandId], [year], [number], [shortYear], [yearOfReceipt], [statusId]) VALUES (6, 2, CAST(N'1999-06-23 00:00:00.000' AS DateTime), N'HT-8381', 1999, CAST(N'2001-06-23 00:00:00.000' AS DateTime), 1)
-INSERT [dbo].[car] ([id], [brandId], [year], [number], [shortYear], [yearOfReceipt], [statusId]) VALUES (7, 5, CAST(N'2019-03-11 00:00:00.000' AS DateTime), N'JZ-4915', 2019, CAST(N'2021-03-11 00:00:00.000' AS DateTime), 1)
-INSERT [dbo].[car] ([id], [brandId], [year], [number], [shortYear], [yearOfReceipt], [statusId]) VALUES (8, 6, CAST(N'2007-10-07 00:00:00.000' AS DateTime), N'AA-1357', 2007, CAST(N'2009-10-07 00:00:00.000' AS DateTime), 1)
+INSERT [dbo].[brand] ([id], [brand], [carriagying_capacity], [model]) VALUES (2, N'VW', 3540.5, N'Crafter')
+INSERT [dbo].[brand] ([id], [brand], [carriagying_capacity], [model]) VALUES (3, N'VW', 1240.5, N'Caddy')
+INSERT [dbo].[brand] ([id], [brand], [carriagying_capacity], [model]) VALUES (4, N'Ford', 1240.5, N'Transit')
+INSERT [dbo].[brand] ([id], [brand], [carriagying_capacity], [model]) VALUES (5, N'Ford', 4500, N'F650')
+INSERT [dbo].[brand] ([id], [brand], [carriagying_capacity], [model]) VALUES (6, N'Scania', 18000, N'R500')
+INSERT [dbo].[car] ([id], [brand_id], [year], [number], [date_of_receipt], [status_id]) VALUES (4, 4, CAST(N'1999-06-23' AS Date), N'OP-1871', CAST(N'2001-06-23' AS Date), 1)
+INSERT [dbo].[car] ([id], [brand_id], [year], [number], [date_of_receipt], [status_id]) VALUES (5, 3, CAST(N'2006-06-23' AS Date), N'YZ-5643', CAST(N'2008-06-23' AS Date), 1)
+INSERT [dbo].[car] ([id], [brand_id], [year], [number], [date_of_receipt], [status_id]) VALUES (6, 2, CAST(N'1999-06-23' AS Date), N'HT-8381', CAST(N'2001-06-23' AS Date), 1)
+INSERT [dbo].[car] ([id], [brand_id], [year], [number], [date_of_receipt], [status_id]) VALUES (7, 5, CAST(N'2019-03-11' AS Date), N'JZ-4915', CAST(N'2021-03-11' AS Date), 1)
+INSERT [dbo].[car] ([id], [brand_id], [year], [number], [date_of_receipt], [status_id]) VALUES (8, 6, CAST(N'2007-10-07' AS Date), N'AA-1357', CAST(N'2009-10-07' AS Date), 1)
 INSERT [dbo].[car_status] ([id], [name]) VALUES (1, N'FREE')
 INSERT [dbo].[car_status] ([id], [name]) VALUES (2, N'BUSY')
-INSERT [dbo].[long_report] ([id], [carId], [driverId], [departure], [weight], [distance], [arrival], [departureDate], [departureTime], [arrivalDate], [arrivalTime]) VALUES (1, 4, 1, CAST(N'2019-12-30 11:00:00.000' AS DateTime), CAST(1345 AS Decimal(18, 0)), CAST(1528 AS Decimal(18, 0)), CAST(N'2020-01-07 06:00:00.000' AS DateTime), N'2019-08-27', N'07:00:00.0000000', N'2020-01-07', N'06:00:00.0000000')
-INSERT [dbo].[long_report] ([id], [carId], [driverId], [departure], [weight], [distance], [arrival], [departureDate], [departureTime], [arrivalDate], [arrivalTime]) VALUES (2, 6, 5, CAST(N'2019-10-01 07:00:00.000' AS DateTime), CAST(2500 AS Decimal(18, 0)), CAST(400 AS Decimal(18, 0)), CAST(N'2019-10-11 14:00:00.000' AS DateTime), N'2019-10-05', N'07:00:00.0000000', N'2019-10-11', N'14:00:00.0000000')
-INSERT [dbo].[long_report] ([id], [carId], [driverId], [departure], [weight], [distance], [arrival], [departureDate], [departureTime], [arrivalDate], [arrivalTime]) VALUES (3, 6, 5, CAST(N'2019-10-07 07:00:00.000' AS DateTime), CAST(2900 AS Decimal(18, 0)), CAST(2111 AS Decimal(18, 0)), CAST(N'2019-10-15 14:00:00.000' AS DateTime), N'2019-10-07', N'07:00:00.0000000', N'2019-10-15', N'14:00:00.0000000')
+INSERT [dbo].[long_report] ([id], [carId], [driver_id], [departure], [weight], [distance], [arrival], [departure_date], [departure_time], [arrival_date], [arrival_time]) VALUES (1, 4, 1, CAST(N'2019-12-30 11:00:00.000' AS DateTime), CAST(1345 AS Decimal(18, 0)), CAST(1528 AS Decimal(18, 0)), CAST(N'2020-01-07 06:00:00.000' AS DateTime), N'2019-08-27', N'07:00:00.0000000', N'2020-01-07', N'06:00:00.0000000')
+INSERT [dbo].[long_report] ([id], [carId], [driver_id], [departure], [weight], [distance], [arrival], [departure_date], [departure_time], [arrival_date], [arrival_time]) VALUES (2, 6, 5, CAST(N'2019-10-01 07:00:00.000' AS DateTime), CAST(2500 AS Decimal(18, 0)), CAST(400 AS Decimal(18, 0)), CAST(N'2019-10-11 14:00:00.000' AS DateTime), N'2019-10-05', N'07:00:00.0000000', N'2019-10-11', N'14:00:00.0000000')
+INSERT [dbo].[long_report] ([id], [carId], [driver_id], [departure], [weight], [distance], [arrival], [departure_date], [departure_time], [arrival_date], [arrival_time]) VALUES (3, 6, 5, CAST(N'2019-10-07 07:00:00.000' AS DateTime), CAST(2900 AS Decimal(18, 0)), CAST(2111 AS Decimal(18, 0)), CAST(N'2019-10-15 14:00:00.000' AS DateTime), N'2019-10-07', N'07:00:00.0000000', N'2019-10-15', N'14:00:00.0000000')
 INSERT [dbo].[report] ([id], [task_id], [departure], [weight], [distance], [arrival]) VALUES (1, 1, CAST(N'2019-11-27 11:00:00.000' AS DateTime), CAST(256 AS Decimal(18, 0)), CAST(128 AS Decimal(18, 0)), CAST(N'2019-11-27 19:30:00.000' AS DateTime))
 INSERT [dbo].[report] ([id], [task_id], [departure], [weight], [distance], [arrival]) VALUES (2, 1, CAST(N'2019-11-28 11:00:00.000' AS DateTime), CAST(1256 AS Decimal(18, 0)), CAST(1228 AS Decimal(18, 0)), CAST(N'2019-11-29 06:10:00.000' AS DateTime))
 INSERT [dbo].[report] ([id], [task_id], [departure], [weight], [distance], [arrival]) VALUES (3, 1, CAST(N'2008-02-25 11:00:00.000' AS DateTime), CAST(351 AS Decimal(18, 0)), CAST(567 AS Decimal(18, 0)), CAST(N'2008-02-26 11:00:00.000' AS DateTime))
@@ -339,21 +363,21 @@ INSERT [dbo].[task_status] ([id], [name]) VALUES (4, N'REJECTED')
 INSERT [dbo].[task_status] ([id], [name]) VALUES (5, N'FINISHED')
 SET IDENTITY_INSERT [dbo].[user] ON
 
-INSERT [dbo].[user] ([id], [lastName], [firstName], [patronymic], [birthDay], [login], [password], [money], [roleId], [statusId]) VALUES (1, N'Ivanov', N'Ivan', N'Ivanovich', CAST(N'1989-01-13 00:00:00.000' AS DateTime), N'ivanov', N'ivanov', 0, 2, 1)
-INSERT [dbo].[user] ([id], [lastName], [firstName], [patronymic], [birthDay], [login], [password], [money], [roleId], [statusId]) VALUES (2, N'Sidorov', N'Igor', N'Igorevich', CAST(N'1973-02-03 00:00:00.000' AS DateTime), N'sidorov', N'sidorov', 0, 2, 1)
-INSERT [dbo].[user] ([id], [lastName], [firstName], [patronymic], [birthDay], [login], [password], [money], [roleId], [statusId]) VALUES (5, N'Novikov', N'Maxim', N'Nikolaevich', CAST(N'1991-12-27 00:00:00.000' AS DateTime), N'novikov', N'novikov', 0, 2, 1)
-INSERT [dbo].[user] ([id], [lastName], [firstName], [patronymic], [birthDay], [login], [password], [money], [roleId], [statusId]) VALUES (7, N'Ivanov', N'Afanasiy', N'Konstantinovich', CAST(N'1978-06-05 00:00:00.000' AS DateTime), N'ivanov', N'ivanov', 0, 2, 1)
-INSERT [dbo].[user] ([id], [lastName], [firstName], [patronymic], [birthDay], [login], [password], [money], [roleId], [statusId]) VALUES (9, N'Vasilev', N'Arkadiy', N'Arkkadievich', CAST(N'1923-04-04 00:00:00.000' AS DateTime), N'vasiliev', N'vasiliev', 0, 2, 1)
-INSERT [dbo].[user] ([id], [lastName], [firstName], [patronymic], [birthDay], [login], [password], [money], [roleId], [statusId]) VALUES (13, N'Admin', N'Admin', N'Admin', CAST(N'1990-04-04 00:00:00.000' AS DateTime), N'admin', N'admin', 1000000, 1, 1)
+INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [roleId], [statusId]) VALUES (1, N'Ivanov', N'Ivan', N'Ivanovich', CAST(N'1989-01-13 00:00:00.000' AS DateTime), N'ivanov', N'ivanov', 0, 2, 1)
+INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [roleId], [statusId]) VALUES (2, N'Sidorov', N'Igor', N'Igorevich', CAST(N'1973-02-03 00:00:00.000' AS DateTime), N'sidorov', N'sidorov', 0, 2, 1)
+INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [roleId], [statusId]) VALUES (5, N'Novikov', N'Maxim', N'Nikolaevich', CAST(N'1991-12-27 00:00:00.000' AS DateTime), N'novikov', N'novikov', 0, 2, 1)
+INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [roleId], [statusId]) VALUES (7, N'Ivanov', N'Afanasiy', N'Konstantinovich', CAST(N'1978-06-05 00:00:00.000' AS DateTime), N'ivanov', N'ivanov', 0, 2, 1)
+INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [roleId], [statusId]) VALUES (9, N'Vasilev', N'Arkadiy', N'Arkkadievich', CAST(N'1923-04-04 00:00:00.000' AS DateTime), N'vasiliev', N'vasiliev', 0, 2, 1)
+INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [roleId], [statusId]) VALUES (13, N'Admin', N'Admin', N'Admin', CAST(N'1990-04-04 00:00:00.000' AS DateTime), N'admin', N'admin', 1000000, 1, 1)
 SET IDENTITY_INSERT [dbo].[user] OFF
 INSERT [dbo].[user_status] ([id], [name]) VALUES (1, N'FREE')
 INSERT [dbo].[user_status] ([id], [name]) VALUES (2, N'BUSY')
-ALTER TABLE [dbo].[car]  WITH CHECK ADD  CONSTRAINT [FK_car_brand] FOREIGN KEY([brandId])
+ALTER TABLE [dbo].[car]  WITH CHECK ADD  CONSTRAINT [FK_car_brand] FOREIGN KEY([brand_id])
 REFERENCES [dbo].[brand] ([id])
 GO
 ALTER TABLE [dbo].[car] CHECK CONSTRAINT [FK_car_brand]
 GO
-ALTER TABLE [dbo].[car]  WITH CHECK ADD  CONSTRAINT [FK_car_car_status] FOREIGN KEY([statusId])
+ALTER TABLE [dbo].[car]  WITH CHECK ADD  CONSTRAINT [FK_car_car_status] FOREIGN KEY([status_id])
 REFERENCES [dbo].[car_status] ([id])
 GO
 ALTER TABLE [dbo].[car] CHECK CONSTRAINT [FK_car_car_status]

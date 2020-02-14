@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @SpringBootApplication incapsulate a lots of component like - @ComponentScan, @EnableAutoConfiguration,
+ * @SpringBootApplication incapsulates a lots of component like - @ComponentScan, @EnableAutoConfiguration,
  * jpa-repositories, json-serialization and so on. And he places @ComponentScan in com.*******.space package.
  * This package com.*******.space must be common for all modules.
  * You have to have in all packages - the same parent part. For example - com.jetMinds.nextLevel

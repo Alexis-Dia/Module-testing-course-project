@@ -6,5 +6,18 @@
 			.csrf().disable()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 3. For converting from entities to dto uses this way:
-        return journalRepository.findAll(***, ***).map(DtoMapper::toJournalDto);			
-				
+        return journalRepository.findAll(***, ***).map(DtoMapper::toJournalDto);		
+        
+        
+        
+        
+DISABLE_BROKER	
+ATE_CORRELATION_OPTIMIZAT
+FILESTREAM
+GO
+USE [master]
+GO
+ALTER DATABASE [carriages_system] SET  READ_WRITE 
+
+DATABASECHANGELOG
+DATABASECHANGELOGLOCK

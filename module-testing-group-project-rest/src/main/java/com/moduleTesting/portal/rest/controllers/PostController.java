@@ -1,7 +1,9 @@
 package com.moduleTesting.portal.rest.controllers;
 
 import com.moduleTesting.portal.dto.User;
+import com.moduleTesting.portal.entity.Car;
 import com.moduleTesting.portal.entity.CarStatus;
+import com.moduleTesting.portal.service.car.CarService;
 import com.moduleTesting.portal.service.carStatus.CarStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +18,12 @@ public class PostController {
 
     private final CarStatusService carStatusService;
 
+    private CarService carService;
+
     @Autowired
-    public PostController(CarStatusService carStatusService) {
+    public PostController(CarStatusService carStatusService, CarService carService) {
         this.carStatusService = carStatusService;
+        this.carService = carService;
     }
 
     @GetMapping("/load")
@@ -41,6 +46,10 @@ public class PostController {
 
         final List<CarStatus> all = carStatusService.findAll();
         System.out.println(all);
+
+        final List<Car> allCars = carService.findAll();
+        System.out.println(allCars);
+
         /*Page<PostDto> lll = null;
         try{
             lll = service.getProductPage(filter);
