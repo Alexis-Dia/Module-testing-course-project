@@ -3,8 +3,12 @@ package com.moduleTesting.portal.rest.controllers;
 import com.moduleTesting.portal.dto.User;
 import com.moduleTesting.portal.entity.Car;
 import com.moduleTesting.portal.entity.CarStatus;
+import com.moduleTesting.portal.entity.Report;
+import com.moduleTesting.portal.entity.Task;
 import com.moduleTesting.portal.service.car.CarService;
 import com.moduleTesting.portal.service.carStatus.CarStatusService;
+import com.moduleTesting.portal.service.report.ReportService;
+import com.moduleTesting.portal.service.task.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +23,12 @@ public class PostController {
     private final CarStatusService carStatusService;
 
     private CarService carService;
+
+    @Autowired
+    private TaskService taskService;
+
+    @Autowired
+    private ReportService reportService;
 
     @Autowired
     public PostController(CarStatusService carStatusService, CarService carService) {
@@ -49,6 +59,14 @@ public class PostController {
 
         final List<Car> allCars = carService.findAll();
         System.out.println(allCars);
+
+        final List<Report> allReports = reportService.findAll();
+        System.out.println(allReports);
+
+        final List<Task> allTask = taskService.findAll();
+        System.out.println(allTask);
+
+
 
         /*Page<PostDto> lll = null;
         try{

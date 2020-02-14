@@ -361,9 +361,9 @@ INSERT [dbo].[role] ([id], [name], [security_level]) VALUES (2, N'DRIVER', 2)
 SET IDENTITY_INSERT [dbo].[role] OFF
 SET IDENTITY_INSERT [dbo].[task] ON
 
-INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (1, 7500, 511, 1, 4, 1, 2000, NULL)
-INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (3, 3790.9, 1200.1, 2, 5, 1, 1150, NULL)
-INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (4, 2310.9, 800.1, 5, 6, 1, 780, NULL)
+INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (1, 7500, 511, 1, 4, 1, 2000, N'Minsk-Gomel')
+INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (3, 3790.9, 1200.1, 2, 5, 1, 1150, N'Vitebsk-Grodno')
+INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (4, 2310.9, 800.1, 5, 6, 1, 780, N'Mins-Vilnius')
 SET IDENTITY_INSERT [dbo].[task] OFF
 INSERT [dbo].[task_status] ([id], [name]) VALUES (1, N'FREE')
 INSERT [dbo].[task_status] ([id], [name]) VALUES (2, N'IN PROCESS')
