@@ -479,5 +479,3 @@ REFERENCES [dbo].[user_status] ([id])
 GO
 ALTER TABLE [dbo].[user] CHECK CONSTRAINT [FK_user_user_status]
 GO
-USE [master]
-GO

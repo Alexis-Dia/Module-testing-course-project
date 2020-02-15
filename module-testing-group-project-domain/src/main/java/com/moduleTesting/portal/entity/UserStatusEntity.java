@@ -3,7 +3,7 @@ package com.moduleTesting.portal.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "task_status")
+@Table(name = "user_status")
 public class UserStatusEntity {
 
     @Id

@@ -1,6 +1,7 @@
 package com.moduleTesting.portal.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "task")
@@ -33,6 +34,9 @@ public class TaskEntity {
 
     @Column(name="reward")
     private Float reward;
+
+    @OneToMany
+    private Set<ReportEntity> reports;
 
     public TaskEntity() {
     }
@@ -109,6 +113,14 @@ public class TaskEntity {
 
     public void setReward(Float reward) {
         this.reward = reward;
+    }
+
+    public Set<ReportEntity> getReports() {
+        return reports;
+    }
+
+    public void setReports(Set<ReportEntity> reports) {
+        this.reports = reports;
     }
 
     @Override
