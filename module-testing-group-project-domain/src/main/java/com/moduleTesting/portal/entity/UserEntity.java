@@ -3,9 +3,13 @@ package com.moduleTesting.portal.entity;
 import javax.persistence.*;
 import java.util.Date;
 
+/*
+MSSQL has a list of reserved word uncluding word 'user'
+https://stackoverflow.com/questions/38818302/incorrect-syntax-near-the-keyword-table-and-could-not-extract-resultset
+ */
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "`user`")
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,16 +38,16 @@ public class User {
 
     @JoinColumn(name = "role_id")
     @ManyToOne
-    private Role role;
+    private RoleEntity roleEntity;
 
     @JoinColumn(name = "status_id")
     @ManyToOne
-    private UserStatus status;
+    private UserStatusEntity status;
 
-    public User() {
+    public UserEntity() {
     }
 
-    public User(String lastName, String firstName, String patronymic, Date birthday, String login, String password, Float money, Role role, UserStatus status) {
+    public UserEntity(String lastName, String firstName, String patronymic, Date birthday, String login, String password, Float money, RoleEntity roleEntity, UserStatusEntity status) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.patronymic = patronymic;
@@ -51,7 +55,7 @@ public class User {
         this.login = login;
         this.password = password;
         this.money = money;
-        this.role = role;
+        this.roleEntity = roleEntity;
         this.status = status;
     }
 
@@ -119,19 +123,19 @@ public class User {
         this.money = money;
     }
 
-    public Role getRole() {
-        return role;
+    public RoleEntity getRoleEntity() {
+        return roleEntity;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleEntity(RoleEntity roleEntity) {
+        this.roleEntity = roleEntity;
     }
 
-    public UserStatus getStatus() {
+    public UserStatusEntity getStatus() {
         return status;
     }
 
-    public void setStatus(UserStatus status) {
+    public void setStatus(UserStatusEntity status) {
         this.status = status;
     }
 
@@ -146,7 +150,7 @@ public class User {
             ", login='" + login + '\'' +
             ", password='" + password + '\'' +
             ", money='" + money + '\'' +
-            ", role=" + role +
+            ", role=" + roleEntity +
             ", status=" + status +
             '}';
     }

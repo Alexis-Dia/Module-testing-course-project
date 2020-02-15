@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "report")
-public class Report {
+public class ReportEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +26,10 @@ public class Report {
     @Column(name="arrival")
     private Date arrival;
 
-    public Report() {
+    public ReportEntity() {
     }
 
-    public Report(Integer taskId, Date departure, Float weight, Float distance, Date arrival) {
+    public ReportEntity(Integer taskId, Date departure, Float weight, Float distance, Date arrival) {
         this.taskId = taskId;
         this.departure = departure;
         this.weight = weight;

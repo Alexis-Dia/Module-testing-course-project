@@ -3,8 +3,8 @@ package com.moduleTesting.portal.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "task_status")
-public class TaskStatus {
+@Table(name = "car_status")
+public class CarStatusEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,10 +13,10 @@ public class TaskStatus {
     @Column(name = "name")
     private String name;
 
-    public TaskStatus() {
+    public CarStatusEntity() {
     }
 
-    public TaskStatus(String name) {
+    public CarStatusEntity(String name) {
         this.name = name;
     }
 
@@ -38,7 +38,7 @@ public class TaskStatus {
 
     @Override
     public String toString() {
-        return "TaskStatus{" +
+        return "CarStatus{" +
             "id=" + id +
             ", name='" + name + '\'' +
             '}';

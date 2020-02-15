@@ -1,6 +1,6 @@
 package com.moduleTesting.portal.service.task.impl;
 
-import com.moduleTesting.portal.entity.Task;
+import com.moduleTesting.portal.entity.TaskEntity;
 import com.moduleTesting.portal.repository.TaskRepository;
 import com.moduleTesting.portal.service.task.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class TaskServiceImpl implements TaskService {
     TaskRepository taskRepository;
 
     @Override
-    public List<Task> findAll() {
+    public List<TaskEntity> findAll() {
         return taskRepository.findAll();
     }
 }

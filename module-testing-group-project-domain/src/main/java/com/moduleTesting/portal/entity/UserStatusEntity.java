@@ -3,8 +3,8 @@ package com.moduleTesting.portal.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "role")
-public class Role {
+@Table(name = "task_status")
+public class UserStatusEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,15 +13,11 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "security_level")
-    private Integer securityLevel;
-
-    public Role() {
+    public UserStatusEntity() {
     }
 
-    public Role(String name, Integer securityLevel) {
+    public UserStatusEntity(String name) {
         this.name = name;
-        this.securityLevel = securityLevel;
     }
 
     public Integer getId() {
@@ -40,20 +36,11 @@ public class Role {
         this.name = name;
     }
 
-    public Integer getSecurityLevel() {
-        return securityLevel;
-    }
-
-    public void setSecurityLevel(Integer securityLevel) {
-        this.securityLevel = securityLevel;
-    }
-
     @Override
     public String toString() {
-        return "Role{" +
+        return "UserStatus{" +
             "id=" + id +
             ", name='" + name + '\'' +
-            ", securityLevel=" + securityLevel +
             '}';
     }
 }

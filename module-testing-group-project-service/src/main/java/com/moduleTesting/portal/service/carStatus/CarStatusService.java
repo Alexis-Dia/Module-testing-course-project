@@ -1,10 +1,10 @@
 package com.moduleTesting.portal.service.carStatus;
 
-import com.moduleTesting.portal.entity.CarStatus;
+import com.moduleTesting.portal.entity.CarStatusEntity;
 
 import java.util.List;
 
 public interface CarStatusService {
 
-    List<CarStatus> findAll();
+    List<CarStatusEntity> findAll();
 }

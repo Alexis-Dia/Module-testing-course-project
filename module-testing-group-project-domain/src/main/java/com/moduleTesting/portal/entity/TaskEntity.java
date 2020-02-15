@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "task")
-public class Task {
+public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,23 +21,23 @@ public class Task {
 
     @JoinColumn(name="driver_id")
     @ManyToOne
-    private User driver;
+    private UserEntity driver;
 
     @JoinColumn(name="car_id")
     @ManyToOne
-    private Car car;
+    private CarEntity car;
 
     @JoinColumn(name="status_id")
     @ManyToOne
-    private TaskStatus status;
+    private TaskStatusEntity status;
 
     @Column(name="reward")
     private Float reward;
 
-    public Task() {
+    public TaskEntity() {
     }
 
-    public Task(String name, Float summaryDistance, Float weight, User driver, Car car, TaskStatus status, Float reward) {
+    public TaskEntity(String name, Float summaryDistance, Float weight, UserEntity driver, CarEntity car, TaskStatusEntity status, Float reward) {
         this.name = name;
         this.summaryDistance = summaryDistance;
         this.weight = weight;
@@ -79,27 +79,27 @@ public class Task {
         this.weight = weight;
     }
 
-    public User getDriver() {
+    public UserEntity getDriver() {
         return driver;
     }
 
-    public void setDriver(User driver) {
+    public void setDriver(UserEntity driver) {
         this.driver = driver;
     }
 
-    public Car getCar() {
+    public CarEntity getCar() {
         return car;
     }
 
-    public void setCar(Car car) {
+    public void setCar(CarEntity car) {
         this.car = car;
     }
 
-    public TaskStatus getStatus() {
+    public TaskStatusEntity getStatus() {
         return status;
     }
 
-    public void setStatus(TaskStatus status) {
+    public void setStatus(TaskStatusEntity status) {
         this.status = status;
     }
 

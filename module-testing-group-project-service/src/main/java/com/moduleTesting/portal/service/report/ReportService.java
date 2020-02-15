@@ -1,10 +1,10 @@
 package com.moduleTesting.portal.service.report;
 
-import com.moduleTesting.portal.entity.Report;
+import com.moduleTesting.portal.entity.ReportEntity;
 
 import java.util.List;
 
 public interface ReportService {
 
-    List<Report> findAll();
+    List<ReportEntity> findAll();
 }

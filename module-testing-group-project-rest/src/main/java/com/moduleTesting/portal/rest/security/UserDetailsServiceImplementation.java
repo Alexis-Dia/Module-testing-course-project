@@ -1,6 +1,6 @@
 package com.moduleTesting.portal.rest.security;
 
-import com.moduleTesting.portal.dto.User;
+import com.moduleTesting.portal.dto.UserDto;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
@@ -20,10 +20,10 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
         }
 
         //com.User foundUser = userRepository.findByEmailAddress(username);
-        User foundUser = new User("Alex", "12345678");
+        UserDto foundUserDto = new UserDto("Alex", "12345678");
         //if( foundUser != null ){
             System.out.println("FOUND");
-            return new SecurityUser(foundUser.getEmailAddress(), foundUser.getPassword(), foundUser.getRole().name());
+            return new SecurityUser(foundUserDto.getEmailAddress(), foundUserDto.getPassword(), foundUserDto.getRole().name());
 
         //}
         //throw new UsernameNotFoundException( username + "is not found");

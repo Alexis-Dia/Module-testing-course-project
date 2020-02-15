@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "car")
-public class Car {
+public class CarEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,17 +25,17 @@ public class Car {
 
     @JoinColumn(name = "status_id")
     @ManyToOne
-    private CarStatus carStatus;
+    private CarStatusEntity carStatusEntity;
 
-    public Car() {
+    public CarEntity() {
     }
 
-    public Car(Integer brandId, Date year, String number, Date dateOfReceipt, CarStatus carStatus) {
+    public CarEntity(Integer brandId, Date year, String number, Date dateOfReceipt, CarStatusEntity carStatusEntity) {
         this.brandId = brandId;
         this.year = year;
         this.number = number;
         this.dateOfReceipt = dateOfReceipt;
-        this.carStatus = carStatus;
+        this.carStatusEntity = carStatusEntity;
     }
 
     public Integer getId() {
@@ -78,12 +78,12 @@ public class Car {
         this.dateOfReceipt = dateOfReceipt;
     }
 
-    public CarStatus getCarStatus() {
-        return carStatus;
+    public CarStatusEntity getCarStatusEntity() {
+        return carStatusEntity;
     }
 
-    public void setCarStatus(CarStatus carStatus) {
-        this.carStatus = carStatus;
+    public void setCarStatusEntity(CarStatusEntity carStatusEntity) {
+        this.carStatusEntity = carStatusEntity;
     }
 
     @Override
@@ -94,7 +94,7 @@ public class Car {
             ", year=" + year +
             ", number='" + number + '\'' +
             ", yearOfReceipt=" + dateOfReceipt +
-            ", carStatus=" + carStatus +
+            ", carStatus=" + carStatusEntity +
             '}';
     }
 }

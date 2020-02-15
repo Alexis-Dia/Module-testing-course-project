@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "brand")
-public class Brand {
+public class BrandEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +19,10 @@ public class Brand {
     @Column(name = "model")
     private String model;
 
-    public Brand() {
+    public BrandEntity() {
     }
 
-    public Brand(String brand, Float carryingCapacity, String model) {
+    public BrandEntity(String brand, Float carryingCapacity, String model) {
         this.brand = brand;
         this.carryingCapacity = carryingCapacity;
         this.model = model;

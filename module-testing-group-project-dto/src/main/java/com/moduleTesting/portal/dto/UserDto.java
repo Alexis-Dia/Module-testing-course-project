@@ -1,6 +1,6 @@
 package com.moduleTesting.portal.dto;
 
-public class User {
+public class UserDto {
     /**
      *
      */
@@ -14,11 +14,11 @@ public class User {
 
     private Role role;
 
-    public User() {
+    public UserDto() {
         super();
     }
 
-    public User(String emailAddress, String password) {
+    public UserDto(String emailAddress, String password) {
         this.emailAddress = emailAddress;
         this.password = password;
     }
