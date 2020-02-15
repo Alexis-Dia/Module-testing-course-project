@@ -1,6 +1,5 @@
 USE [master]
 GO
-/****** Object:  Database [carriages_system]    Script Date: 2/15/2020 7:04:38 PM ******/
 ALTER DATABASE [carriages_system] SET COMPATIBILITY_LEVEL = 120
 GO
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
@@ -62,7 +61,7 @@ ALTER DATABASE [carriages_system] SET DELAYED_DURABILITY = DISABLED
 GO
 USE [carriages_system]
 GO
-/****** Object:  Table [dbo].[brand]    Script Date: 2/15/2020 7:04:38 PM ******/
+/****** Object:  Table [dbo].[brand]    Script Date: 2/15/2020 8:56:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -83,7 +82,7 @@ CREATE TABLE [dbo].[brand](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[car]    Script Date: 2/15/2020 7:04:38 PM ******/
+/****** Object:  Table [dbo].[car]    Script Date: 2/15/2020 8:56:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -106,7 +105,7 @@ CREATE TABLE [dbo].[car](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[car_status]    Script Date: 2/15/2020 7:04:38 PM ******/
+/****** Object:  Table [dbo].[car_status]    Script Date: 2/15/2020 8:56:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -124,16 +123,20 @@ CREATE TABLE [dbo].[car_status](
 
 GO
 SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DATABASECHANGELOG]    Script Date: 2/15/2020 8:56:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 
+GO
+/****** Object:  Table [dbo].[DATABASECHANGELOGLOCK]    Script Date: 2/15/2020 8:56:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 
 GO
-/****** Object:  Table [dbo].[report]    Script Date: 2/15/2020 7:04:38 PM ******/
+/****** Object:  Table [dbo].[report]    Script Date: 2/15/2020 8:56:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -151,7 +154,7 @@ CREATE TABLE [dbo].[report](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[role]    Script Date: 2/15/2020 7:04:38 PM ******/
+/****** Object:  Table [dbo].[role]    Script Date: 2/15/2020 8:56:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -171,7 +174,7 @@ CREATE TABLE [dbo].[role](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[task]    Script Date: 2/15/2020 7:04:38 PM ******/
+/****** Object:  Table [dbo].[task]    Script Date: 2/15/2020 8:56:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -196,7 +199,7 @@ CREATE TABLE [dbo].[task](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[task_reports]    Script Date: 2/15/2020 7:04:38 PM ******/
+/****** Object:  Table [dbo].[task_reports]    Script Date: 2/15/2020 8:56:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -207,7 +210,7 @@ CREATE TABLE [dbo].[task_reports](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[task_status]    Script Date: 2/15/2020 7:04:38 PM ******/
+/****** Object:  Table [dbo].[task_status]    Script Date: 2/15/2020 8:56:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -226,7 +229,7 @@ CREATE TABLE [dbo].[task_status](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[user]    Script Date: 2/15/2020 7:04:38 PM ******/
+/****** Object:  Table [dbo].[user]    Script Date: 2/15/2020 8:56:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -253,7 +256,7 @@ CREATE TABLE [dbo].[user](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[user_status]    Script Date: 2/15/2020 7:04:38 PM ******/
+/****** Object:  Table [dbo].[user_status]    Script Date: 2/15/2020 8:56:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -358,7 +361,7 @@ SET IDENTITY_INSERT [dbo].[task] OFF
 INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 1)
 INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 2)
 INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 3)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 51)
+INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 51)
 INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 4)
 INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 6)
 INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 7)
@@ -423,11 +426,11 @@ SET IDENTITY_INSERT [dbo].[user_status] ON
 INSERT [dbo].[user_status] ([id], [name]) VALUES (1, N'FREE')
 INSERT [dbo].[user_status] ([id], [name]) VALUES (2, N'BUSY')
 SET IDENTITY_INSERT [dbo].[user_status] OFF
-/****** Object:  Index [IX_task_reports]    Script Date: 2/15/2020 7:04:38 PM ******/
-ALTER TABLE [dbo].[task_reports] ADD  CONSTRAINT [IX_task_reports] UNIQUE NONCLUSTERED
+/****** Object:  Index [IX_task_reports]    Script Date: 2/15/2020 8:56:01 PM ******/
+CREATE NONCLUSTERED INDEX [IX_task_reports] ON [dbo].[task_reports]
 (
 	[reports_id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[car]  WITH CHECK ADD  CONSTRAINT [FK_car_brand] FOREIGN KEY([brand_id])
 REFERENCES [dbo].[brand] ([id])

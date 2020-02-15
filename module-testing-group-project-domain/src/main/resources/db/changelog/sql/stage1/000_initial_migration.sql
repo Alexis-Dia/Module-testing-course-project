@@ -61,7 +61,7 @@ ALTER DATABASE [carriages_system] SET DELAYED_DURABILITY = DISABLED
 GO
 USE [carriages_system]
 GO
-/****** Object:  Table [dbo].[brand]    Script Date: 2/15/2020 2:42:51 PM ******/
+/****** Object:  Table [dbo].[brand]    Script Date: 2/15/2020 8:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -82,7 +82,7 @@ CREATE TABLE [dbo].[brand](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[car]    Script Date: 2/15/2020 2:42:51 PM ******/
+/****** Object:  Table [dbo].[car]    Script Date: 2/15/2020 8:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -105,7 +105,7 @@ CREATE TABLE [dbo].[car](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[car_status]    Script Date: 2/15/2020 2:42:51 PM ******/
+/****** Object:  Table [dbo].[car_status]    Script Date: 2/15/2020 8:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -124,19 +124,19 @@ CREATE TABLE [dbo].[car_status](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[DATABASECHANGELOG]    Script Date: 2/15/2020 2:42:51 PM ******/
+/****** Object:  Table [dbo].[DATABASECHANGELOG]    Script Date: 2/15/2020 8:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 
 GO
-/****** Object:  Table [dbo].[DATABASECHANGELOGLOCK]    Script Date: 2/15/2020 2:42:51 PM ******/
+/****** Object:  Table [dbo].[DATABASECHANGELOGLOCK]    Script Date: 2/15/2020 8:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 
 GO
-/****** Object:  Table [dbo].[long_report]    Script Date: 2/15/2020 2:42:51 PM ******/
+/****** Object:  Table [dbo].[long_report]    Script Date: 2/15/2020 8:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -164,13 +164,13 @@ CREATE TABLE [dbo].[long_report](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[report]    Script Date: 2/15/2020 2:42:51 PM ******/
+/****** Object:  Table [dbo].[report]    Script Date: 2/15/2020 8:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[report](
-	[id] [int] NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL,
 	[departure] [datetime] NOT NULL,
 	[weight] [float] NOT NULL,
 	[distance] [float] NOT NULL,
@@ -182,7 +182,7 @@ CREATE TABLE [dbo].[report](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[role]    Script Date: 2/15/2020 2:42:51 PM ******/
+/****** Object:  Table [dbo].[role]    Script Date: 2/15/2020 8:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -202,7 +202,7 @@ CREATE TABLE [dbo].[role](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[task]    Script Date: 2/15/2020 2:42:51 PM ******/
+/****** Object:  Table [dbo].[task]    Script Date: 2/15/2020 8:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -227,7 +227,7 @@ CREATE TABLE [dbo].[task](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[task_reports]    Script Date: 2/15/2020 2:42:51 PM ******/
+/****** Object:  Table [dbo].[task_reports]    Script Date: 2/15/2020 8:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -238,7 +238,7 @@ CREATE TABLE [dbo].[task_reports](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[task_status]    Script Date: 2/15/2020 2:42:51 PM ******/
+/****** Object:  Table [dbo].[task_status]    Script Date: 2/15/2020 8:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -257,7 +257,7 @@ CREATE TABLE [dbo].[task_status](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[user]    Script Date: 2/15/2020 2:42:51 PM ******/
+/****** Object:  Table [dbo].[user]    Script Date: 2/15/2020 8:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -284,7 +284,7 @@ CREATE TABLE [dbo].[user](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[user_status]    Script Date: 2/15/2020 2:42:51 PM ******/
+/****** Object:  Table [dbo].[user_status]    Script Date: 2/15/2020 8:37:24 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -318,6 +318,8 @@ INSERT [dbo].[car_status] ([id], [name]) VALUES (2, N'BUSY')
 INSERT [dbo].[long_report] ([id], [carId], [driver_id], [departure], [weight], [distance], [arrival], [departure_date], [departure_time], [arrival_date], [arrival_time]) VALUES (1, 4, 1, CAST(N'2019-12-30 11:00:00.000' AS DateTime), CAST(1345 AS Decimal(18, 0)), CAST(1528 AS Decimal(18, 0)), CAST(N'2020-01-07 06:00:00.000' AS DateTime), N'2019-08-27', N'07:00:00.0000000', N'2020-01-07', N'06:00:00.0000000')
 INSERT [dbo].[long_report] ([id], [carId], [driver_id], [departure], [weight], [distance], [arrival], [departure_date], [departure_time], [arrival_date], [arrival_time]) VALUES (2, 6, 5, CAST(N'2019-10-01 07:00:00.000' AS DateTime), CAST(2500 AS Decimal(18, 0)), CAST(400 AS Decimal(18, 0)), CAST(N'2019-10-11 14:00:00.000' AS DateTime), N'2019-10-05', N'07:00:00.0000000', N'2019-10-11', N'14:00:00.0000000')
 INSERT [dbo].[long_report] ([id], [carId], [driver_id], [departure], [weight], [distance], [arrival], [departure_date], [departure_time], [arrival_date], [arrival_time]) VALUES (3, 6, 5, CAST(N'2019-10-07 07:00:00.000' AS DateTime), CAST(2900 AS Decimal(18, 0)), CAST(2111 AS Decimal(18, 0)), CAST(N'2019-10-15 14:00:00.000' AS DateTime), N'2019-10-07', N'07:00:00.0000000', N'2019-10-15', N'14:00:00.0000000')
+SET IDENTITY_INSERT [dbo].[report] ON
+
 INSERT [dbo].[report] ([id], [departure], [weight], [distance], [arrival]) VALUES (1, CAST(N'2019-11-27 11:00:00.000' AS DateTime), 256, 128, CAST(N'2019-11-27 19:30:00.000' AS DateTime))
 INSERT [dbo].[report] ([id], [departure], [weight], [distance], [arrival]) VALUES (2, CAST(N'2019-11-28 11:00:00.000' AS DateTime), 1256, 1228, CAST(N'2019-11-29 06:10:00.000' AS DateTime))
 INSERT [dbo].[report] ([id], [departure], [weight], [distance], [arrival]) VALUES (3, CAST(N'2008-02-25 11:00:00.000' AS DateTime), 351, 567, CAST(N'2008-02-26 11:00:00.000' AS DateTime))
@@ -364,6 +366,7 @@ INSERT [dbo].[report] ([id], [departure], [weight], [distance], [arrival]) VALUE
 INSERT [dbo].[report] ([id], [departure], [weight], [distance], [arrival]) VALUES (46, CAST(N'2020-01-28 07:00:00.000' AS DateTime), 100, 850, CAST(N'2020-01-28 17:00:00.000' AS DateTime))
 INSERT [dbo].[report] ([id], [departure], [weight], [distance], [arrival]) VALUES (47, CAST(N'2020-01-29 07:00:00.000' AS DateTime), 100, 850, CAST(N'2020-01-29 17:00:00.000' AS DateTime))
 INSERT [dbo].[report] ([id], [departure], [weight], [distance], [arrival]) VALUES (48, CAST(N'2020-01-31 07:00:00.000' AS DateTime), 100, 399, CAST(N'2020-01-31 17:00:00.000' AS DateTime))
+SET IDENTITY_INSERT [dbo].[report] OFF
 SET IDENTITY_INSERT [dbo].[role] ON
 
 INSERT [dbo].[role] ([id], [name], [security_level]) VALUES (1, N'ADMIN', 1)
@@ -438,6 +441,12 @@ INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], 
 SET IDENTITY_INSERT [dbo].[user] OFF
 INSERT [dbo].[user_status] ([id], [name]) VALUES (1, N'FREE')
 INSERT [dbo].[user_status] ([id], [name]) VALUES (2, N'BUSY')
+/****** Object:  Index [IX_task_reports]    Script Date: 2/15/2020 8:37:24 PM ******/
+CREATE NONCLUSTERED INDEX [IX_task_reports] ON [dbo].[task_reports]
+(
+	[reports_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
 ALTER TABLE [dbo].[car]  WITH CHECK ADD  CONSTRAINT [FK_car_brand] FOREIGN KEY([brand_id])
 REFERENCES [dbo].[brand] ([id])
 GO
@@ -462,6 +471,16 @@ ALTER TABLE [dbo].[task]  WITH CHECK ADD  CONSTRAINT [FK_task_user] FOREIGN KEY(
 REFERENCES [dbo].[user] ([id])
 GO
 ALTER TABLE [dbo].[task] CHECK CONSTRAINT [FK_task_user]
+GO
+ALTER TABLE [dbo].[task_reports]  WITH CHECK ADD  CONSTRAINT [FK_task_reports_report] FOREIGN KEY([reports_id])
+REFERENCES [dbo].[report] ([id])
+GO
+ALTER TABLE [dbo].[task_reports] CHECK CONSTRAINT [FK_task_reports_report]
+GO
+ALTER TABLE [dbo].[task_reports]  WITH CHECK ADD  CONSTRAINT [FK_task_reports_task] FOREIGN KEY([task_entity_id])
+REFERENCES [dbo].[task] ([id])
+GO
+ALTER TABLE [dbo].[task_reports] CHECK CONSTRAINT [FK_task_reports_task]
 GO
 ALTER TABLE [dbo].[user]  WITH CHECK ADD  CONSTRAINT [FK_user_role] FOREIGN KEY([role_id])
 REFERENCES [dbo].[role] ([id])
