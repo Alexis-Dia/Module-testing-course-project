@@ -6,7 +6,7 @@
 
     <changeSet id="000_initial_migration.sql" author="adruzik">
         <comment>Initial schema migration</comment>
-        <sqlFile path="/db/changelog/sql/stage1/000_initial_migration2.sql"/>
+        <sqlFile path="/db/changelog/sql/stage1/000_initial_migrationV2.0.sql"/>
     </changeSet>
 
 </databaseChangeLog>
