@@ -11,9 +11,6 @@ public class ReportEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="task_id")
-    private Integer taskId;
-
     @Column(name="departure")
     private Date departure;
 
@@ -29,8 +26,7 @@ public class ReportEntity {
     public ReportEntity() {
     }
 
-    public ReportEntity(Integer taskId, Date departure, Float weight, Float distance, Date arrival) {
-        this.taskId = taskId;
+    public ReportEntity(Date departure, Float weight, Float distance, Date arrival) {
         this.departure = departure;
         this.weight = weight;
         this.distance = distance;
@@ -39,10 +35,6 @@ public class ReportEntity {
 
     public Integer getId() {
         return id;
-    }
-
-    public Integer getTaskId() {
-        return taskId;
     }
 
     public Date getDeparture() {
@@ -65,7 +57,6 @@ public class ReportEntity {
     public String toString() {
         return "Report{" +
             "id=" + id +
-            ", taskId=" + taskId +
             ", departure=" + departure +
             ", weight=" + weight +
             ", distance=" + distance +
