@@ -8,11 +8,13 @@ import java.util.Arrays;
 public class DtoMapper {
 
     public static UserRole toUserRole(RoleEntity roleEntity) {
-        return Arrays.stream(UserRole.values()).filter(role -> role.getName().equals(roleEntity.getName())).findAny().get();
+        return Arrays.stream(UserRole.values()).filter(role ->
+            role.getName().equals(roleEntity.getName())).findAny().get();
     }
 
     public static UserStatus toUserStatus(UserStatusEntity userStatusEntity) {
-        return Arrays.stream(UserStatus.values()).filter(userStatus -> userStatus.getName().equals(userStatusEntity.getName())).findAny().get();
+        return Arrays.stream(UserStatus.values()).filter(userStatus ->
+            userStatus.getName().equals(userStatusEntity.getName())).findAny().get();
     }
 
     public static UserDto toUserDto(UserEntity userEntity) {
@@ -26,11 +28,13 @@ public class DtoMapper {
     }
 
     public static CarStatus toCarStatus(CarStatusEntity carStatusEntity) {
-        return Arrays.stream(CarStatus.values()).filter(carStatus -> carStatus.getName().equals(carStatusEntity.getName())).findAny().get();
+        return Arrays.stream(CarStatus.values()).filter(carStatus ->
+            carStatus.getName().equals(carStatusEntity.getName())).findAny().get();
     }
 
     public static BrandDto toBrandDto (BrandEntity brandEntity) {
-        return new BrandDto(brandEntity.getId(), brandEntity.getBrand(), brandEntity.getCarryingCapacity(), brandEntity.getModel());
+        return new BrandDto(brandEntity.getId(), brandEntity.getBrand(),
+            brandEntity.getCarryingCapacity(), brandEntity.getModel());
     }
 
     public static CarDto toCarDto(CarEntity carEntity) {
@@ -38,6 +42,11 @@ public class DtoMapper {
         final BrandDto brandDto = DtoMapper.toBrandDto(carEntity.getBrandEntity());
         return new CarDto(carEntity.getId(), brandDto, carEntity.getYear(), carEntity.getNumber(),
             carEntity.getDateOfReceipt(), carStatus);
+    }
+
+    public static TaskStatus toTaskStatus(TaskStatusEntity taskStatusEntity) {
+        return Arrays.stream(TaskStatus.values()).filter(taskStatus ->
+            taskStatus.getName().equals(taskStatusEntity.getName())).findAny().get();
     }
 
 }
