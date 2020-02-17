@@ -1,6 +1,6 @@
 package com.moduleTesting.portal.service.report.impl;
 
-import com.moduleTesting.portal.entity.ReportEntity;
+import com.moduleTesting.portal.dto.ReportDto;
 import com.moduleTesting.portal.repository.ReportRepository;
 import com.moduleTesting.portal.service.report.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +16,12 @@ public class ReportServiceImpl implements ReportService {
     ReportRepository reportRepository;
 
     @Override
-    public List<ReportEntity> findAll() {
-        return reportRepository.findAll();
+    public List<ReportDto> findAll() {
+        return null;
     }
 
     @Override
-    public List<ReportEntity> getReportsByTaskId(Integer taskId) {
+    public List<ReportDto> getReportsByTaskId(Integer taskId) {
         return null;
     }
 

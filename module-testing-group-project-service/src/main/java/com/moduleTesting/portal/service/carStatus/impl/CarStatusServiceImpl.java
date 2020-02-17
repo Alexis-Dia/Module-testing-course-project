@@ -1,6 +1,6 @@
 package com.moduleTesting.portal.service.carStatus.impl;
 
-import com.moduleTesting.portal.entity.CarStatusEntity;
+import com.moduleTesting.portal.dto.CarStatus;
 import com.moduleTesting.portal.repository.CarStatusRepository;
 import com.moduleTesting.portal.service.carStatus.CarStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class CarStatusServiceImpl implements CarStatusService {
     }
 
     @Override
-    public List<CarStatusEntity> findAll() {
-        return carStatusRepository.findAll();
+    public List<CarStatus> findAll() {
+        return null;
     }
 }

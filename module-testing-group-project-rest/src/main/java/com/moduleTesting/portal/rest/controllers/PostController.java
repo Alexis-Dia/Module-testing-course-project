@@ -1,7 +1,6 @@
 package com.moduleTesting.portal.rest.controllers;
 
-import com.moduleTesting.portal.dto.UserDto;
-import com.moduleTesting.portal.entity.*;
+import com.moduleTesting.portal.dto.*;
 import com.moduleTesting.portal.service.car.CarService;
 import com.moduleTesting.portal.service.carStatus.CarStatusService;
 import com.moduleTesting.portal.service.report.ReportService;
@@ -55,19 +54,19 @@ public class PostController {
     @GetMapping("/all")
     public UserDto getTasks() {
 
-        final List<CarStatusEntity> all = carStatusService.findAll();
+        final List<CarStatus> all = carStatusService.findAll();
         System.out.println(all);
 
-        final List<CarEntity> allCars = carService.findAll();
+        final List<CarDto> allCars = carService.findAll();
         System.out.println(allCars);
 
-        final List<ReportEntity> allReports = reportService.findAll();
+        final List<ReportDto> allReports = reportService.findAll();
         System.out.println(allReports);
 
-        final List<UserEntity> allUsers = userService.findAll();
+        final List<UserDto> allUsers = userService.findAll();
         System.out.println(allUsers);
 
-        final List<TaskEntity> allTask = taskService.findAll();
+        final List<TaskDto> allTask = taskService.findAll();
         System.out.println(allTask);
 
 

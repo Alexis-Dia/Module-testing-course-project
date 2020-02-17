@@ -1,8 +1,7 @@
 package com.moduleTesting.portal.service.user.impl;
 
-import com.moduleTesting.portal.dto.UserRole;
 import com.moduleTesting.portal.dto.UserDto;
-import com.moduleTesting.portal.entity.UserEntity;
+import com.moduleTesting.portal.dto.UserRole;
 import com.moduleTesting.portal.repository.UserRepository;
 import com.moduleTesting.portal.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +17,12 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public List<UserEntity> findAll() {
-        return userRepository.findAll();
+    public List<UserDto> findAll() {
+        return null;
     }
 
     @Override
-    public List<UserEntity> findAllDrivers() {
+    public List<UserDto> findAllDrivers() {
         return null;
     }
 

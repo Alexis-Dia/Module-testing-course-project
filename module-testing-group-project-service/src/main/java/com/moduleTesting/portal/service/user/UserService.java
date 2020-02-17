@@ -1,17 +1,16 @@
 package com.moduleTesting.portal.service.user;
 
-import com.moduleTesting.portal.dto.UserRole;
 import com.moduleTesting.portal.dto.UserDto;
-import com.moduleTesting.portal.entity.UserEntity;
+import com.moduleTesting.portal.dto.UserRole;
 
 import java.util.Date;
 import java.util.List;
 
 public interface UserService {
 
-    List<UserEntity> findAll();
+    List<UserDto> findAll();
 
-    List<UserEntity> findAllDrivers();
+    List<UserDto> findAllDrivers();
 
     UserDto getUserById(int id);
 

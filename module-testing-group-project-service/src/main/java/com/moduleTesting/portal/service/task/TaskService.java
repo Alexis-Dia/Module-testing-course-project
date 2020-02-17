@@ -1,10 +1,16 @@
 package com.moduleTesting.portal.service.task;
 
-import com.moduleTesting.portal.entity.TaskEntity;
+import com.moduleTesting.portal.dto.TaskDto;
 
 import java.util.List;
 
 public interface TaskService {
 
-    List<TaskEntity> findAll();
+    List<TaskDto> findAll();
+
+    List<TaskDto> findAllActiveTasks();
+
+    void changeTaskStatus(Integer taskId);
+
+    TaskDto createNewTask();
 }
