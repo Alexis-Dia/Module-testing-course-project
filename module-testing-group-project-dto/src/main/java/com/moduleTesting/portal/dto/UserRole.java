@@ -2,14 +2,14 @@ package com.moduleTesting.portal.dto;
 
 import java.util.Arrays;
 
-public enum Role {
+public enum UserRole {
 
     ADMIN("ADMIN", 1), USER("ADMIN", 2);
 
     private final String name;
     private final int securityLevel;
 
-    Role (String name, int securityLevel) {
+    UserRole(String name, int securityLevel) {
         this.name = name;
         this.securityLevel = securityLevel;
     }
@@ -22,7 +22,7 @@ public enum Role {
         return securityLevel;
     }
 
-    public Role getRoleByName(String name) {
+    public UserRole getRoleByName(String name) {
         return Arrays.stream(values()).filter(ob -> ob.name.equals(name)).findAny().orElseThrow();
     }
 }
