@@ -3,12 +3,14 @@ package com.moduleTesting.portal.service.user.impl;
 import com.moduleTesting.portal.dto.UserDto;
 import com.moduleTesting.portal.dto.UserRole;
 import com.moduleTesting.portal.repository.UserRepository;
+import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> findAll() {
-        return null;
+        return userRepository.findAll().stream().map(user -> DtoMapper.toUserDto(user)).collect(Collectors.toList());
     }
 
     @Override

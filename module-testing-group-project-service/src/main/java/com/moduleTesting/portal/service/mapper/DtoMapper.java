@@ -28,4 +28,5 @@ public class DtoMapper {
             userEntity.getPatronymic(), userEntity.getBirthday(), userEntity.getLogin(), userEntity.getPassword(),
             userEntity.getMoney(), userRole, userStatus);
     }
+
 }

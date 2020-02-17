@@ -23,7 +23,7 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
         UserDto foundUserDto = new UserDto("Alex", "12345678");
         //if( foundUser != null ){
             System.out.println("FOUND");
-            return new SecurityUser(foundUserDto.getEmailAddress(), foundUserDto.getPassword(), foundUserDto.getRole().name());
+            return new SecurityUser(foundUserDto.getEmailAddress(), foundUserDto.getPassword(), foundUserDto.getUserRole().name());
 
         //}
         //throw new UsernameNotFoundException( username + "is not found");
