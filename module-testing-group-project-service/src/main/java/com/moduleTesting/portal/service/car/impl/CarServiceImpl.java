@@ -5,11 +5,13 @@ import com.moduleTesting.portal.dto.CarDto;
 import com.moduleTesting.portal.dto.CarStatus;
 import com.moduleTesting.portal.repository.CarRepository;
 import com.moduleTesting.portal.service.car.CarService;
+import com.moduleTesting.portal.service.mapper.DtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -23,7 +25,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<CarDto> findAll() {
-        return null;
+        return carRepository.findAll().stream().map(DtoMapper::toCarDto).collect(Collectors.toList());
     }
 
     @Override

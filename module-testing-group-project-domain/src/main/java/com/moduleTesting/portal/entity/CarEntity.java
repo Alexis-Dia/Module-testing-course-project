@@ -11,8 +11,9 @@ public class CarEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "brand_id")
-    private Integer brandId;
+    @JoinColumn(name = "brand_id")
+    @ManyToOne
+    private BrandEntity brandEntity;
 
     @Column(name = "year")
     private Date year;
@@ -30,8 +31,8 @@ public class CarEntity {
     public CarEntity() {
     }
 
-    public CarEntity(Integer brandId, Date year, String number, Date dateOfReceipt, CarStatusEntity carStatusEntity) {
-        this.brandId = brandId;
+    public CarEntity(BrandEntity brandEntity, Date year, String number, Date dateOfReceipt, CarStatusEntity carStatusEntity) {
+        this.brandEntity = brandEntity;
         this.year = year;
         this.number = number;
         this.dateOfReceipt = dateOfReceipt;
@@ -46,12 +47,12 @@ public class CarEntity {
         this.id = id;
     }
 
-    public Integer getBrandId() {
-        return brandId;
+    public BrandEntity getBrandEntity() {
+        return brandEntity;
     }
 
-    public void setBrandId(Integer brandId) {
-        this.brandId = brandId;
+    public void setBrandEntity(BrandEntity brandEntity) {
+        this.brandEntity = brandEntity;
     }
 
     public Date getYear() {
@@ -90,7 +91,7 @@ public class CarEntity {
     public String toString() {
         return "Car{" +
             "id=" + id +
-            ", brandId=" + brandId +
+            ", brandEntity=" + brandEntity +
             ", year=" + year +
             ", number='" + number + '\'' +
             ", yearOfReceipt=" + dateOfReceipt +

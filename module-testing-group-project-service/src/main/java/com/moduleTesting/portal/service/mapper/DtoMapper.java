@@ -1,11 +1,7 @@
 package com.moduleTesting.portal.service.mapper;
 
-import com.moduleTesting.portal.dto.UserDto;
-import com.moduleTesting.portal.dto.UserRole;
-import com.moduleTesting.portal.dto.UserStatus;
-import com.moduleTesting.portal.entity.RoleEntity;
-import com.moduleTesting.portal.entity.UserEntity;
-import com.moduleTesting.portal.entity.UserStatusEntity;
+import com.moduleTesting.portal.dto.*;
+import com.moduleTesting.portal.entity.*;
 
 import java.util.Arrays;
 
@@ -27,6 +23,21 @@ public class DtoMapper {
         return new UserDto(userEntity.getId(), userEntity.getLastName(), userEntity.getFirstName(),
             userEntity.getPatronymic(), userEntity.getBirthday(), userEntity.getLogin(), userEntity.getPassword(),
             userEntity.getMoney(), userRole, userStatus);
+    }
+
+    public static CarStatus toCarStatus(CarStatusEntity carStatusEntity) {
+        return Arrays.stream(CarStatus.values()).filter(carStatus -> carStatus.getName().equals(carStatusEntity.getName())).findAny().get();
+    }
+
+    public static BrandDto toBrandDto (BrandEntity brandEntity) {
+        return new BrandDto(brandEntity.getId(), brandEntity.getBrand(), brandEntity.getCarryingCapacity(), brandEntity.getModel());
+    }
+
+    public static CarDto toCarDto(CarEntity carEntity) {
+        final CarStatus carStatus = DtoMapper.toCarStatus(carEntity.getCarStatusEntity());
+        final BrandDto brandDto = DtoMapper.toBrandDto(carEntity.getBrandEntity());
+        return new CarDto(carEntity.getId(), brandDto, carEntity.getYear(), carEntity.getNumber(),
+            carEntity.getDateOfReceipt(), carStatus);
     }
 
 }
