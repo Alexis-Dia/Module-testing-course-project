@@ -154,14 +154,14 @@ CREATE TABLE [dbo].[report](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[userRole]    Script Date: 2/15/2020 8:56:01 PM ******/
+/****** Object:  Table [dbo].[role]    Script Date: 2/15/2020 8:56:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-CREATE TABLE [dbo].[userRole](
+CREATE TABLE [dbo].[role](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](50) NOT NULL,
 	[security_level] [int] NOT NULL,
@@ -346,11 +346,11 @@ INSERT [dbo].[report] ([id], [departure], [weight], [distance], [arrival]) VALUE
 INSERT [dbo].[report] ([id], [departure], [weight], [distance], [arrival]) VALUES (46, CAST(N'2020-01-31 07:00:00.000' AS DateTime), 100, 399, CAST(N'2020-01-31 17:00:00.000' AS DateTime))
 INSERT [dbo].[report] ([id], [departure], [weight], [distance], [arrival]) VALUES (51, CAST(N'2020-02-29 07:00:00.000' AS DateTime), 25, 577, CAST(N'2020-02-29 17:00:00.000' AS DateTime))
 SET IDENTITY_INSERT [dbo].[report] OFF
-SET IDENTITY_INSERT [dbo].[userRole] ON
+SET IDENTITY_INSERT [dbo].[role] ON
 
-INSERT [dbo].[userRole] ([id], [name], [security_level]) VALUES (1, N'ADMIN', 1)
-INSERT [dbo].[userRole] ([id], [name], [security_level]) VALUES (2, N'DRIVER', 2)
-SET IDENTITY_INSERT [dbo].[userRole] OFF
+INSERT [dbo].[role] ([id], [name], [security_level]) VALUES (1, N'ADMIN', 1)
+INSERT [dbo].[role] ([id], [name], [security_level]) VALUES (2, N'DRIVER', 2)
+SET IDENTITY_INSERT [dbo].[role] OFF
 SET IDENTITY_INSERT [dbo].[task] ON
 
 INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (1, 7500, 511, 1, 4, 1, 2000, N'Minsk-Gomel')
@@ -473,7 +473,7 @@ GO
 ALTER TABLE [dbo].[task_reports] CHECK CONSTRAINT [FK_task_reports_task]
 GO
 ALTER TABLE [dbo].[user]  WITH CHECK ADD  CONSTRAINT [FK_user_role] FOREIGN KEY([role_id])
-REFERENCES [dbo].[userRole] ([id])
+REFERENCES [dbo].[role] ([id])
 GO
 ALTER TABLE [dbo].[user] CHECK CONSTRAINT [FK_user_role]
 GO
