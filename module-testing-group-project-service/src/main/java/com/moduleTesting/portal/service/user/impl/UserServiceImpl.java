@@ -23,6 +23,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserEntity> findAllDrivers() {
+        return null;
+    }
+
+    @Override
     public UserDto getUserById(int id) {
         return null;
     }

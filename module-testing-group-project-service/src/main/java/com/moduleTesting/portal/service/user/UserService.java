@@ -11,6 +11,8 @@ public interface UserService {
 
     List<UserEntity> findAll();
 
+    List<UserEntity> findAllDrivers();
+
     UserDto getUserById(int id);
 
     void editUser(int userId, String lastName, String firstName, String patronymic, Date birthday);
