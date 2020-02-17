@@ -227,13 +227,13 @@ CREATE TABLE [dbo].[task](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[task_reports]    Script Date: 2/15/2020 9:20:20 PM ******/
+/****** Object:  Table [dbo].[task_report]    Script Date: 2/15/2020 9:20:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[task_reports](
-	[task_entity_id] [int] NOT NULL,
+CREATE TABLE [dbo].[task_report](
+	[task_id] [int] NOT NULL,
 	[reports_id] [int] NOT NULL
 ) ON [PRIMARY]
 
@@ -378,52 +378,52 @@ INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], 
 INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (3, 3790.9, 1200.1, 2, 5, 1, 1150, N'Vitebsk-Grodno')
 INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (4, 2310.9, 800.1, 5, 6, 1, 780, N'Mins-Vilnius')
 SET IDENTITY_INSERT [dbo].[task] OFF
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 1)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 2)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 3)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 4)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 6)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 7)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 8)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 9)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 10)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 12)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 13)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 14)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 15)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 16)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 17)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 18)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (1, 19)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (4, 20)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (4, 21)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (4, 22)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (4, 23)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (4, 24)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (4, 25)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (4, 26)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 27)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 28)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 29)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 30)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 31)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 32)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 33)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 34)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 35)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 36)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 37)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 38)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 39)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 40)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 41)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 42)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 43)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 44)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 45)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 46)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 47)
-INSERT [dbo].[task_reports] ([task_entity_id], [reports_id]) VALUES (3, 48)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 1)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 2)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 3)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 4)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 6)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 7)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 8)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 9)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 10)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 12)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 13)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 14)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 15)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 16)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 17)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 18)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 19)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (4, 20)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (4, 21)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (4, 22)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (4, 23)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (4, 24)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (4, 25)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (4, 26)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 27)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 28)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 29)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 30)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 31)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 32)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 33)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 34)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 35)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 36)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 37)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 38)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 39)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 40)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 41)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 42)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 43)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 44)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 45)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 46)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 47)
+INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 48)
 INSERT [dbo].[task_status] ([id], [name]) VALUES (1, N'FREE')
 INSERT [dbo].[task_status] ([id], [name]) VALUES (2, N'IN PROCESS')
 INSERT [dbo].[task_status] ([id], [name]) VALUES (3, N'VALIDATING')
@@ -441,8 +441,8 @@ INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], 
 SET IDENTITY_INSERT [dbo].[user] OFF
 INSERT [dbo].[user_status] ([id], [name]) VALUES (1, N'FREE')
 INSERT [dbo].[user_status] ([id], [name]) VALUES (2, N'BUSY')
-/****** Object:  Index [IX_task_reports]    Script Date: 2/15/2020 9:20:20 PM ******/
-ALTER TABLE [dbo].[task_reports] ADD  CONSTRAINT [IX_task_reports] UNIQUE NONCLUSTERED
+/****** Object:  Index [IX_task_report]    Script Date: 2/15/2020 9:20:20 PM ******/
+ALTER TABLE [dbo].[task_report] ADD  CONSTRAINT [IX_task_report] UNIQUE NONCLUSTERED
 (
 	[reports_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -472,15 +472,15 @@ REFERENCES [dbo].[user] ([id])
 GO
 ALTER TABLE [dbo].[task] CHECK CONSTRAINT [FK_task_user]
 GO
-ALTER TABLE [dbo].[task_reports]  WITH CHECK ADD  CONSTRAINT [FK_task_reports_report] FOREIGN KEY([reports_id])
+ALTER TABLE [dbo].[task_report]  WITH CHECK ADD  CONSTRAINT [FK_task_report_report] FOREIGN KEY([reports_id])
 REFERENCES [dbo].[report] ([id])
 GO
-ALTER TABLE [dbo].[task_reports] CHECK CONSTRAINT [FK_task_reports_report]
+ALTER TABLE [dbo].[task_report] CHECK CONSTRAINT [FK_task_report_report]
 GO
-ALTER TABLE [dbo].[task_reports]  WITH CHECK ADD  CONSTRAINT [FK_task_reports_task] FOREIGN KEY([task_entity_id])
+ALTER TABLE [dbo].[task_report]  WITH CHECK ADD  CONSTRAINT [FK_task_report_task] FOREIGN KEY([task_id])
 REFERENCES [dbo].[task] ([id])
 GO
-ALTER TABLE [dbo].[task_reports] CHECK CONSTRAINT [FK_task_reports_task]
+ALTER TABLE [dbo].[task_report] CHECK CONSTRAINT [FK_task_report_task]
 GO
 ALTER TABLE [dbo].[user]  WITH CHECK ADD  CONSTRAINT [FK_user_role] FOREIGN KEY([role_id])
 REFERENCES [dbo].[role] ([id])

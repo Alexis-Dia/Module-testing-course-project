@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum UserRole {
 
-    ADMIN("ADMIN", 1), USER("ADMIN", 2);
+    ADMIN("ADMIN", 1), USER("DRIVER", 2);
 
     private final String name;
     private final int securityLevel;
