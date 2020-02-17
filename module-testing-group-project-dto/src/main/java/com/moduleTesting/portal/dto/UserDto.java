@@ -6,7 +6,7 @@ public class UserDto {
 
     private static final long serialVersionUID = 1L;
 
-    private Long userID;
+    private Integer userID;
 
     private String lastName;
 
@@ -29,7 +29,7 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(Long userID, String lastName, String firstName, String patronymic, Date birthday, String emailAddress,
+    public UserDto(Integer userID, String lastName, String firstName, String patronymic, Date birthday, String emailAddress,
                    String password, Float money, UserRole userRole, UserStatus userStatus) {
         this.userID = userID;
         this.lastName = lastName;
@@ -48,7 +48,7 @@ public class UserDto {
         this.firstName = firstName;
     }
 
-    public Long getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 

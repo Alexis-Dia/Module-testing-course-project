@@ -131,11 +131,11 @@ public class UserEntity {
         this.roleEntity = roleEntity;
     }
 
-    public UserStatusEntity getStatus() {
+    public UserStatusEntity getUserStatusEntity() {
         return status;
     }
 
-    public void setStatus(UserStatusEntity status) {
+    public void setUserStatusEntity(UserStatusEntity status) {
         this.status = status;
     }
 
