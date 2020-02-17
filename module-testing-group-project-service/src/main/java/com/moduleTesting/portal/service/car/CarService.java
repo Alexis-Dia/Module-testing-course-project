@@ -11,8 +11,8 @@ public interface CarService {
 
     List<CarDto> findAll();
 
-    void editCar(Integer carId, BrandDto brandId, Date year, String number, Date dateOfReceipt, CarStatus carStatus);
+    List<CarDto> editCar(Integer carId, BrandDto brandId, Date year, String number, Date dateOfReceipt, CarStatus carStatus);
 
-    void removeCar(Integer carId);
+    List<CarDto> removeCar(Integer carId);
 
 }

@@ -26,7 +26,8 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public void createReport(Date departure, Float weight, Float distance, Date arrival) {
+    public List<ReportDto> createReport(Date departure, Float weight, Float distance, Date arrival) {
+        return null;
     }
 
 }

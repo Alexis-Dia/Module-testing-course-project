@@ -10,7 +10,7 @@ public interface TaskService {
 
     List<TaskDto> findAllActiveTasks();
 
-    void changeTaskStatus(Integer taskId);
+    TaskDto changeTaskStatus(Integer taskId);
 
-    TaskDto createNewTask();
+    List<TaskDto> createNewTask();
 }

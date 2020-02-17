@@ -11,6 +11,6 @@ public interface ReportService {
 
     List<ReportDto> getReportsByTaskId(Integer taskId);
 
-    void createReport(Date departure, Float weight, Float distance, Date arrival);
+    List<ReportDto> createReport(Date departure, Float weight, Float distance, Date arrival);
 
 }

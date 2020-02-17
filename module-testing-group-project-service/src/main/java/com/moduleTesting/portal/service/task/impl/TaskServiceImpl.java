@@ -25,11 +25,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void changeTaskStatus(Integer taskId) {
+    public TaskDto changeTaskStatus(Integer taskId) {
+        return null;
     }
 
     @Override
-    public TaskDto createNewTask() {
+    public List<TaskDto> createNewTask() {
         return null;
     }
 

@@ -27,12 +27,13 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void editCar(Integer carId, BrandDto brandId, Date year, String number, Date dateOfReceipt, CarStatus carStatus) {
+    public List<CarDto> editCar(Integer carId, BrandDto brandId, Date year, String number, Date dateOfReceipt, CarStatus carStatus) {
+        return null;
     }
 
     @Override
-    public void removeCar(Integer carId) {
-
+    public List<CarDto> removeCar(Integer carId) {
+        return null;
     }
 
 }

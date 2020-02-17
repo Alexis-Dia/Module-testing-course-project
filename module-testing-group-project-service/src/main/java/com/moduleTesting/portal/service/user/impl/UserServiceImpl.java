@@ -27,24 +27,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserById(int id) {
+    public UserDto getUserById(Integer userId) {
         return null;
     }
 
     @Override
-    public void editUser(int userId, String lastName, String firstName, String patronymic, Date birthday) {
+    public UserDto editUser(Integer userId, String lastName, String firstName, String patronymic, Date birthday) {
+        return null;
     }
 
     @Override
-    public void changeStatus(int userId, UserRole userRole) {
+    public UserDto changeUserStatus(Integer userId, UserRole userRole) {
+        return null;
     }
 
     @Override
-    public void transferMoney(int userId, float money) {
+    public void transferMoney(Integer userId, Float money) {
     }
 
     @Override
-    public void deleteUser(int userId) {
+    public List<UserDto> deleteUser(Integer userId) {
+        return null;
     }
 
     @Override

@@ -12,15 +12,15 @@ public interface UserService {
 
     List<UserDto> findAllDrivers();
 
-    UserDto getUserById(int id);
+    UserDto getUserById(Integer userId);
 
-    void editUser(int userId, String lastName, String firstName, String patronymic, Date birthday);
+    UserDto editUser(Integer userId, String lastName, String firstName, String patronymic, Date birthday);
 
-    void changeStatus(int userId, UserRole userRole);
+    UserDto changeUserStatus(Integer userId, UserRole userRole);
 
-    void transferMoney(int userId, float money);
+    void transferMoney(Integer userId, Float money);
 
-    void deleteUser(int userId);
+    List<UserDto> deleteUser(Integer userId);
 
     void createNewUser (String lastName, String firstName, String patronymic, Date birthday, String email, String password,
                         Integer roleId, Integer statusId);

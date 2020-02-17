@@ -25,4 +25,27 @@ public class TaskController {
         return allTask;
     }
 
+    @PostMapping("/allActive")
+    public List<TaskDto> getAllActiveTasks() {
+
+        final List<TaskDto> allTask = taskService.findAllActiveTasks();
+        System.out.println(allTask);
+
+        return allTask;
+    }
+
+    @PostMapping("/changeTaskStatus")
+    public TaskDto changeTaskStatus(Integer taskId) {
+        TaskDto taskDto = taskService.changeTaskStatus(taskId);
+
+        return taskDto;
+    }
+
+    @PostMapping("/createNewTask")
+    public List<TaskDto> createNewTask(Integer taskId) {
+        List<TaskDto> tasks = taskService.createNewTask();
+
+        return tasks;
+    }
+
 }
