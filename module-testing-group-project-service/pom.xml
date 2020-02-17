@@ -20,6 +20,12 @@
             <artifactId>module-testing-group-project-domain</artifactId>
             <version>1.0.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.module-testing-group-project</groupId>
+            <artifactId>module-testing-group-project-dto</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
 </project>
