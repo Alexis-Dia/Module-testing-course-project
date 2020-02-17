@@ -20,4 +20,7 @@ public interface UserService {
     void transferMoney(int userId, float money);
 
     void deleteUser(int userId);
+
+    void createNewUser (String lastName, String firstName, String patronymic, Date birthday, String email, String password,
+                        Integer roleId, Integer statusId);
 }

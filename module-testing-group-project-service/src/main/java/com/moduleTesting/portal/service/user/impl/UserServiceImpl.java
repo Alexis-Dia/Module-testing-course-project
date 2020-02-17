@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(int userId) {
     }
 
+    @Override
+    public void createNewUser(String lastName, String firstName, String patronymic, Date birthday, String email,
+                              String password, Integer roleId, Integer statusId) {
+    }
+
 }
