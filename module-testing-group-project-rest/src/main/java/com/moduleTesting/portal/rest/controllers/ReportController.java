@@ -5,6 +5,7 @@ import com.moduleTesting.portal.service.report.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -21,16 +22,14 @@ public class ReportController {
     public List<ReportDto> getAllReports() {
 
         final List<ReportDto> allReports = reportService.findAll();
-        System.out.println(allReports);
 
         return allReports;
     }
 
     @PostMapping("/getByTaskId")
-    public List<ReportDto> getReportsByTaskId(Integer taskId) {
+    public List<ReportDto> getReportsByTaskId(@RequestParam("taskId") Integer taskId) {
 
         final List<ReportDto> reports = reportService.getReportsByTaskId(taskId);
-        System.out.println(reports);
 
         return reports;
     }
@@ -39,7 +38,6 @@ public class ReportController {
     public List<ReportDto> createReport(Date departure, Float weight, Float distance, Date arrival) {
 
         final List<ReportDto> reports = reportService.createReport(departure, weight, distance, arrival);
-        System.out.println(reports);
 
         return reports;
     }

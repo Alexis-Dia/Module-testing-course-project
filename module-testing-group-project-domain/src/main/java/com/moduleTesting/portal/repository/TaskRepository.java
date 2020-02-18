@@ -23,4 +23,5 @@ public interface TaskRepository extends JpaRepository<TaskEntity, Long> {
     @Query("UPDATE TaskEntity task SET task.status.id = ?2 WHERE task.id = ?1")
     Integer updateStatusById(Integer taskId, Integer statusId);
 
+    List<TaskEntity> findById(Integer taskId);
 }
