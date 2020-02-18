@@ -3,12 +3,8 @@ package com.moduleTesting.portal.rest.controllers;
 import com.moduleTesting.portal.dto.ReportDto;
 import com.moduleTesting.portal.service.report.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -34,10 +30,10 @@ public class ReportController {
         return reports;
     }
 
-    @PostMapping("/createReport")
-    public List<ReportDto> createReport(Date departure, Float weight, Float distance, Date arrival) {
+    @PostMapping("/{taskId}/createReport")
+    public List<ReportDto> createReport(@PathVariable("taskId") Integer taskId, @RequestBody ReportDto reportDto) {
 
-        final List<ReportDto> reports = reportService.createReport(departure, weight, distance, arrival);
+        final List<ReportDto> reports = reportService.createReport(taskId, reportDto);
 
         return reports;
     }

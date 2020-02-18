@@ -1,14 +1,16 @@
 package com.moduleTesting.portal.service.report.impl;
 
 import com.moduleTesting.portal.dto.ReportDto;
+import com.moduleTesting.portal.entity.ReportEntity;
 import com.moduleTesting.portal.repository.ReportRepository;
 import com.moduleTesting.portal.repository.TaskRepository;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.report.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +34,11 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public List<ReportDto> createReport(Date departure, Float weight, Float distance, Date arrival) {
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public List<ReportDto> createReport(Integer taskId, ReportDto reportDto) {
+        reportRepository.save(new ReportEntity(reportDto.getDeparture(), reportDto.getWeight(), reportDto.getDistance(),
+            reportDto.getArrival()));
+        //taskRepository.updateTaskByReportId(taskId);
         return null;
     }
 

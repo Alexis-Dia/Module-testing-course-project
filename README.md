@@ -42,3 +42,9 @@
         "name": "Baranovichi-Svetlogorsk",
         "reward": 389
         }
+        
+        
+        POST http://localhost:8080/report/getByTaskId?taskId=3
+        
+        
+        @PostMapping("/{taskId}/createReport")

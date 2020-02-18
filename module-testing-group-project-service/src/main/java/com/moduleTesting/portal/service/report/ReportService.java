@@ -2,7 +2,6 @@ package com.moduleTesting.portal.service.report;
 
 import com.moduleTesting.portal.dto.ReportDto;
 
-import java.util.Date;
 import java.util.List;
 
 public interface ReportService {
@@ -11,6 +10,6 @@ public interface ReportService {
 
     List<ReportDto> getReportsByTaskId(Integer taskId);
 
-    List<ReportDto> createReport(Date departure, Float weight, Float distance, Date arrival);
+    List<ReportDto> createReport(Integer taskId, ReportDto reportDto);
 
 }

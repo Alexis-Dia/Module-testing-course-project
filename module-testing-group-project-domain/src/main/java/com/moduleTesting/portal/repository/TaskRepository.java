@@ -24,4 +24,5 @@ public interface TaskRepository extends JpaRepository<TaskEntity, Long> {
     Integer updateStatusById(Integer taskId, Integer statusId);
 
     List<TaskEntity> findById(Integer taskId);
+
 }
