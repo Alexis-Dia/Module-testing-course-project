@@ -4,6 +4,8 @@ import com.moduleTesting.portal.dto.*;
 import com.moduleTesting.portal.entity.*;
 
 import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class DtoMapper {
 
@@ -47,6 +49,18 @@ public class DtoMapper {
     public static TaskStatus toTaskStatus(TaskStatusEntity taskStatusEntity) {
         return Arrays.stream(TaskStatus.values()).filter(taskStatus ->
             taskStatus.getName().equals(taskStatusEntity.getName())).findAny().get();
+    }
+
+    public static ReportDto toReportDto (ReportEntity reportEntity) {
+        return new ReportDto(reportEntity.getId(), reportEntity.getDeparture(), reportEntity.getWeight(),
+            reportEntity.getDistance(), reportEntity.getArrival());
+    }
+
+    public static TaskDto toTaskDto(TaskEntity taskEntity) {
+        final Set<ReportDto> reports = taskEntity.getReports().stream().map(DtoMapper::toReportDto).collect(Collectors.toSet());
+        return new TaskDto(taskEntity.getId(), taskEntity.getSummaryDistance(), taskEntity.getWeight(),
+            DtoMapper.toUserDto(taskEntity.getDriver()), DtoMapper.toCarDto(taskEntity.getCar()),
+            DtoMapper.toTaskStatus(taskEntity.getStatus()), taskEntity.getName(), reports);
     }
 
 }

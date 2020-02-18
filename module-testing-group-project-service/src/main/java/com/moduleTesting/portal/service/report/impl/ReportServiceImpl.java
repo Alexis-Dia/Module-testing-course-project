@@ -2,12 +2,14 @@ package com.moduleTesting.portal.service.report.impl;
 
 import com.moduleTesting.portal.dto.ReportDto;
 import com.moduleTesting.portal.repository.ReportRepository;
+import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.report.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReportServiceImpl implements ReportService {
@@ -17,7 +19,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<ReportDto> findAll() {
-        return null;
+        return reportRepository.findAll().stream().map(DtoMapper::toReportDto).collect(Collectors.toList());
     }
 
     @Override
