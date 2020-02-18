@@ -20,6 +20,11 @@ public class TaskStatusEntity {
         this.name = name;
     }
 
+    public TaskStatusEntity(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }

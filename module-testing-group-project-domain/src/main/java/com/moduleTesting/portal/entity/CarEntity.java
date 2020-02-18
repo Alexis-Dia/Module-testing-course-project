@@ -39,6 +39,10 @@ public class CarEntity {
         this.carStatusEntity = carStatusEntity;
     }
 
+    public CarEntity(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

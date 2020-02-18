@@ -1,6 +1,7 @@
 package com.moduleTesting.portal.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -47,6 +48,14 @@ public class TaskEntity {
         this.weight = weight;
         this.driver = driver;
         this.car = car;
+        this.status = status;
+        this.reward = reward;
+    }
+
+    public TaskEntity(String name, Float summaryDistance, Float weight, TaskStatusEntity status, Float reward) {
+        this.name = name;
+        this.summaryDistance = summaryDistance;
+        this.weight = weight;
         this.status = status;
         this.reward = reward;
     }
@@ -116,7 +125,10 @@ public class TaskEntity {
     }
 
     public Set<ReportEntity> getReports() {
-        return reports;
+        if (reports != null) {
+            return reports;
+        }
+        return new HashSet<ReportEntity>();
     }
 
     public void setReports(Set<ReportEntity> reports) {

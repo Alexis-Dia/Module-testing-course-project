@@ -21,12 +21,16 @@ public class DtoMapper {
 
     public static UserDto toUserDto(UserEntity userEntity) {
 
-        final UserRole userRole = toUserRole(userEntity.getRoleEntity());
-        final UserStatus userStatus = toUserStatus(userEntity.getUserStatusEntity());
+        if (userEntity != null) {
+            final UserRole userRole = toUserRole(userEntity.getRoleEntity());
+            final UserStatus userStatus = toUserStatus(userEntity.getUserStatusEntity());
 
-        return new UserDto(userEntity.getId(), userEntity.getLastName(), userEntity.getFirstName(),
-            userEntity.getPatronymic(), userEntity.getBirthday(), userEntity.getLogin(), userEntity.getPassword(),
-            userEntity.getMoney(), userRole, userStatus);
+            return new UserDto(userEntity.getId(), userEntity.getLastName(), userEntity.getFirstName(),
+                userEntity.getPatronymic(), userEntity.getBirthday(), userEntity.getLogin(), userEntity.getPassword(),
+                userEntity.getMoney(), userRole, userStatus);
+
+        }
+        return new UserDto();
     }
 
     public static CarStatus toCarStatus(CarStatusEntity carStatusEntity) {
@@ -40,10 +44,13 @@ public class DtoMapper {
     }
 
     public static CarDto toCarDto(CarEntity carEntity) {
-        final CarStatus carStatus = DtoMapper.toCarStatus(carEntity.getCarStatusEntity());
-        final BrandDto brandDto = DtoMapper.toBrandDto(carEntity.getBrandEntity());
-        return new CarDto(carEntity.getId(), brandDto, carEntity.getYear(), carEntity.getNumber(),
-            carEntity.getDateOfReceipt(), carStatus);
+        if (carEntity != null) {
+            final CarStatus carStatus = DtoMapper.toCarStatus(carEntity.getCarStatusEntity());
+            final BrandDto brandDto = DtoMapper.toBrandDto(carEntity.getBrandEntity());
+            return new CarDto(carEntity.getId(), brandDto, carEntity.getYear(), carEntity.getNumber(),
+                carEntity.getDateOfReceipt(), carStatus);
+        }
+        return new CarDto();
     }
 
     public static TaskStatus toTaskStatus(TaskStatusEntity taskStatusEntity) {
@@ -52,15 +59,18 @@ public class DtoMapper {
     }
 
     public static ReportDto toReportDto (ReportEntity reportEntity) {
-        return new ReportDto(reportEntity.getId(), reportEntity.getDeparture(), reportEntity.getWeight(),
-            reportEntity.getDistance(), reportEntity.getArrival());
+        if (reportEntity != null) {
+            return new ReportDto(reportEntity.getId(), reportEntity.getDeparture(), reportEntity.getWeight(),
+                reportEntity.getDistance(), reportEntity.getArrival());
+        }
+        return new ReportDto();
     }
 
     public static TaskDto toTaskDto(TaskEntity taskEntity) {
         final Set<ReportDto> reports = taskEntity.getReports().stream().map(DtoMapper::toReportDto).collect(Collectors.toSet());
         return new TaskDto(taskEntity.getId(), taskEntity.getSummaryDistance(), taskEntity.getWeight(),
             DtoMapper.toUserDto(taskEntity.getDriver()), DtoMapper.toCarDto(taskEntity.getCar()),
-            DtoMapper.toTaskStatus(taskEntity.getStatus()), taskEntity.getName(), reports);
+            DtoMapper.toTaskStatus(taskEntity.getStatus()), taskEntity.getName(), reports, taskEntity.getReward());
     }
 
 }

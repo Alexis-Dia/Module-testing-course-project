@@ -29,6 +29,11 @@ public class UserDto {
     public UserDto() {
     }
 
+/*    @JsonCreator
+    public UserDto(@JsonProperty Integer userID) {
+        this.userID = userID;
+    }*/
+
     public UserDto(Integer userID, String lastName, String firstName, String patronymic, Date birthday, String emailAddress,
                    String password, Float money, UserRole userRole, UserStatus userStatus) {
         this.userID = userID;

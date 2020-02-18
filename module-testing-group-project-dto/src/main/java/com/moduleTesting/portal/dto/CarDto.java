@@ -19,6 +19,11 @@ public class CarDto {
     public CarDto() {
     }
 
+/*    @JsonCreator
+    public CarDto(@JsonProperty Integer id) {
+        this.id = id;
+    }*/
+
     public CarDto(Integer id, BrandDto brand, Date year, String number, Date dateOfReceipt, CarStatus carStatus) {
         this.id = id;
         this.brand = brand;

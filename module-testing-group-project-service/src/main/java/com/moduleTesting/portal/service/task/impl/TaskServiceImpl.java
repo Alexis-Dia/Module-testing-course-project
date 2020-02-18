@@ -1,11 +1,15 @@
 package com.moduleTesting.portal.service.task.impl;
 
 import com.moduleTesting.portal.dto.TaskDto;
+import com.moduleTesting.portal.entity.TaskEntity;
+import com.moduleTesting.portal.entity.TaskStatusEntity;
 import com.moduleTesting.portal.repository.TaskRepository;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.task.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,18 +26,29 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<TaskDto> findAllActiveTasks() {
-        return null;
+    public List<TaskDto> findAllActiveTasks(String statusName) {
+        return taskRepository.findByStatusNameContaining(statusName).stream().map(DtoMapper::toTaskDto).collect(Collectors.toList());
     }
 
     @Override
-    public TaskDto changeTaskStatus(Integer taskId) {
-        return null;
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public Integer changeTaskStatus(Integer taskId, Integer statusId) {
+        Integer rowNumber = taskRepository.updateStatusById(taskId, statusId);
+        return rowNumber;
     }
 
+    /**
+     * @Transactional If we get err in second action findAll the taskRepository.save will rollback
+     * @param taskDto
+     * @return
+     */
     @Override
-    public List<TaskDto> createNewTask() {
-        return null;
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public List<TaskDto> createNewTask(TaskDto taskDto) {
+        taskRepository.save(new TaskEntity(taskDto.getName(), taskDto.getSummaryDistance(), taskDto.getWeight(),
+            new TaskStatusEntity(taskDto.getTaskStatus().getId(), taskDto.getTaskStatus().getName()), taskDto.getReward()));
+        final List<TaskDto> allTasks = findAll();
+        return allTasks;
     }
 
 }

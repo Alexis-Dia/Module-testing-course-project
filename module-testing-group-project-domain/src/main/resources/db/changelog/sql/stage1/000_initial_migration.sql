@@ -374,9 +374,10 @@ INSERT [dbo].[role] ([id], [name], [security_level]) VALUES (2, N'DRIVER', 2)
 SET IDENTITY_INSERT [dbo].[role] OFF
 SET IDENTITY_INSERT [dbo].[task] ON
 
-INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (1, 7500, 511, 1, 4, 1, 2000, N'Minsk-Gomel')
-INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (3, 3790.9, 1200.1, 2, 5, 1, 1150, N'Vitebsk-Grodno')
-INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (4, 2310.9, 800.1, 5, 6, 1, 780, N'Mins-Vilnius')
+INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (1, 7500, 511, 1, 4, 2, 2000, N'Minsk-Gomel')
+INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (3, 3790.9, 1200.1, 2, 5, 2, 1150, N'Vitebsk-Grodno')
+INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (4, 2310.9, 800.1, 5, 6, 2, 780, N'Mins-Vilnius')
+INSERT [dbo].[task] ([id], [summary_distance], [weight], [status_id], [reward], [name]) VALUES (5, 469, 231, 1, 290, N'Baranovichi-Svetlogorsk')
 SET IDENTITY_INSERT [dbo].[task] OFF
 INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 1)
 INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 2)
@@ -425,7 +426,7 @@ INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 46)
 INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 47)
 INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (3, 48)
 INSERT [dbo].[task_status] ([id], [name]) VALUES (1, N'FREE')
-INSERT [dbo].[task_status] ([id], [name]) VALUES (2, N'IN PROCESS')
+INSERT [dbo].[task_status] ([id], [name]) VALUES (2, N'IN_PROGRESS')
 INSERT [dbo].[task_status] ([id], [name]) VALUES (3, N'VALIDATING')
 INSERT [dbo].[task_status] ([id], [name]) VALUES (4, N'REJECTED')
 INSERT [dbo].[task_status] ([id], [name]) VALUES (5, N'FINISHED')

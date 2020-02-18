@@ -18,3 +18,27 @@
     ALTER DATABASE [carriages_system] SET  READ_WRITE 
     DATABASECHANGELOG
     DATABASECHANGELOGLOCK
+    
+    
+    
+    
+    
+    POST http://localhost:8080/task/createNew
+            {
+            "summaryDistance": 469.1,
+            "weight": 231.4,
+            "driver": {"userID": null},
+            "car": {"id": 4},
+            "taskStatus": "FREE",
+            "name": "Baranovichi-Svetlogorsk",
+            "reward": 389
+            }
+        {
+        "summaryDistance": 469.1,
+        "weight": 231.4,
+        "driver": {"userID": 1},
+        "car": {"id": 4},
+        "taskStatus": "FREE",
+        "name": "Baranovichi-Svetlogorsk",
+        "reward": 389
+        }

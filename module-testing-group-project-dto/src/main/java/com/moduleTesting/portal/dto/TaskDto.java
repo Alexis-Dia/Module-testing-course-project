@@ -20,10 +20,13 @@ public class TaskDto {
 
     private Set<ReportDto> reports;
 
+    private Float reward;
+
     public TaskDto() {
     }
 
-    public TaskDto(Integer id, Float summaryDistance, Float weight, UserDto driver, CarDto car, TaskStatus taskStatus, String name, Set<ReportDto> reports) {
+    public TaskDto(Integer id, Float summaryDistance, Float weight, UserDto driver, CarDto car, TaskStatus taskStatus,
+                   String name, Set<ReportDto> reports, Float reward) {
         this.id = id;
         this.summaryDistance = summaryDistance;
         this.weight = weight;
@@ -32,6 +35,7 @@ public class TaskDto {
         this.taskStatus = taskStatus;
         this.name = name;
         this.reports = reports;
+        this.reward = reward;
     }
 
     public Integer getId() {
@@ -94,6 +98,14 @@ public class TaskDto {
         this.reports = reports;
     }
 
+    public Float getReward() {
+        return reward;
+    }
+
+    public void setReward(Float reward) {
+        this.reward = reward;
+    }
+
     @Override
     public String toString() {
         return "TaskDto{" +
@@ -105,6 +117,7 @@ public class TaskDto {
             ", taskStatus=" + taskStatus +
             ", name='" + name + '\'' +
             ", reports=" + reports +
+            ", reward=" + reward +
             '}';
     }
 }

@@ -1,11 +1,9 @@
 package com.moduleTesting.portal.rest.controllers;
 
-import com.moduleTesting.portal.dto.*;
+import com.moduleTesting.portal.dto.TaskDto;
 import com.moduleTesting.portal.service.task.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,24 +24,24 @@ public class TaskController {
     }
 
     @PostMapping("/allActive")
-    public List<TaskDto> getAllActiveTasks() {
+    public List<TaskDto> getAllActiveTasks(@RequestParam("taskStatus") String taskStatus) {
 
-        final List<TaskDto> allTask = taskService.findAllActiveTasks();
+        final List<TaskDto> allTask = taskService.findAllActiveTasks(taskStatus);
         System.out.println(allTask);
 
         return allTask;
     }
 
     @PostMapping("/changeTaskStatus")
-    public TaskDto changeTaskStatus(Integer taskId) {
-        TaskDto taskDto = taskService.changeTaskStatus(taskId);
+    public Integer changeTaskStatus(@RequestParam("taskId") Integer taskId, @RequestParam("statusId") Integer statusId) {
+        Integer changedRow = taskService.changeTaskStatus(taskId, statusId);
 
-        return taskDto;
+        return changedRow;
     }
 
-    @PostMapping("/createNewTask")
-    public List<TaskDto> createNewTask(Integer taskId) {
-        List<TaskDto> tasks = taskService.createNewTask();
+    @PostMapping("/createNew")
+    public List<TaskDto> createNewTask(@RequestBody TaskDto taskDto) {
+        List<TaskDto> tasks = taskService.createNewTask(taskDto);
 
         return tasks;
     }
