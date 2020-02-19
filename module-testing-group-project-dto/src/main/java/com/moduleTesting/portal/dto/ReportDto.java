@@ -1,5 +1,9 @@
 package com.moduleTesting.portal.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class ReportDto {
@@ -19,6 +23,15 @@ public class ReportDto {
 
     public ReportDto(Integer id, Date departure, Float weight, Float distance, Date arrival) {
         this.id = id;
+        this.departure = departure;
+        this.weight = weight;
+        this.distance = distance;
+        this.arrival = arrival;
+    }
+
+    @JsonCreator
+    public ReportDto(@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") @JsonProperty("departure") Date departure, @JsonProperty("weight") Float weight,
+                     @JsonProperty("distance") Float distance, @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") @JsonProperty("arrival") Date arrival) {
         this.departure = departure;
         this.weight = weight;
         this.distance = distance;

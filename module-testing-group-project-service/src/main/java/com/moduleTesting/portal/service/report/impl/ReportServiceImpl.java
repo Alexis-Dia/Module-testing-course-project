@@ -2,6 +2,7 @@ package com.moduleTesting.portal.service.report.impl;
 
 import com.moduleTesting.portal.dto.ReportDto;
 import com.moduleTesting.portal.entity.ReportEntity;
+import com.moduleTesting.portal.entity.TaskEntity;
 import com.moduleTesting.portal.repository.ReportRepository;
 import com.moduleTesting.portal.repository.TaskRepository;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
@@ -30,16 +31,17 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<ReportDto> getReportsByTaskId(Integer taskId) {
-        return taskRepository.findById(taskId).stream().findAny().get().getReports().stream().map(DtoMapper::toReportDto).collect(Collectors.toList());
+        return taskRepository.findById(taskId).getReports().stream().map(DtoMapper::toReportDto).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<ReportDto> createReport(Integer taskId, ReportDto reportDto) {
-        reportRepository.save(new ReportEntity(reportDto.getDeparture(), reportDto.getWeight(), reportDto.getDistance(),
+        TaskEntity taskEntity = taskRepository.findById(taskId);
+        taskEntity.getReports().add(new ReportEntity(reportDto.getDeparture(), reportDto.getWeight(), reportDto.getDistance(),
             reportDto.getArrival()));
-        //taskRepository.updateTaskByReportId(taskId);
-        return null;
+        taskEntity = taskRepository.save(taskEntity);
+        return taskEntity.getReports().stream().map(DtoMapper::toReportDto).collect(Collectors.toList());
     }
 
 }

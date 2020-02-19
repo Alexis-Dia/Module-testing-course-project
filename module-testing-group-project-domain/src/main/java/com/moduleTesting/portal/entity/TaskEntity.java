@@ -36,7 +36,7 @@ public class TaskEntity {
     @Column(name="reward")
     private Float reward;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     private Set<ReportEntity> reports;
 
     public TaskEntity() {
