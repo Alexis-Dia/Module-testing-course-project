@@ -22,8 +22,9 @@ import java.util.stream.Collectors;
 @Service
 public class CarServiceImpl implements CarService {
 
-    public static final String CAR_NOT_FOUND = "Car not found";
-    public static final String BRAND_NOT_FOUND = "Brand not found";
+    private static final String CAR_NOT_FOUND = "Car not found";
+    private static final String BRAND_NOT_FOUND = "Brand not found";
+
     @Autowired
     CarRepository carRepository;
 
@@ -72,8 +73,15 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<CarDto> removeCar(Integer carId) {
-        return null;
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public List<CarDto> removeCarById(Integer carId) {
+
+        carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException(CAR_NOT_FOUND));
+
+        carRepository.removeCarById(carId);
+
+        final List<CarDto> allCars = findAll();
+        return allCars;
     }
 
 }

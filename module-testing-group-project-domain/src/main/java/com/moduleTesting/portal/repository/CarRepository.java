@@ -20,4 +20,8 @@ public interface CarRepository extends JpaRepository<CarEntity, Long> {
     @Modifying
     @Query("UPDATE CarEntity car SET car.brandEntity.id = ?2, car.year = ?3, car.number = ?4, car.dateOfReceipt = ?5, car.carStatusEntity.id = ?6 WHERE car.id = ?1")
     Integer updateCar(Integer carId, Integer brandId, Date year, String number, Date dateOfReceipt, Integer carStatusId);
+
+    @Modifying
+    @Query("DELETE FROM CarEntity car WHERE car.id = ?1")
+    Integer removeCarById(Integer carId);
 }

@@ -12,6 +12,6 @@ public interface CarService {
 
     List<CarDto> editCar(CarDto carDto);
 
-    List<CarDto> removeCar(Integer carId);
+    List<CarDto> removeCarById(Integer carId);
 
 }

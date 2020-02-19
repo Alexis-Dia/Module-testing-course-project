@@ -62,5 +62,27 @@
         	"carStatus": "FREE"
         }
         
+        http://localhost:8080/car/edit
+        @PostMapping("/edit")
+        {
+        	"id":"4",
+        	"brand": {
+        		"id": "15"
+        	},
+        	"year": "2009-01-17dasda 17:00:00.000",
+        	"number": "FJ-3352",
+        	"dateOfReceipt": "2019-11-27 17:00:00.000",
+        	"carStatus": "FREE"
+        }
+        
+        http://localhost:8080/car/removeById?carId=10
+        @PostMapping("/removeById")
+        
+        
+        
+        
+        
+        
+        
         
         
