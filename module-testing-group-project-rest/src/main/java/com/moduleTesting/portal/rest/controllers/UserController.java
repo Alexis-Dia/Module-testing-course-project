@@ -44,6 +44,14 @@ public class UserController {
         return userDto;
     }
 
+    @PostMapping("/getAdmin")
+    public UserDto geAdmin() {
+
+        final UserDto userDto = userService.getAdmin();
+
+        return userDto;
+    }
+
     @PostMapping("/edit")
     public UserDto editUser(Integer userId, String lastName, String firstName, String patronymic, Date birthday) {
 

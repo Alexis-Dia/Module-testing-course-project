@@ -14,6 +14,8 @@ public interface UserService {
 
     UserDto getDriverById(Integer userId);
 
+    UserDto getAdmin();
+
     UserDto editUser(Integer userId, String lastName, String firstName, String patronymic, Date birthday);
 
     UserDto changeUserStatus(Integer userId, UserRole userRole);

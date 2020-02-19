@@ -92,8 +92,8 @@
             http://localhost:8080/user/getById?id=11
             @PostMapping("/getById")
         
-        
-        
+            @PostMapping("/getAdmin")
+            http://localhost:8080/user/getAdmin
         
         
         

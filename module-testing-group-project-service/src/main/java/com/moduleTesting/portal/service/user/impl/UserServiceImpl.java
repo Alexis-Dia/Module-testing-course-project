@@ -41,6 +41,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto getAdmin() {
+        final String admin = UserRole.ADMIN.getName();
+        return DtoMapper.toUserDto(userRepository.findAllByRoleEntity_NameContains(admin).stream().findAny().get());
+    }
+
+    @Override
     public UserDto editUser(Integer userId, String lastName, String firstName, String patronymic, Date birthday) {
         return null;
     }
