@@ -12,7 +12,7 @@ public interface UserService {
 
     List<UserDto> findAllDrivers();
 
-    UserDto getUserById(Integer userId);
+    UserDto getDriverById(Integer userId);
 
     UserDto editUser(Integer userId, String lastName, String firstName, String patronymic, Date birthday);
 

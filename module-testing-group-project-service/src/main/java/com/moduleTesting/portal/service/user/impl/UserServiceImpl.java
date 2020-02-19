@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     public static final String USER_WASN_T_FOUND = "User wasn't found";
+    public static final String DRIVER = "DRIVER";
 
     @Autowired
     UserRepository userRepository;
@@ -33,8 +34,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserById(Integer userId) {
-        return DtoMapper.toUserDto(userRepository.getUserById(userId).orElseThrow(() -> new UserNotFoundException(USER_WASN_T_FOUND)));
+    public UserDto getDriverById(Integer userId) {
+        return DtoMapper.toUserDto(userRepository.getUserByIdAndRoleEntity_Name(userId, DRIVER).orElseThrow(
+            () -> new UserNotFoundException(USER_WASN_T_FOUND)
+        ));
     }
 
     @Override

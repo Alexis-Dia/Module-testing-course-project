@@ -37,9 +37,9 @@ public class UserController {
     }
 
     @PostMapping("/getById")
-    public UserDto getUserById(@RequestParam("id") Integer userId) {
+    public UserDto getDriverById(@RequestParam("id") Integer userId) {
 
-        final UserDto userDto = userService.getUserById(userId);
+        final UserDto userDto = userService.getDriverById(userId);
 
         return userDto;
     }
