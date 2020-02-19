@@ -1,7 +1,6 @@
 package com.moduleTesting.portal.service.user;
 
 import com.moduleTesting.portal.dto.UserDto;
-import com.moduleTesting.portal.dto.UserRole;
 
 import java.util.Date;
 import java.util.List;
@@ -18,7 +17,7 @@ public interface UserService {
 
     UserDto editUser(UserDto userDto);
 
-    UserDto changeUserStatus(Integer userId, UserRole userRole);
+    UserDto changeUserStatus(Integer userId, Integer userStatus);
 
     void transferMoney(Integer userId, Float money);
 

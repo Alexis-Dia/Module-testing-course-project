@@ -108,6 +108,20 @@
                 "money": 100.9
             }
         
+            http://localhost:8080/user/changeStatus
+            @PostMapping("/changeStatus")
+            {
+                "userID":"9",
+                "lastName": "Mahrez",
+                "firstName": "Riad",
+                "patronymic": "Abulovich",
+                "birthday": "1979-11-27 17:00:00.000",
+                "emailAddress": "Kon@tut.by",
+                "password": "12345678",
+                "money": 100.9,
+                "userStatus": "BUSY"
+            }
+        
         
         
         

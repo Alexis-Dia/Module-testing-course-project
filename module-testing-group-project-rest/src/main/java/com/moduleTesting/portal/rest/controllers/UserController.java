@@ -1,7 +1,6 @@
 package com.moduleTesting.portal.rest.controllers;
 
 import com.moduleTesting.portal.dto.UserDto;
-import com.moduleTesting.portal.dto.UserRole;
 import com.moduleTesting.portal.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -58,9 +57,9 @@ public class UserController {
     }
 
     @PostMapping("/changeStatus")
-    public UserDto changeUserStatus(Integer userId, UserRole userRole) {
+    public UserDto changeUserStatus(@RequestBody UserDto userDto) {
 
-        final UserDto user = userService.changeUserStatus(userId, userRole);
+        final UserDto user = userService.changeUserStatus(userDto.getUserID(), userDto.getUserStatus().getId());
         System.out.println(user);
 
         return user;

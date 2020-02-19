@@ -22,4 +22,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
         " user.birthday = ?5, user.login = ?6, user.password = ?7, user.money = ?8 WHERE user.id = ?1")
     Integer updateUser(Integer userId, String lastName, String firstName, String patronymic,
                        Date birthday, String login, String password, Float money);
+
+    @Modifying
+    @Query("UPDATE UserEntity userEntity SET userEntity.status.id = ?2 WHERE userEntity.id = ?1")
+    Integer updateUserStatus(Integer userId, Integer statusId);
 }

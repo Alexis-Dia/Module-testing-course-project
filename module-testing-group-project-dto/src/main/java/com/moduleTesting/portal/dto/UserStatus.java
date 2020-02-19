@@ -2,7 +2,7 @@ package com.moduleTesting.portal.dto;
 
 public enum UserStatus {
 
-    FREE("FREE", 1), BUSY("BUSY", 1);
+    FREE("FREE", 1), BUSY("BUSY", 2);
 
     private final String name;
     private final int id;

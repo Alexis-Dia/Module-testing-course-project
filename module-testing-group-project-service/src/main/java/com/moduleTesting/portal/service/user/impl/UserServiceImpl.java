@@ -61,8 +61,14 @@ public class UserServiceImpl implements UserService {
      }
 
     @Override
-    public UserDto changeUserStatus(Integer userId, UserRole userRole) {
-        return null;
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public UserDto changeUserStatus(Integer userId, Integer userStatus) {
+
+        userRepository.updateUserStatus(userId, userStatus);
+
+        return DtoMapper.toUserDto(userRepository.getUserByIdAndRoleEntity_Name(userId, DRIVER).orElseThrow(
+            () -> new UserNotFoundException(USER_WASN_T_FOUND)
+        ));
     }
 
     @Override
