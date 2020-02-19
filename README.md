@@ -95,7 +95,18 @@
             @PostMapping("/getAdmin")
             http://localhost:8080/user/getAdmin
         
-        
+            http://localhost:8080/user/edit
+            @PostMapping("/edit")
+            {
+                "userID":"9",
+                "lastName": "Mahrez",
+                "firstName": "Riad",
+                "patronymic": "Abulovich",
+                "birthday": "1979-11-27 17:00:00.000",
+                "emailAddress": "Kon@tut.by",
+                "password": "12345678",
+                "money": 100.9
+            }
         
         
         

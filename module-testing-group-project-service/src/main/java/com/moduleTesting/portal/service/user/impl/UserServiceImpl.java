@@ -8,6 +8,8 @@ import com.moduleTesting.portal.service.user.UserService;
 import exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -47,9 +49,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto editUser(Integer userId, String lastName, String firstName, String patronymic, Date birthday) {
-        return null;
-    }
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public UserDto editUser(UserDto userDto) {
+        userRepository.updateUser(userDto.getUserID(), userDto.getLastName(),
+            userDto.getFirstName(), userDto.getPatronymic(),userDto.getBirthday(), userDto.getEmailAddress(),
+            userDto.getPassword(), userDto.getMoney());
+
+        return DtoMapper.toUserDto(userRepository.getUserByIdAndRoleEntity_Name(userDto.getUserID(), DRIVER).orElseThrow(
+            () -> new UserNotFoundException(USER_WASN_T_FOUND)
+        ));
+     }
 
     @Override
     public UserDto changeUserStatus(Integer userId, UserRole userRole) {

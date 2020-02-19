@@ -1,5 +1,8 @@
 package com.moduleTesting.portal.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class UserDto {
@@ -46,6 +49,20 @@ public class UserDto {
         this.money = money;
         this.userRole = userRole;
         this.userStatus = userStatus;
+    }
+
+    @JsonCreator
+    public UserDto(Integer userID, String lastName, String firstName, String patronymic,
+                   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date birthday, String emailAddress,
+                   String password, Float money) {
+        this.userID = userID;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.patronymic = patronymic;
+        this.birthday = birthday;
+        this.emailAddress = emailAddress;
+        this.password = password;
+        this.money = money;
     }
 
     public UserDto(String lastName, String firstName) {

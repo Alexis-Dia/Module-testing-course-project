@@ -16,7 +16,7 @@ public interface UserService {
 
     UserDto getAdmin();
 
-    UserDto editUser(Integer userId, String lastName, String firstName, String patronymic, Date birthday);
+    UserDto editUser(UserDto userDto);
 
     UserDto changeUserStatus(Integer userId, UserRole userRole);
 

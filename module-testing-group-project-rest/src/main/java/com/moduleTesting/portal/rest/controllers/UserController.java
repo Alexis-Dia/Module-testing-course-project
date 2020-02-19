@@ -4,10 +4,7 @@ import com.moduleTesting.portal.dto.UserDto;
 import com.moduleTesting.portal.dto.UserRole;
 import com.moduleTesting.portal.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -53,10 +50,9 @@ public class UserController {
     }
 
     @PostMapping("/edit")
-    public UserDto editUser(Integer userId, String lastName, String firstName, String patronymic, Date birthday) {
+    public UserDto editUser(@RequestBody UserDto userDto) {
 
-        final UserDto user = userService.editUser(userId, lastName, firstName, patronymic, birthday);
-        System.out.println(user);
+        final UserDto user = userService.editUser(userDto);
 
         return user;
     }
