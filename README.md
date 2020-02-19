@@ -50,7 +50,17 @@
         	"arrival": "2019-11-27 17:00:00.000"
         }
         
-        
+        http://localhost:8080/car/addNew
+        @PostMapping("/addNew")
+        {
+        	"brand": {
+        		"id": "5"
+        	},
+        	"year": "2009-01-17 17:00:00.000",
+        	"number": "FJ-3351",
+        	"dateOfReceipt": "2019-11-27 17:00:00.000",
+        	"carStatus": "FREE"
+        }
         
         
         
