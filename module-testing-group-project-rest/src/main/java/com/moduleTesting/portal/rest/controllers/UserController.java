@@ -6,6 +6,7 @@ import com.moduleTesting.portal.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -36,12 +37,11 @@ public class UserController {
     }
 
     @PostMapping("/getById")
-    public List<UserDto> getUserById() {
+    public UserDto getUserById(@RequestParam("id") Integer userId) {
 
-        final List<UserDto> allDrivers = userService.findAll();
-        System.out.println(allDrivers);
+        final UserDto userDto = userService.getUserById(userId);
 
-        return allDrivers;
+        return userDto;
     }
 
     @PostMapping("/edit")

@@ -19,64 +19,81 @@
     DATABASECHANGELOG
     DATABASECHANGELOGLOCK
 
+    task:
     
-    POST http://localhost:8080/task/createNew
+        POST http://localhost:8080/task/createNew
+                {
+                "summaryDistance": 469.1,
+                "weight": 231.4,
+                "driver": {"userID": null},
+                "car": {"id": 4},
+                "taskStatus": "FREE",
+                "name": "Baranovichi-Svetlogorsk",
+                "reward": 389
+                }
             {
             "summaryDistance": 469.1,
             "weight": 231.4,
-            "driver": {"userID": null},
+            "driver": {"userID": 1},
             "car": {"id": 4},
             "taskStatus": "FREE",
             "name": "Baranovichi-Svetlogorsk",
             "reward": 389
             }
-        {
-        "summaryDistance": 469.1,
-        "weight": 231.4,
-        "driver": {"userID": 1},
-        "car": {"id": 4},
-        "taskStatus": "FREE",
-        "name": "Baranovichi-Svetlogorsk",
-        "reward": 389
-        }
         
-        POST http://localhost:8080/report/getByTaskId?taskId=3
+        report:
         
-        @PostMapping("/{taskId}/createReport")
-        {
-        	"departure": "2019-11-27 11:00:00.000",
-        	"weight": 111.1,
-        	"distance": 311.1,
-        	"arrival": "2019-11-27 17:00:00.000"
-        }
+            POST http://localhost:8080/report/getByTaskId?taskId=3
+            
+            @PostMapping("/{taskId}/createReport")
+            {
+                "departure": "2019-11-27 11:00:00.000",
+                "weight": 111.1,
+                "distance": 311.1,
+                "arrival": "2019-11-27 17:00:00.000"
+            }
         
-        http://localhost:8080/car/addNew
-        @PostMapping("/addNew")
-        {
-        	"brand": {
-        		"id": "5"
-        	},
-        	"year": "2009-01-17 17:00:00.000",
-        	"number": "FJ-3351",
-        	"dateOfReceipt": "2019-11-27 17:00:00.000",
-        	"carStatus": "FREE"
-        }
+        car:
         
-        http://localhost:8080/car/edit
-        @PostMapping("/edit")
-        {
-        	"id":"4",
-        	"brand": {
-        		"id": "15"
-        	},
-        	"year": "2009-01-17dasda 17:00:00.000",
-        	"number": "FJ-3352",
-        	"dateOfReceipt": "2019-11-27 17:00:00.000",
-        	"carStatus": "FREE"
-        }
+            http://localhost:8080/car/addNew
+            @PostMapping("/addNew")
+            {
+                "brand": {
+                    "id": "5"
+                },
+                "year": "2009-01-17 17:00:00.000",
+                "number": "FJ-3351",
+                "dateOfReceipt": "2019-11-27 17:00:00.000",
+                "carStatus": "FREE"
+            }
+            
+            http://localhost:8080/car/edit
+            @PostMapping("/edit")
+            {
+                "id":"4",
+                "brand": {
+                    "id": "15"
+                },
+                "year": "2009-01-17dasda 17:00:00.000",
+                "number": "FJ-3352",
+                "dateOfReceipt": "2019-11-27 17:00:00.000",
+                "carStatus": "FREE"
+            }
+            
+            http://localhost:8080/car/removeById?carId=10
+            @PostMapping("/removeById")
         
-        http://localhost:8080/car/removeById?carId=10
-        @PostMapping("/removeById")
+        
+        user:
+        
+            http://localhost:8080/user/allDrivers
+            @PostMapping("/allDrivers")
+                
+            http://localhost:8080/user/getById?id=11
+            @PostMapping("/getById")
+        
+        
+        
         
         
         

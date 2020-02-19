@@ -5,6 +5,7 @@ import com.moduleTesting.portal.dto.UserRole;
 import com.moduleTesting.portal.repository.UserRepository;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.user.UserService;
+import exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    public static final String USER_WASN_T_FOUND = "User wasn't found";
 
     @Autowired
     UserRepository userRepository;
@@ -31,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserById(Integer userId) {
-        return null;
+        return DtoMapper.toUserDto(userRepository.getUserById(userId).orElseThrow(() -> new UserNotFoundException(USER_WASN_T_FOUND)));
     }
 
     @Override
