@@ -1,5 +1,8 @@
 package com.moduleTesting.portal.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class CarDto {
@@ -19,12 +22,9 @@ public class CarDto {
     public CarDto() {
     }
 
-/*    @JsonCreator
-    public CarDto(@JsonProperty Integer id) {
-        this.id = id;
-    }*/
-
-    public CarDto(Integer id, BrandDto brand, Date year, String number, Date dateOfReceipt, CarStatus carStatus) {
+    @JsonCreator
+    public CarDto(Integer id, BrandDto brand, @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date year,
+                  String number, @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date dateOfReceipt, CarStatus carStatus) {
         this.id = id;
         this.brand = brand;
         this.year = year;

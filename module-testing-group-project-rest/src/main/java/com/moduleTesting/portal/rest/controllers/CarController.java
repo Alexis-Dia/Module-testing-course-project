@@ -1,16 +1,14 @@
 package com.moduleTesting.portal.rest.controllers;
 
-import com.moduleTesting.portal.dto.BrandDto;
 import com.moduleTesting.portal.dto.CarDto;
-import com.moduleTesting.portal.dto.CarStatus;
 import com.moduleTesting.portal.service.car.CarService;
 import com.moduleTesting.portal.service.carStatus.CarStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -32,11 +30,19 @@ public class CarController {
         return allCars;
     }
 
-    @PostMapping("/edit")
-    public List<CarDto> editCar(Integer carId, BrandDto brandId, Date year, String number, Date dateOfReceipt, CarStatus carStatus) {
+    @PostMapping("/addNew")
+    public List<CarDto> addNewCar(@RequestBody CarDto carDto) {
 
-        final List<CarDto> cars = carService.editCar(carId, brandId, year, number, dateOfReceipt, carStatus);
-        System.out.println(cars);
+        final List<CarDto> cars = carService.addNewCar(carDto);
+
+        return cars;
+    }
+
+
+    @PostMapping("/edit")
+    public List<CarDto> editCar(@RequestBody CarDto carDto) {
+
+        final List<CarDto> cars = carService.editCar(carDto);
 
         return cars;
     }

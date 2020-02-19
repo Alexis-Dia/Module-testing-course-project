@@ -10,4 +10,6 @@ import java.util.List;
 public interface CarStatusRepository extends JpaRepository<CarStatusEntity, Long> {
 
     List<CarStatusEntity> findAll();
+
+    CarStatusEntity findByName(String name);
 }

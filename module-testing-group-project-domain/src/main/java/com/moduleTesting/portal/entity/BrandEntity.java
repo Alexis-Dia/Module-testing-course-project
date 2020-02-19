@@ -22,6 +22,10 @@ public class BrandEntity {
     public BrandEntity() {
     }
 
+    public BrandEntity(Integer id) {
+        this.id = id;
+    }
+
     public BrandEntity(String brand, Float carryingCapacity, String model) {
         this.brand = brand;
         this.carryingCapacity = carryingCapacity;
