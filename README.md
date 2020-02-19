@@ -18,10 +18,7 @@
     ALTER DATABASE [carriages_system] SET  READ_WRITE 
     DATABASECHANGELOG
     DATABASECHANGELOGLOCK
-    
-    
-    
-    
+
     
     POST http://localhost:8080/task/createNew
             {
@@ -43,8 +40,17 @@
         "reward": 389
         }
         
-        
         POST http://localhost:8080/report/getByTaskId?taskId=3
         
-        
         @PostMapping("/{taskId}/createReport")
+        {
+        	"departure": "2019-11-27 11:00:00.000",
+        	"weight": 111.1,
+        	"distance": 311.1,
+        	"arrival": "2019-11-27 17:00:00.000"
+        }
+        
+        
+        
+        
+        
