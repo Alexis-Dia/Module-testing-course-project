@@ -60,24 +60,23 @@ public class UserController {
     public UserDto changeUserStatus(@RequestBody UserDto userDto) {
 
         final UserDto user = userService.changeUserStatus(userDto.getUserID(), userDto.getUserStatus().getId());
-        System.out.println(user);
 
         return user;
     }
+
+    @PostMapping("/delete")
+    public List<UserDto> deleteUser(@RequestParam("id") Integer userId) {
+
+        final List<UserDto> allUsers = userService.deleteUser(userId);
+
+        return allUsers;
+    }
+
 
     @PostMapping("/transferMoney")
     public void transferMoney(Integer userId, Float money) {
 
         userService.transferMoney(userId, money);
-    }
-
-    @PostMapping("/delete")
-    public List<UserDto> deleteUser(Integer userId) {
-
-        final List<UserDto> allUsers = userService.deleteUser(userId);
-        System.out.println(allUsers);
-
-        return allUsers;
     }
 
     @PostMapping("/new")

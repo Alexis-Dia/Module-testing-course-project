@@ -72,12 +72,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void transferMoney(Integer userId, Float money) {
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public List<UserDto> deleteUser(Integer userId) {
+
+        userRepository.getUserByIdAndRoleEntity_Name(userId, DRIVER).orElseThrow(
+            () -> new UserNotFoundException(USER_WASN_T_FOUND)
+        );
+
+        userRepository.deleteById(userId);
+
+        return userRepository.findAll().stream().map(DtoMapper::toUserDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<UserDto> deleteUser(Integer userId) {
-        return null;
+    public void transferMoney(Integer userId, Float money) {
     }
 
     @Override
