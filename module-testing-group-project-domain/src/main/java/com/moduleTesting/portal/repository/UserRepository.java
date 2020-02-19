@@ -8,4 +8,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     List<UserEntity> findAll();
+
+    List<UserEntity> findAllByRoleEntity_NameContains(String status);
 }

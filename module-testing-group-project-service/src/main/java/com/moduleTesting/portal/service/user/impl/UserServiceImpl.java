@@ -25,7 +25,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> findAllDrivers() {
-        return null;
+        final String driver = UserRole.USER.getName();
+        return userRepository.findAllByRoleEntity_NameContains(driver).stream().map(DtoMapper::toUserDto).collect(Collectors.toList());
     }
 
     @Override

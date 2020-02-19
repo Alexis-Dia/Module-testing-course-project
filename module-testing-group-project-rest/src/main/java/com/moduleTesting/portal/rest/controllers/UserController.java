@@ -31,7 +31,6 @@ public class UserController {
     public List<UserDto> findAllDrivers() {
 
         final List<UserDto> allDrivers = userService.findAllDrivers();
-        System.out.println(allDrivers);
 
         return allDrivers;
     }
@@ -39,7 +38,7 @@ public class UserController {
     @PostMapping("/getById")
     public List<UserDto> getUserById() {
 
-        final List<UserDto> allDrivers = userService.findAllDrivers();
+        final List<UserDto> allDrivers = userService.findAll();
         System.out.println(allDrivers);
 
         return allDrivers;
