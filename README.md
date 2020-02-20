@@ -122,8 +122,21 @@
                 "userStatus": "BUSY"
             }
         
-        
-        
+            http://localhost:8080/user/new
+            @PostMapping("/new")
+            {
+                "lastName": "Mahrez",
+                "firstName": "Riad",
+                "patronymic": "Abulovich",
+                "birthday": "1979-11-27 17:00:00.000",
+                "emailAddress": "Kon@tut.by",
+                "password": "12345678"
+            }
+            
+            
+            
+            
+            
         
         
         

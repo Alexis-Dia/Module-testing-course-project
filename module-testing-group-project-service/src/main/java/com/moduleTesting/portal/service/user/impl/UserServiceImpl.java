@@ -2,27 +2,42 @@ package com.moduleTesting.portal.service.user.impl;
 
 import com.moduleTesting.portal.dto.UserDto;
 import com.moduleTesting.portal.dto.UserRole;
+import com.moduleTesting.portal.entity.RoleEntity;
+import com.moduleTesting.portal.entity.UserEntity;
+import com.moduleTesting.portal.entity.UserStatusEntity;
+import com.moduleTesting.portal.repository.RoleRepository;
 import com.moduleTesting.portal.repository.UserRepository;
+import com.moduleTesting.portal.repository.UserStatusRepository;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.user.UserService;
 import exceptions.UserNotFoundException;
+import exceptions.UserStatusNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    public static final String USER_WASN_T_FOUND = "User wasn't found";
-    public static final String DRIVER = "DRIVER";
+    private static final String USER_WASN_T_FOUND = "User wasn't found";
+    private static final String DRIVER = "DRIVER";
+    private static final String USER_STATUS_WASN_T_FOUND = "User status wasn't found";
+    private static final String ROLE_WASN_T_FOUND = "Role wasn't found";
+    private static final String FREE = "FREE";
+    private static final float INITIAL_MONEY_VALUE = 0f;
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserStatusRepository userStatusRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
 
     @Override
     public List<UserDto> findAll() {
@@ -85,12 +100,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void transferMoney(Integer userId, Float money) {
+    public void createNewUser(UserDto userDto) {
+
+        final RoleEntity userRole = roleRepository.findByName(DRIVER).orElseThrow(
+            () -> new UserStatusNotFoundException(ROLE_WASN_T_FOUND)
+        );
+
+        final UserStatusEntity userStatusEntity = userStatusRepository.findByName(FREE).orElseThrow(
+            () -> new UserStatusNotFoundException(USER_STATUS_WASN_T_FOUND)
+        );
+
+        UserEntity userEntity = userRepository.getUserByIdAndRoleEntity_Name(userDto.getUserID(), DRIVER).orElse(
+            new UserEntity(userDto.getLastName(), userDto.getFirstName(), userDto.getPatronymic(), userDto.getBirthday(),
+                userDto.getEmailAddress(), userDto.getPassword(), INITIAL_MONEY_VALUE, userRole, userStatusEntity)
+        );
+
+        userRepository.save(userEntity);
     }
 
     @Override
-    public void createNewUser(String lastName, String firstName, String patronymic, Date birthday, String email,
-                              String password, Integer roleId, Integer statusId) {
+    public void transferMoney(Integer userId, Float money) {
     }
 
 }

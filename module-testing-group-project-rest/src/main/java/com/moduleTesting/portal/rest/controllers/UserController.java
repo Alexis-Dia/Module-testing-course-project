@@ -5,7 +5,6 @@ import com.moduleTesting.portal.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -72,6 +71,12 @@ public class UserController {
         return allUsers;
     }
 
+    @PostMapping("/new")
+    public void createNew(@RequestBody UserDto userDto) {
+
+        userService.createNewUser(userDto);
+
+    }
 
     @PostMapping("/transferMoney")
     public void transferMoney(Integer userId, Float money) {
@@ -79,11 +84,4 @@ public class UserController {
         userService.transferMoney(userId, money);
     }
 
-    @PostMapping("/new")
-    public void createNew(String lastName, String firstName, String patronymic, Date birthday, String email,
-                                   String password, Integer roleId, Integer statusId) {
-
-        userService.createNewUser(lastName, firstName, patronymic, birthday, email,
-            password, roleId, statusId);
-    }
 }
