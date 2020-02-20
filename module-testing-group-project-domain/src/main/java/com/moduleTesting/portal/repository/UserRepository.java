@@ -28,4 +28,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     Integer updateUserStatus(Integer userId, Integer statusId);
 
     Integer deleteById(Integer userId);
+
+    @Modifying
+    @Query("UPDATE UserEntity userEntity SET userEntity.money = ?2 WHERE userEntity.id = ?1")
+    Integer updateBalance(Integer userId, Float amount);
 }

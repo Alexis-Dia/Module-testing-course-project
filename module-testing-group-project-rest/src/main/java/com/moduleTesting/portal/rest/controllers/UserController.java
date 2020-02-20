@@ -79,7 +79,7 @@ public class UserController {
     }
 
     @PostMapping("/transferMoney")
-    public void transferMoney(Integer userId, Float money) {
+    public void transferMoney(@RequestParam("userId") Integer userId, @RequestParam("money") Float money) {
 
         userService.transferMoney(userId, money);
     }

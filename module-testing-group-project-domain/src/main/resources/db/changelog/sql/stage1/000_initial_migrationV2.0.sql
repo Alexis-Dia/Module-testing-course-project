@@ -414,12 +414,13 @@ INSERT [dbo].[task_status] ([id], [name]) VALUES (6, N'PARTIALLY')
 SET IDENTITY_INSERT [dbo].[task_status] OFF
 SET IDENTITY_INSERT [dbo].[user] ON
 
-INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id]) VALUES (1, N'Ivanov', N'Ivan', N'Ivanovich', CAST(N'1989-01-13 00:00:00.000' AS DateTime), N'ivanov@tut.by', N'ivanov', 0, 2, 1)
+INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id]) VALUES (1, N'Admin', N'Admin', N'Admin', CAST(N'1990-04-04 00:00:00.000' AS DateTime), N'admin@tut.by', N'admin', 1000000, 1, 1)
 INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id]) VALUES (2, N'Sidorov', N'Igor', N'Igorevich', CAST(N'1973-02-03 00:00:00.000' AS DateTime), N'sidorov@tut.by', N'sidorov', 0, 2, 1)
+INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id]) VALUES (3, N'Ivanov', N'Ivan', N'Ivanovich', CAST(N'1989-01-13 00:00:00.000' AS DateTime), N'ivanov@tut.by', N'ivanov', 0, 2, 1)
 INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id]) VALUES (5, N'Novikov', N'Maxim', N'Nikolaevich', CAST(N'1991-12-27 00:00:00.000' AS DateTime), N'novikov@tut.by', N'novikov', 0, 2, 1)
 INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id]) VALUES (7, N'Ivanov', N'Afanasiy', N'Konstantinovich', CAST(N'1978-06-05 00:00:00.000' AS DateTime), N'ivanov@gmail.com', N'ivanov', 0, 2, 1)
 INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id]) VALUES (9, N'Vasilev', N'Arkadiy', N'Arkkadievich', CAST(N'1923-04-04 00:00:00.000' AS DateTime), N'vasiliev@tut.by', N'vasiliev', 0, 2, 1)
-INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id]) VALUES (13, N'Admin', N'Admin', N'Admin', CAST(N'1990-04-04 00:00:00.000' AS DateTime), N'admin@tut.by', N'admin', 1000000, 1, 1)SET IDENTITY_INSERT [dbo].[user] OFF
+SET IDENTITY_INSERT [dbo].[user] OFF
 SET IDENTITY_INSERT [dbo].[user_status] ON
 
 INSERT [dbo].[user_status] ([id], [name]) VALUES (1, N'FREE')

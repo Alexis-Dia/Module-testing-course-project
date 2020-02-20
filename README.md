@@ -133,8 +133,8 @@
                 "password": "12345678"
             }
             
-            
-            
+            http://localhost:8080/user/transferMoney?userId=2&money=100.0
+            @PostMapping("/transferMoney")
             
             
         
