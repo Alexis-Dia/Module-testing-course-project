@@ -14,6 +14,8 @@ public interface UserService {
 
     UserDto getAdmin();
 
+    UserDto findByLogin(String login);
+
     UserDto editUser(UserDto userDto);
 
     UserDto changeUserStatus(Integer userId, Integer userStatus);

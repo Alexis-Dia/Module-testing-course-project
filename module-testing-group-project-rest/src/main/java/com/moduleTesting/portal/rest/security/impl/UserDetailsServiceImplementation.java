@@ -1,6 +1,7 @@
-package com.moduleTesting.portal.rest.security;
+package com.moduleTesting.portal.rest.security.impl;
 
 import com.moduleTesting.portal.dto.UserDto;
+import com.moduleTesting.portal.rest.security.dto.SecurityUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;

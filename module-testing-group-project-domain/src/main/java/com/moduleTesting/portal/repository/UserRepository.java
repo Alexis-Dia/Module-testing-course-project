@@ -17,6 +17,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> getUserByIdAndRoleEntity_Name(Integer userId, String roleName);
 
+    Optional<UserEntity> findByLogin(String login);
+
     @Modifying
     @Query("UPDATE UserEntity user SET user.lastName = ?2, user.firstName = ?3, user.patronymic = ?4," +
         " user.birthday = ?5, user.login = ?6, user.password = ?7, user.money = ?8 WHERE user.id = ?1")

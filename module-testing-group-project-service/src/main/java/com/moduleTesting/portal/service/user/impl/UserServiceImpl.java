@@ -67,6 +67,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto findByLogin(String login) {
+        return DtoMapper.toUserDto(userRepository.findByLogin(login).stream().findAny().get());
+    }
+
+    @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public UserDto editUser(UserDto userDto) {
         userRepository.updateUser(userDto.getUserID(), userDto.getLastName(),
