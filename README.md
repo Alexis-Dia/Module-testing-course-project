@@ -137,7 +137,53 @@
             @PostMapping("/transferMoney")
             
             
+        https://coderoad.ru/6305801/Spring-SecurityContext-%D0%B2%D0%BE%D0%B7%D0%B2%D1%80%D0%B0%D1%82-null-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B8-%D0%BD%D0%B0-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0%D1%85-%D0%BE%D1%88%D0%B8%D0%B1%D0%BE%D0%BA
         
         
+        import org.springframework.security.authentication.*;
+        import org.springframework.security.core.*;
+        import org.springframework.security.core.authority.SimpleGrantedAuthority;
+        import org.springframework.security.core.context.SecurityContextHolder;
+        
+        public class AuthenticationExample {
+        private static AuthenticationManager am = new SampleAuthenticationManager();
+        
+        public static void main(String[] args) throws Exception {
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        
+            while(true) {
+            System.out.println("Please enter your username:");
+            String name = in.readLine();
+            System.out.println("Please enter your password:");
+            String password = in.readLine();
+            try {
+                Authentication request = new UsernamePasswordAuthenticationToken(name, password);
+                Authentication result = am.authenticate(request);
+                SecurityContextHolder.getContext().setAuthentication(result);
+                break;
+            } catch(AuthenticationException e) {
+                System.out.println("Authentication failed: " + e.getMessage());
+            }
+            }
+            System.out.println("Successfully authenticated. Security context contains: " +
+                    SecurityContextHolder.getContext().getAuthentication());
+        }
+        }
+        
+        class SampleAuthenticationManager implements AuthenticationManager {
+        static final List<GrantedAuthority> AUTHORITIES = new ArrayList<GrantedAuthority>();
+        
+        static {
+            AUTHORITIES.add(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+        
+        public Authentication authenticate(Authentication auth) throws AuthenticationException {
+            if (auth.getName().equals(auth.getCredentials())) {
+            return new UsernamePasswordAuthenticationToken(auth.getName(),
+                auth.getCredentials(), AUTHORITIES);
+            }
+            throw new BadCredentialsException("Bad Credentials");
+        }
+        }
         
         
