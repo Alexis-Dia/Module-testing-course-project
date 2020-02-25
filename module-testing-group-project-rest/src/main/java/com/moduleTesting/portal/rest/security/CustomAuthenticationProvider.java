@@ -33,7 +33,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             }
 
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-            grantedAuthorities.add(new SimpleGrantedAuthority("DRIVER"));
+            grantedAuthorities.add(new SimpleGrantedAuthority(user.getUserRole().getName()));
             grantedAuthorities.add(new SimpleGrantedAuthority("ADMIN"));
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
             grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
