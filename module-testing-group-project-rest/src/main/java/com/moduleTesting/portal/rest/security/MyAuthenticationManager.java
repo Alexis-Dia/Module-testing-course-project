@@ -7,27 +7,39 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.stereotype.Component;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
-@Component
 public class MyAuthenticationManager implements AuthenticationManager {
+
+    private final UserDetailsService userDetailsService;
+
+    public MyAuthenticationManager(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
     static final List<GrantedAuthority> AUTHORITIES = new ArrayList<GrantedAuthority>();
 
-    private static final String ROLE_USER = "ROLE_USER";
+    private static final String ROLE_DRIVER = "DRIVER";
     private static final String BAD_CREDENTIALS = "Bad Credentials";
 
     static {
-        AUTHORITIES.add(new SimpleGrantedAuthority(ROLE_USER));
+        AUTHORITIES.add(new SimpleGrantedAuthority(ROLE_DRIVER));
     }
 
     public Authentication authenticate(Authentication auth) throws AuthenticationException {
-        if (auth.getName().equals(auth.getCredentials())) {
-            return new UsernamePasswordAuthenticationToken(auth.getName(),
-                auth.getCredentials(), AUTHORITIES);
+
+        UserDetails userDetails =  userDetailsService.loadUserByUsername(auth.getName());
+
+        if (Objects.isNull(userDetails)) {
+            throw new BadCredentialsException(BAD_CREDENTIALS);
         }
-        throw new BadCredentialsException(BAD_CREDENTIALS);
+
+        return new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), Collections.singletonList(new SimpleGrantedAuthority("DRIVER")));
     }
 }
