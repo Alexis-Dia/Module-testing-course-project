@@ -18,7 +18,6 @@ public class UserController {
     public List<UserDto> getAllUsers() {
 
         final List<UserDto> allUsers = userService.findAll();
-        System.out.println(allUsers);
 
         return allUsers;
     }

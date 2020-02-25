@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import static com.moduleTesting.portal.rest.consts.Common.ROLE_DRIVER;
+import static com.moduleTesting.portal.rest.consts.RestNavigation.PATH_USER_ALL_DRIVERS;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -27,26 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            //.exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint)
-            //.and()
+            .csrf().disable()
                 .authorizeRequests()
-                //.antMatchers("/authenticate").permitAll()
-                //.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                //.antMatchers(HttpMethod.GET, "/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/user/allDrivers").hasAuthority("DRIVER")
-                //.antMatchers(HttpMethod.POST, "/post/load/").hasAuthority("DRIVER")
-                .anyRequest().authenticated()
+                .antMatchers(HttpMethod.POST, PATH_USER_ALL_DRIVERS).hasAuthority(ROLE_DRIVER).anyRequest().authenticated()
             .and()
             .httpBasic();
     }
-
-/*    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web
-            .ignoring()
-            .antMatchers("/authenticate");
-    }*/
-
-
 
 }
