@@ -1,4 +1,4 @@
-package com.moduleTesting.portal.rest.consts;
+package com.moduleTesting.portal.consts;
 
 public interface Common {
 

@@ -9,8 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import static com.moduleTesting.portal.rest.consts.Common.ROLE_DRIVER;
-import static com.moduleTesting.portal.rest.consts.RestNavigation.PATH_USER_ALL_DRIVERS;
+import static com.moduleTesting.portal.consts.Common.ROLE_DRIVER;
+import static com.moduleTesting.portal.consts.RestNavigation.PATH_USER_ALL_DRIVERS;
 
 @Configuration
 @EnableWebSecurity
