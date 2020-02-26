@@ -1,6 +1,7 @@
 package com.moduleTesting.portal.rest.controllers;
 
 import com.moduleTesting.portal.dto.CarDto;
+import com.moduleTesting.portal.dto.CarStatus;
 import com.moduleTesting.portal.service.car.CarService;
 import com.moduleTesting.portal.service.carStatus.CarStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,14 @@ public class CarController {
     public List<CarDto> getAllCars() {
 
         final List<CarDto> allCars = carService.findAll();
-        System.out.println(allCars);
+
+        return allCars;
+    }
+
+    @GetMapping("/allFree")
+    public List<CarDto> getAllFreeCars() {
+
+        final List<CarDto> allCars = carService.getAllFreeCars(CarStatus.FREE.getName());
 
         return allCars;
     }

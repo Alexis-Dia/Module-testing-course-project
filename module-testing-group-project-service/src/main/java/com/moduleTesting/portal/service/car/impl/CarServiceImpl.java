@@ -45,6 +45,11 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public List<CarDto> getAllFreeCars(String statusName) {
+        return carRepository.findByCarStatusEntity_Name(statusName).stream().map(DtoMapper::toCarDto).collect(Collectors.toList());
+    }
+
+    @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<CarDto> addNewCar(CarDto carDto) {
 

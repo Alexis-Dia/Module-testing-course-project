@@ -8,6 +8,8 @@ public interface CarService {
 
     List<CarDto> findAll();
 
+    List<CarDto> getAllFreeCars(String statusName);
+
     List<CarDto> addNewCar(CarDto carDto);
 
     List<CarDto> editCar(CarDto carDto);
