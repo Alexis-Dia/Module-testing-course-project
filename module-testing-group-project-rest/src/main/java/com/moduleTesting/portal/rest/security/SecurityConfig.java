@@ -57,7 +57,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(HttpMethod.POST, "/report/createReport").hasAuthority(ROLE_DRIVER)
                     .antMatchers(HttpMethod.GET, "/report/all").hasAuthority(ROLE_ADMIN)
 
-
+                    .antMatchers(HttpMethod.GET, "/car/allFree").hasAuthority(ROLE_DRIVER)
+                    .antMatchers(HttpMethod.GET, "/car/all").hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.POST, "/car/addNew").hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.PUT, "/car/edit").hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.DELETE, "/car/removeById").hasAuthority(ROLE_ADMIN)
 
 
                     .anyRequest().authenticated();
