@@ -14,7 +14,7 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public List<TaskDto> getAllTasks() {
 
         final List<TaskDto> allTask = taskService.findAll();
@@ -23,7 +23,7 @@ public class TaskController {
         return allTask;
     }
 
-    @PostMapping("/allActive")
+    @GetMapping("/allActive")
     public List<TaskDto> getAllActiveTasks(@RequestParam("taskStatus") String taskStatus) {
 
         final List<TaskDto> allTask = taskService.findAllActiveTasks(taskStatus);
@@ -32,7 +32,7 @@ public class TaskController {
         return allTask;
     }
 
-    @PostMapping("/changeTaskStatus")
+    @PutMapping("/changeTaskStatus")
     public Integer changeTaskStatus(@RequestParam("taskId") Integer taskId, @RequestParam("statusId") Integer statusId) {
         Integer changedRow = taskService.changeTaskStatus(taskId, statusId);
 

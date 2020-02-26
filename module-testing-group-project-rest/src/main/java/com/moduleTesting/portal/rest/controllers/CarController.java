@@ -18,7 +18,7 @@ public class CarController {
     @Autowired
     private CarStatusService carStatusService;
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public List<CarDto> getAllCars() {
 
         final List<CarDto> allCars = carService.findAll();
@@ -36,7 +36,7 @@ public class CarController {
     }
 
 
-    @PostMapping("/edit")
+    @PutMapping("/edit")
     public List<CarDto> editCar(@RequestBody CarDto carDto) {
 
         final List<CarDto> cars = carService.editCar(carDto);
@@ -44,7 +44,7 @@ public class CarController {
         return cars;
     }
 
-    @PostMapping("/removeById")
+    @DeleteMapping("/removeById")
     public List<CarDto> removeCar(@RequestParam("carId") Integer carId) {
 
         final List<CarDto> cars = carService.removeCarById(carId);

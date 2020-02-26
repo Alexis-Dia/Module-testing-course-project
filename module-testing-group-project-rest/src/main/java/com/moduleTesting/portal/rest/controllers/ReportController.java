@@ -14,7 +14,7 @@ public class ReportController {
     @Autowired
     private ReportService reportService;
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public List<ReportDto> getAllReports() {
 
         final List<ReportDto> allReports = reportService.findAll();
@@ -22,7 +22,7 @@ public class ReportController {
         return allReports;
     }
 
-    @PostMapping("/getByTaskId")
+    @GetMapping("/getByTaskId")
     public List<ReportDto> getReportsByTaskId(@RequestParam("taskId") Integer taskId) {
 
         final List<ReportDto> reports = reportService.getReportsByTaskId(taskId);

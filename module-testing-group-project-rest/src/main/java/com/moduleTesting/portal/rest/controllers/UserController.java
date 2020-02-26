@@ -14,7 +14,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public List<UserDto> getAllUsers() {
 
         final List<UserDto> allUsers = userService.findAll();
@@ -22,7 +22,7 @@ public class UserController {
         return allUsers;
     }
 
-    @PostMapping("/allDrivers")
+    @GetMapping("/allDrivers")
     public List<UserDto> findAllDrivers() {
 
         final List<UserDto> allDrivers = userService.findAllDrivers();
@@ -30,7 +30,7 @@ public class UserController {
         return allDrivers;
     }
 
-    @PostMapping("/getById")
+    @GetMapping("/getById")
     public UserDto getDriverById(@RequestParam("id") Integer userId) {
 
         final UserDto userDto = userService.getDriverById(userId);
@@ -38,7 +38,7 @@ public class UserController {
         return userDto;
     }
 
-    @PostMapping("/getAdmin")
+    @GetMapping("/getAdmin")
     public UserDto geAdmin() {
 
         final UserDto userDto = userService.getAdmin();
@@ -46,7 +46,7 @@ public class UserController {
         return userDto;
     }
 
-    @PostMapping("/edit")
+    @PutMapping("/edit")
     public UserDto editUser(@RequestBody UserDto userDto) {
 
         final UserDto user = userService.editUser(userDto);
@@ -54,7 +54,7 @@ public class UserController {
         return user;
     }
 
-    @PostMapping("/changeStatus")
+    @PutMapping("/changeStatus")
     public UserDto changeUserStatus(@RequestBody UserDto userDto) {
 
         final UserDto user = userService.changeUserStatus(userDto.getUserID(), userDto.getUserStatus().getId());
@@ -62,7 +62,7 @@ public class UserController {
         return user;
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public List<UserDto> deleteUser(@RequestParam("id") Integer userId) {
 
         final List<UserDto> allUsers = userService.deleteUser(userId);
@@ -77,7 +77,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/transferMoney")
+    @PutMapping("/transferMoney")
     public void transferMoney(@RequestParam("userId") Integer userId, @RequestParam("money") Float money) {
 
         userService.transferMoney(userId, money);
