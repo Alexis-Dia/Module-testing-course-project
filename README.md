@@ -19,6 +19,9 @@
     DATABASECHANGELOG
     DATABASECHANGELOGLOCK
 
+Password for admin - admin
+Password for any driver - user
+
     task:
     
         POST http://localhost:8080/task/createNew

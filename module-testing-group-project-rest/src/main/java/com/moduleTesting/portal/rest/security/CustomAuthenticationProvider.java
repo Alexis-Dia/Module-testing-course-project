@@ -10,16 +10,21 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import static com.moduleTesting.portal.consts.Common.MSG_ERR_INCORRECT_PASSORD;
+import static com.moduleTesting.portal.consts.Common.MSG_ERR_USER_WASN_T_FOUND;
+
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-    private static final String USER_WASN_T_FOUND = "User wasn't found";
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UserService userService;
@@ -28,9 +33,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
             Optional<UserDto> user = userService.findByLogin(authentication.getName());
+            String credentials = authentication.getCredentials().toString();
 
             if (!user.isPresent()) {
-                throw new UserNotFoundException(USER_WASN_T_FOUND);
+                throw new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND);
+            }
+
+            if (!bCryptPasswordEncoder.matches(credentials, user.get().getPassword())) {
+                throw new UserNotFoundException(MSG_ERR_INCORRECT_PASSORD);
             }
 
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
