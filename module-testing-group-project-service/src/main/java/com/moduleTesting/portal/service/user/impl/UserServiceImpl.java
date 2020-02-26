@@ -81,6 +81,7 @@ public class UserServiceImpl implements UserService {
         return DtoMapper.toUserDto(userRepository.findAllByRoleEntity_NameContains(admin).stream().findAny().get());
     }
 
+    // FIXME: Try to change if-clause to lambda-style.
     @Override
     public Optional<UserDto> findByLogin(String login) {
         Optional<UserEntity> userEntity = userRepository.findByLogin(login).stream().findAny();
