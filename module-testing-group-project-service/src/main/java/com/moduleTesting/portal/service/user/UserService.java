@@ -12,6 +12,8 @@ public interface UserService {
 
     UserDto getDriverById(Integer userId);
 
+    UserDto getMe(Integer userId, String authenticationName);
+
     UserDto getAdmin();
 
     UserDto findByLogin(String login);

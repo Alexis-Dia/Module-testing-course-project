@@ -20,9 +20,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.moduleTesting.portal.consts.Common.MSG_ERR_EDITING_NOT_CURRENT_USER_IS_FORBIDDEN;
+import static com.moduleTesting.portal.consts.Common.MSG_ERR_GETTING_NOT_CURRENT_USER_IS_FORBIDDEN;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -61,6 +63,18 @@ public class UserServiceImpl implements UserService {
         return DtoMapper.toUserDto(userRepository.getUserByIdAndRoleEntity_Name(userId, DRIVER).orElseThrow(
             () -> new UserNotFoundException(USER_WASN_T_FOUND)
         ));
+    }
+
+    @Override
+    public UserDto getMe(Integer userId, String authenticationName) {
+
+        Optional<UserEntity> userByIdAndRoleEntityName = userRepository.getUserByIdAndRoleEntity_Name(userId, DRIVER);
+
+        if (!userByIdAndRoleEntityName.orElseThrow(() -> new UserNotFoundException(USER_WASN_T_FOUND)).getLogin().equals(authenticationName)) {
+            throw new NotCurrentUserException(MSG_ERR_GETTING_NOT_CURRENT_USER_IS_FORBIDDEN);
+        }
+
+        return DtoMapper.toUserDto(userByIdAndRoleEntityName.get());
     }
 
     @Override

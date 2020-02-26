@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import static com.moduleTesting.portal.consts.Common.ROLE_ADMIN;
 import static com.moduleTesting.portal.consts.Common.ROLE_DRIVER;
 import static com.moduleTesting.portal.consts.RestNavigation.PATH_USER_ALL_DRIVERS;
 
@@ -34,8 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
+                    .antMatchers(HttpMethod.GET, "/user/all").hasAuthority(ROLE_ADMIN)
                     .antMatchers(HttpMethod.GET, PATH_USER_ALL_DRIVERS).hasAuthority(ROLE_DRIVER)
-                    .antMatchers(HttpMethod.PUT, "/user/edit").hasAuthority(ROLE_DRIVER)
+                    .antMatchers(HttpMethod.PUT, "/user/edit").hasAuthority(ROLE_ADMIN)
                     .anyRequest().authenticated();
 
     }

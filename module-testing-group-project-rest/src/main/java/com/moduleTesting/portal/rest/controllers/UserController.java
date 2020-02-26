@@ -39,6 +39,16 @@ public class UserController {
         return userDto;
     }
 
+    @GetMapping("/getMe")
+    public UserDto getMe(@RequestParam("id") Integer userId) {
+
+        final String authenticationName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        final UserDto userDto = userService.getMe(userId, authenticationName);
+
+        return userDto;
+    }
+
     @GetMapping("/getAdmin")
     public UserDto geAdmin() {
 
