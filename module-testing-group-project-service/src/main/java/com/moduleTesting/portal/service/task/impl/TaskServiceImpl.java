@@ -8,6 +8,7 @@ import com.moduleTesting.portal.repository.TaskRepository;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.task.TaskService;
 import com.moduleTesting.portal.service.user.UserService;
+import exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -15,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.moduleTesting.portal.consts.Common.MSG_ERR_USER_WASN_T_FOUND;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -33,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<TaskDto> findAllMineTasks(String authenticationName) {
-        UserDto userByLogin = userService.findByLogin(authenticationName);
+        UserDto userByLogin = userService.findByLogin(authenticationName).orElseThrow(() -> new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND));
 
         return taskRepository.findByDriver_Id(userByLogin.getUserID()).stream().map(DtoMapper::toTaskDto).collect(Collectors.toList());
     }

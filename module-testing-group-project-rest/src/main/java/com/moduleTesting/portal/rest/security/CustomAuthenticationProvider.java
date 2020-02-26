@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Component
@@ -26,21 +27,16 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-            UserDto user = userService.findByLogin(authentication.getName());
+            Optional<UserDto> user = userService.findByLogin(authentication.getName());
 
-            if (user == null) {
+            if (!user.isPresent()) {
                 throw new UserNotFoundException(USER_WASN_T_FOUND);
             }
 
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-            grantedAuthorities.add(new SimpleGrantedAuthority(user.getUserRole().getName()));
-           /* grantedAuthorities.add(new SimpleGrantedAuthority(user.getUserRole().getName()));*/
-           // grantedAuthorities.add(new SimpleGrantedAuthority("DRIVER"));
-/*            grantedAuthorities.add(new SimpleGrantedAuthority("ADMIN"));
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-            grantedAuthorities.add(new SimpleGrantedAuthority("USER"));*/
+            grantedAuthorities.add(new SimpleGrantedAuthority(user.get().getUserRole().getName()));
 
-        return new UsernamePasswordAuthenticationToken(user.getEmailAddress(), user.getPassword(),
+        return new UsernamePasswordAuthenticationToken(user.get().getEmailAddress(), user.get().getPassword(),
             grantedAuthorities);
     }
 

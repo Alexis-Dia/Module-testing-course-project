@@ -3,6 +3,7 @@ package com.moduleTesting.portal.service.user;
 import com.moduleTesting.portal.dto.UserDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -16,7 +17,7 @@ public interface UserService {
 
     UserDto getAdmin();
 
-    UserDto findByLogin(String login);
+    Optional<UserDto> findByLogin(String login);
 
     UserDto editUser(UserDto userDto);
 

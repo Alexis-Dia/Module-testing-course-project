@@ -23,15 +23,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.moduleTesting.portal.consts.Common.MSG_ERR_EDITING_NOT_CURRENT_USER_IS_FORBIDDEN;
-import static com.moduleTesting.portal.consts.Common.MSG_ERR_GETTING_NOT_CURRENT_USER_IS_FORBIDDEN;
+import static com.moduleTesting.portal.consts.Common.*;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private static final float INITIAL_MONEY_VALUE = 0f;
     private static final int ADMIN_ID = 1;
-    private static final String USER_WASN_T_FOUND = "User wasn't found";
     private static final String DRIVER = "DRIVER";
     private static final String USER_STATUS_WASN_T_FOUND = "User status wasn't found";
     private static final String ROLE_WASN_T_FOUND = "Role wasn't found";
@@ -61,7 +59,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getDriverById(Integer userId) {
         return DtoMapper.toUserDto(userRepository.getUserByIdAndRoleEntity_Name(userId, DRIVER).orElseThrow(
-            () -> new UserNotFoundException(USER_WASN_T_FOUND)
+            () -> new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND)
         ));
     }
 
@@ -70,7 +68,7 @@ public class UserServiceImpl implements UserService {
 
         Optional<UserEntity> userByIdAndRoleEntityName = userRepository.getUserByIdAndRoleEntity_Name(userId, DRIVER);
 
-        if (!userByIdAndRoleEntityName.orElseThrow(() -> new UserNotFoundException(USER_WASN_T_FOUND)).getLogin().equals(authenticationName)) {
+        if (!userByIdAndRoleEntityName.orElseThrow(() -> new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND)).getLogin().equals(authenticationName)) {
             throw new NotCurrentUserException(MSG_ERR_GETTING_NOT_CURRENT_USER_IS_FORBIDDEN);
         }
 
@@ -84,8 +82,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto findByLogin(String login) {
-        return DtoMapper.toUserDto(userRepository.findByLogin(login).stream().findAny().get());
+    public Optional<UserDto> findByLogin(String login) {
+        Optional<UserEntity> userEntity = userRepository.findByLogin(login).stream().findAny();
+        if (!userEntity.isPresent()) {
+            return Optional.empty();
+        }
+        return Optional.of(DtoMapper.toUserDto(userRepository.findByLogin(login).stream().findAny().get()));
     }
 
     @Override
@@ -96,7 +98,7 @@ public class UserServiceImpl implements UserService {
             userDto.getPassword(), userDto.getMoney());
 
         return DtoMapper.toUserDto(userRepository.getUserByIdAndRoleEntity_Name(userDto.getUserID(), DRIVER).orElseThrow(
-            () -> new UserNotFoundException(USER_WASN_T_FOUND)
+            () -> new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND)
         ));
      }
 
@@ -113,7 +115,7 @@ public class UserServiceImpl implements UserService {
             userDto.getPassword(), userDto.getMoney());
 
         return DtoMapper.toUserDto(userRepository.getUserByIdAndRoleEntity_Name(userDto.getUserID(), DRIVER).orElseThrow(
-            () -> new UserNotFoundException(USER_WASN_T_FOUND)
+            () -> new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND)
         ));
     }
 
@@ -124,7 +126,7 @@ public class UserServiceImpl implements UserService {
         userRepository.updateUserStatus(userId, userStatus);
 
         return DtoMapper.toUserDto(userRepository.getUserByIdAndRoleEntity_Name(userId, DRIVER).orElseThrow(
-            () -> new UserNotFoundException(USER_WASN_T_FOUND)
+            () -> new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND)
         ));
     }
 
@@ -133,7 +135,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> deleteUser(Integer userId) {
 
         userRepository.getUserByIdAndRoleEntity_Name(userId, DRIVER).orElseThrow(
-            () -> new UserNotFoundException(USER_WASN_T_FOUND)
+            () -> new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND)
         );
 
         userRepository.deleteById(userId);
