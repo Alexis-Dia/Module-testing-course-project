@@ -3,6 +3,7 @@ package com.moduleTesting.portal.rest.controllers;
 import com.moduleTesting.portal.dto.UserDto;
 import com.moduleTesting.portal.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +51,16 @@ public class UserController {
     public UserDto editUser(@RequestBody UserDto userDto) {
 
         final UserDto user = userService.editUser(userDto);
+
+        return user;
+    }
+
+    @PutMapping("/editMe")
+    public UserDto editCurrentUser(@RequestBody UserDto userDto) {
+
+        final String authenticationName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        final UserDto user = userService.editMe(userDto, authenticationName);
 
         return user;
     }

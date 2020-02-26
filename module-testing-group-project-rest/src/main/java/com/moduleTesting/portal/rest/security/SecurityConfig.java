@@ -31,10 +31,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .csrf().disable()
+                .httpBasic()
+                .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, PATH_USER_ALL_DRIVERS).hasAuthority(ROLE_DRIVER).anyRequest().authenticated()
-            .and()
-            .httpBasic();
+                    .antMatchers(HttpMethod.GET, PATH_USER_ALL_DRIVERS).hasAuthority(ROLE_DRIVER)
+                    .antMatchers(HttpMethod.PUT, "/user/edit").hasAuthority(ROLE_DRIVER)
+                    .anyRequest().authenticated();
+
     }
 
 }

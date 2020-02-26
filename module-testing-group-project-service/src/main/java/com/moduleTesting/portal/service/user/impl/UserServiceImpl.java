@@ -10,6 +10,7 @@ import com.moduleTesting.portal.repository.UserRepository;
 import com.moduleTesting.portal.repository.UserStatusRepository;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.user.UserService;
+import exceptions.NotCurrentUserException;
 import exceptions.NotEnoughPoundsException;
 import exceptions.UserNotFoundException;
 import exceptions.UserStatusNotFoundException;
@@ -20,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.moduleTesting.portal.consts.Common.MSG_ERR_EDITING_NOT_CURRENT_USER_IS_FORBIDDEN;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -82,6 +85,23 @@ public class UserServiceImpl implements UserService {
             () -> new UserNotFoundException(USER_WASN_T_FOUND)
         ));
      }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public UserDto editMe(UserDto userDto, String authenticationName) {
+
+        if (!userDto.getEmailAddress().equals(authenticationName)) {
+            throw new NotCurrentUserException(MSG_ERR_EDITING_NOT_CURRENT_USER_IS_FORBIDDEN);
+        }
+
+        userRepository.updateUser(userDto.getUserID(), userDto.getLastName(),
+            userDto.getFirstName(), userDto.getPatronymic(),userDto.getBirthday(), userDto.getEmailAddress(),
+            userDto.getPassword(), userDto.getMoney());
+
+        return DtoMapper.toUserDto(userRepository.getUserByIdAndRoleEntity_Name(userDto.getUserID(), DRIVER).orElseThrow(
+            () -> new UserNotFoundException(USER_WASN_T_FOUND)
+        ));
+    }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)

@@ -18,6 +18,8 @@ public interface UserService {
 
     UserDto editUser(UserDto userDto);
 
+    UserDto editMe(UserDto userDto, String authenticationName);
+
     UserDto changeUserStatus(Integer userId, Integer userStatus);
 
     List<UserDto> deleteUser(Integer userId);
