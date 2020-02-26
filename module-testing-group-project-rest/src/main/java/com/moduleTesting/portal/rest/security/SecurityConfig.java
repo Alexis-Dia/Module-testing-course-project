@@ -63,9 +63,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(HttpMethod.PUT, "/car/edit").hasAuthority(ROLE_ADMIN)
                     .antMatchers(HttpMethod.DELETE, "/car/removeById").hasAuthority(ROLE_ADMIN)
 
+                    .antMatchers(HttpMethod.GET, "/auth/authenticate").anonymous()
 
-                    .anyRequest().authenticated();
-
+                    .anyRequest().authenticated();   //From my point of view it means that any request except all above will demand basic auth
     }
 
 }
