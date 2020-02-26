@@ -8,9 +8,12 @@ public interface TaskService {
 
     List<TaskDto> findAll();
 
+    List<TaskDto> findAllMineTasks(String authenticationName);
+
     List<TaskDto> findAllActiveTasks(String statusName);
 
     Integer changeTaskStatus(Integer taskId, Integer statusId);
 
     List<TaskDto> createNewTask(TaskDto taskDto);
+
 }

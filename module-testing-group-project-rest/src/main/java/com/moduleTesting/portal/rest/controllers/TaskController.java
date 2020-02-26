@@ -3,6 +3,7 @@ package com.moduleTesting.portal.rest.controllers;
 import com.moduleTesting.portal.dto.TaskDto;
 import com.moduleTesting.portal.service.task.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,17 @@ public class TaskController {
     public List<TaskDto> getAllTasks() {
 
         final List<TaskDto> allTask = taskService.findAll();
+        System.out.println(allTask);
+
+        return allTask;
+    }
+
+    @GetMapping("/allMine")
+    public List<TaskDto> getAllMineTasks() {
+
+        final String authenticationName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        final List<TaskDto> allTask = taskService.findAllMineTasks(authenticationName);
         System.out.println(allTask);
 
         return allTask;

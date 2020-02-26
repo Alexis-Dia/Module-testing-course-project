@@ -353,7 +353,7 @@ INSERT [dbo].[role] ([id], [name], [security_level]) VALUES (2, N'DRIVER', 2)
 SET IDENTITY_INSERT [dbo].[role] OFF
 SET IDENTITY_INSERT [dbo].[task] ON
 
-INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (1, 7500, 511, 1, 4, 2, 2000, N'Minsk-Gomel')
+INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (1, 7500, 511, 3, 4, 2, 2000, N'Minsk-Gomel')
 INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (2, 3790.9, 1200.1, 2, 5, 2, 1150, N'Vitebsk-Grodno')
 INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (3, 2310.9, 800.1, 5, 2, 2, 780, N'Mins-Vilnius')
 INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (4, 200, 123, NULL, NULL, 1, 100, N'Minsk-Borisov')

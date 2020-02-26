@@ -1,11 +1,13 @@
 package com.moduleTesting.portal.service.task.impl;
 
 import com.moduleTesting.portal.dto.TaskDto;
+import com.moduleTesting.portal.dto.UserDto;
 import com.moduleTesting.portal.entity.TaskEntity;
 import com.moduleTesting.portal.entity.TaskStatusEntity;
 import com.moduleTesting.portal.repository.TaskRepository;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.task.TaskService;
+import com.moduleTesting.portal.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -20,9 +22,20 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     TaskRepository taskRepository;
 
+    @Autowired
+    UserService userService;
+
     @Override
     public List<TaskDto> findAll() {
         return taskRepository.findAll().stream().map(DtoMapper::toTaskDto).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public List<TaskDto> findAllMineTasks(String authenticationName) {
+        UserDto userByLogin = userService.findByLogin(authenticationName);
+
+        return taskRepository.findByDriver_Id(userByLogin.getUserID()).stream().map(DtoMapper::toTaskDto).collect(Collectors.toList());
     }
 
     @Override

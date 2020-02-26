@@ -25,4 +25,5 @@ public interface TaskRepository extends JpaRepository<TaskEntity, Long> {
 
     TaskEntity findById(Integer taskId);
 
+    List<TaskEntity> findByDriver_Id(Integer driverId);
 }
