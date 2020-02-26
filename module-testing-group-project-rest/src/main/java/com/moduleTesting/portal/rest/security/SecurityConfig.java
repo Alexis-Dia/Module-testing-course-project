@@ -52,7 +52,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(HttpMethod.GET, "/task/allActive").hasAuthority(ROLE_ADMIN)
                     .antMatchers(HttpMethod.PUT, "/task/changeTaskStatus").hasAuthority(ROLE_ADMIN)
                     .antMatchers(HttpMethod.POST, "/task/createNew").hasAuthority(ROLE_ADMIN)
-            
+
+                    .antMatchers(HttpMethod.GET, "/report/getByTaskId").authenticated()
+                    .antMatchers(HttpMethod.POST, "/report/createReport").hasAuthority(ROLE_DRIVER)
+                    .antMatchers(HttpMethod.GET, "/report/all").hasAuthority(ROLE_ADMIN)
+
+
 
 
                     .anyRequest().authenticated();
