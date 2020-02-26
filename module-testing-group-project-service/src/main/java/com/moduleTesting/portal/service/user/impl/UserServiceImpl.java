@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
         if (!userEntity.isPresent()) {
             return Optional.empty();
         }
-        return Optional.of(DtoMapper.toUserDto(userRepository.findByLogin(login).stream().findAny().get()));
+        return Optional.of(DtoMapper.toUserDto(byLogin.stream().findAny().get()));
     }
 
     @Override
