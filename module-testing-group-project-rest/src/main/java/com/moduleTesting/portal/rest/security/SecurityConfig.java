@@ -35,9 +35,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
+                    .antMatchers(HttpMethod.POST, "/user/new").anonymous()
+                    .antMatchers(HttpMethod.PUT, "/user/editMe").hasAuthority(ROLE_DRIVER)
+                    .antMatchers(HttpMethod.GET, "/user/getMe").hasAuthority(ROLE_DRIVER)
                     .antMatchers(HttpMethod.GET, "/user/all").hasAuthority(ROLE_ADMIN)
-                    .antMatchers(HttpMethod.GET, PATH_USER_ALL_DRIVERS).hasAuthority(ROLE_DRIVER)
+                    .antMatchers(HttpMethod.GET, PATH_USER_ALL_DRIVERS).hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.GET, "/user/getById").hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.GET, "/user/getAdmin").hasAuthority(ROLE_ADMIN)
                     .antMatchers(HttpMethod.PUT, "/user/edit").hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.PUT, "/user/changeStatus").hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.DELETE, "/user/delete").hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.PUT, "/user/transferMoney").hasAuthority(ROLE_ADMIN)
+
                     .anyRequest().authenticated();
 
     }
