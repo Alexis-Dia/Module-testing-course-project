@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
         return DtoMapper.toUserDto(userRepository.findAllByRoleEntity_NameContains(admin).stream().findAny().get());
     }
 
-    // FIXME: Try to change if-clause to lambda-style. I've noticed that it demands Java 9+ version of compiller
+    // FIXME: Try to change if-clause to lambda-style using ifPresent. I've noticed that it demands Java 9+ version of compiler
     @Override
     public Optional<UserDto> findByLogin(String login) {
         Optional<UserEntity> byLogin = userRepository.findByLogin(login);

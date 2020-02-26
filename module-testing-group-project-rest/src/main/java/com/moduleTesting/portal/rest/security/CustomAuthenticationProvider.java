@@ -29,6 +29,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private UserService userService;
 
+    // FIXME: Try to change if-clause to lambda-style using ifPresent. I've noticed that it demands Java 9+ version of compiler
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 

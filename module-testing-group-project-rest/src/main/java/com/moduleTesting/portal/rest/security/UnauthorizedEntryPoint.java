@@ -12,7 +12,7 @@ import java.io.IOException;
 @Component
 public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
 
-    public static final String MESSAGE = "err_message";
+    private static final String MESSAGE = "Unauthorized user";
 
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
