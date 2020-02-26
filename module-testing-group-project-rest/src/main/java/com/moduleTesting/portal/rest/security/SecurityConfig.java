@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import static com.moduleTesting.portal.consts.Common.ROLE_ADMIN;
 import static com.moduleTesting.portal.consts.Common.ROLE_DRIVER;
-import static com.moduleTesting.portal.consts.RestNavigation.PATH_USER_ALL_DRIVERS;
+import static com.moduleTesting.portal.consts.RestNavigation.*;
 
 @Configuration
 @EnableWebSecurity
@@ -35,35 +35,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/user/new").anonymous()
-                    .antMatchers(HttpMethod.PUT, "/user/editMe").hasAuthority(ROLE_DRIVER)
-                    .antMatchers(HttpMethod.GET, "/user/getMe").hasAuthority(ROLE_DRIVER)
-                    .antMatchers(HttpMethod.GET, "/user/all").hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.POST, PATH_USER_NEW).anonymous()
+                    .antMatchers(HttpMethod.PUT, PATH_USER_EDIT_ME).hasAuthority(ROLE_DRIVER)
+                    .antMatchers(HttpMethod.GET, PATH_USER_GET_ME).hasAuthority(ROLE_DRIVER)
+                    .antMatchers(HttpMethod.GET, PATH_USER_ALL).hasAuthority(ROLE_ADMIN)
                     .antMatchers(HttpMethod.GET, PATH_USER_ALL_DRIVERS).hasAuthority(ROLE_ADMIN)
-                    .antMatchers(HttpMethod.GET, "/user/getById").hasAuthority(ROLE_ADMIN)
-                    .antMatchers(HttpMethod.GET, "/user/getAdmin").hasAuthority(ROLE_ADMIN)
-                    .antMatchers(HttpMethod.PUT, "/user/edit").hasAuthority(ROLE_ADMIN)
-                    .antMatchers(HttpMethod.PUT, "/user/changeStatus").hasAuthority(ROLE_ADMIN)
-                    .antMatchers(HttpMethod.DELETE, "/user/delete").hasAuthority(ROLE_ADMIN)
-                    .antMatchers(HttpMethod.PUT, "/user/transferMoney").hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.GET, PATH_USER_GET_BY_ID).hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.GET, PATH_USER_GET_ADMIN).hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.PUT, PATH_USER_EDIT).hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.PUT, PATH_USER_CHANGE_STATUS).hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.DELETE, PATH_USER_DELETE).hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.PUT, PATH_USER_TRANSFER_MONEY).hasAuthority(ROLE_ADMIN)
 
-                    .antMatchers(HttpMethod.GET, "/task/allMine").hasAuthority(ROLE_DRIVER)
-                    .antMatchers(HttpMethod.GET, "/task/all").hasAuthority(ROLE_ADMIN)
-                    .antMatchers(HttpMethod.GET, "/task/allActive").hasAuthority(ROLE_ADMIN)
-                    .antMatchers(HttpMethod.PUT, "/task/changeTaskStatus").hasAuthority(ROLE_ADMIN)
-                    .antMatchers(HttpMethod.POST, "/task/createNew").hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.GET, PATH_TASK_ALL_MINE).hasAuthority(ROLE_DRIVER)
+                    .antMatchers(HttpMethod.GET, PATH_TASK_ALL).hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.GET, PATH_TASK_ALL_ACTIVE).hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.PUT, PATH_TASK_CHANGE_TASK_STATUS).hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.POST, PATH_TASK_CREATE_NEW).hasAuthority(ROLE_ADMIN)
 
-                    .antMatchers(HttpMethod.GET, "/report/getByTaskId").authenticated()
-                    .antMatchers(HttpMethod.POST, "/report/createReport").hasAuthority(ROLE_DRIVER)
-                    .antMatchers(HttpMethod.GET, "/report/all").hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.GET, PATH_REPORT_GET_BY_TASK_ID).authenticated()
+                    .antMatchers(HttpMethod.POST, PATH_REPORT_CREATE_REPORT).hasAuthority(ROLE_DRIVER)
+                    .antMatchers(HttpMethod.GET, PATH_REPORT_ALL).hasAuthority(ROLE_ADMIN)
 
-                    .antMatchers(HttpMethod.GET, "/car/allFree").hasAuthority(ROLE_DRIVER)
-                    .antMatchers(HttpMethod.GET, "/car/all").hasAuthority(ROLE_ADMIN)
-                    .antMatchers(HttpMethod.POST, "/car/addNew").hasAuthority(ROLE_ADMIN)
-                    .antMatchers(HttpMethod.PUT, "/car/edit").hasAuthority(ROLE_ADMIN)
-                    .antMatchers(HttpMethod.DELETE, "/car/removeById").hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.GET, PATH_CAR_ALL_FREE).hasAuthority(ROLE_DRIVER)
+                    .antMatchers(HttpMethod.GET, PATH_CAR_ALL).hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.POST, PATH_CAR_ADD_NEW).hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.PUT, PATH_CAR_EDIT).hasAuthority(ROLE_ADMIN)
+                    .antMatchers(HttpMethod.DELETE, PATH_CAR_REMOVE_BY_ID).hasAuthority(ROLE_ADMIN)
 
-                    .antMatchers(HttpMethod.GET, "/auth/authenticate").anonymous()
+                    .antMatchers(HttpMethod.GET, PATH_AUTH_AUTHENTICATE).anonymous()
 
                     .anyRequest().authenticated();   //From my point of view it means that any request except all above will demand basic auth
     }
