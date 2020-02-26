@@ -84,7 +84,8 @@ public class UserServiceImpl implements UserService {
     // FIXME: Try to change if-clause to lambda-style.
     @Override
     public Optional<UserDto> findByLogin(String login) {
-        Optional<UserEntity> userEntity = userRepository.findByLogin(login).stream().findAny();
+        Optional<UserEntity> byLogin = userRepository.findByLogin(login);
+        Optional<UserEntity> userEntity = byLogin.stream().findAny();
         if (!userEntity.isPresent()) {
             return Optional.empty();
         }
