@@ -1,6 +1,7 @@
 package com.moduleTesting.portal.rest.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import static com.moduleTesting.portal.consts.Common.ROLE_ADMIN;
 import static com.moduleTesting.portal.consts.Common.ROLE_DRIVER;
@@ -22,17 +25,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationProvider authProvider;
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     @Autowired
     private UnauthorizedEntryPoint unauthorizedEntryPoint;
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider);
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Value("${spring.security.origins.allow}")
+    private String allowOrigins;
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry
+                    .addMapping("/**")
+                    .allowedHeaders("*")
+                    .allowCredentials(false)
+                    .allowedOrigins(allowOrigins);
+            }
+        };
     }
 
     @Override
@@ -72,7 +92,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers(HttpMethod.PUT, PATH_CAR_EDIT).hasAuthority(ROLE_ADMIN)
                         .antMatchers(HttpMethod.DELETE, PATH_CAR_REMOVE_BY_ID).hasAuthority(ROLE_ADMIN)
 
-                        .antMatchers(HttpMethod.GET, PATH_AUTH_AUTHENTICATE).anonymous();
+                        .antMatchers(HttpMethod.GET, PATH_AUTH_AUTHENTICATE).anonymous()
+                        .antMatchers(HttpMethod.POST, PATH_AUTH_SIGN_UP).anonymous();
 
                         /* From my point of view it means that any request except all above will demand basic auth
                         Also this line disables object-info with timestamp, status, error, message, path -fields */

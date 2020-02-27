@@ -9,5 +9,5 @@ public interface Common {
     String MSG_ERR_GETTING_NOT_CURRENT_USER_IS_FORBIDDEN = "Getting not current user is forbidden";
     String MSG_ERR_USER_WASN_T_FOUND = "User wasn't found";
     String MSG_ERR_USER_ALREADY_EXISTS = "User with the same email already exists";
-    String MSG_ERR_INCORRECT_PASSORD = "Password is incorrect";
+    String MSG_ERR_INCORRECT_PASSORD = "Password or username is incorrect";
 }
