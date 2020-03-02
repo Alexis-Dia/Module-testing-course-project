@@ -92,6 +92,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers(HttpMethod.PUT, PATH_CAR_EDIT).hasAuthority(ROLE_ADMIN)
                         .antMatchers(HttpMethod.DELETE, PATH_CAR_REMOVE_BY_ID).hasAuthority(ROLE_ADMIN)
 
+                        .antMatchers(HttpMethod.GET, PATH_BRAND_ALL).hasAuthority(ROLE_ADMIN)
+
                         .antMatchers(HttpMethod.GET, PATH_AUTH_AUTHENTICATE).anonymous()
                         .antMatchers(HttpMethod.POST, PATH_AUTH_SIGN_UP).anonymous();
 

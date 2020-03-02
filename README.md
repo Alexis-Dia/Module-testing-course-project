@@ -60,10 +60,10 @@ Password for any driver - user
         
             http://localhost:8080/car/addNew
             @PostMapping("/addNew")
-            {
-                "brand": {
-                    "id": "5"
-                },
+            {{
+                                 "id": "5"
+                             },
+                "brand": 
                 "year": "2009-01-17 17:00:00.000",
                 "number": "FJ-3351",
                 "dateOfReceipt": "2019-11-27 17:00:00.000",

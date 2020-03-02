@@ -1,6 +1,7 @@
 package com.moduleTesting.portal.service.car.impl;
 
 import com.moduleTesting.portal.dto.CarDto;
+import com.moduleTesting.portal.dto.CarStatus;
 import com.moduleTesting.portal.entity.BrandEntity;
 import com.moduleTesting.portal.entity.CarEntity;
 import com.moduleTesting.portal.entity.CarStatusEntity;
@@ -54,7 +55,7 @@ public class CarServiceImpl implements CarService {
     public List<CarDto> addNewCar(CarDto carDto) {
 
         final BrandEntity brandEntity = brandRepository.findById(carDto.getBrand().getId()).orElseThrow(() -> new BrandNotFoundException("Brand not found"));
-        final CarStatusEntity carStatusEntity = carStatusRepository.findByName(carDto.getCarStatus().getName());
+        final CarStatusEntity carStatusEntity = carStatusRepository.findByName(CarStatus.FREE.getName());
 
         CarEntity carEntity = new CarEntity(brandEntity, carDto.getYear(), carDto.getNumber(), carDto.getDateOfReceipt(), carStatusEntity);
         carRepository.save(carEntity);

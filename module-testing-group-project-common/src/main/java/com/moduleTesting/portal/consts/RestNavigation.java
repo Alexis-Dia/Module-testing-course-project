@@ -26,6 +26,7 @@ public interface RestNavigation {
    String PATH_CAR_ADD_NEW = "/car/addNew";
    String PATH_CAR_EDIT = "/car/edit";
    String PATH_CAR_REMOVE_BY_ID = "/car/removeById";
+   String PATH_BRAND_ALL = "/brand/all";
    String PATH_AUTH_AUTHENTICATE = "/auth/authenticate";
    String PATH_AUTH_SIGN_UP = "/auth/signUp";
 
