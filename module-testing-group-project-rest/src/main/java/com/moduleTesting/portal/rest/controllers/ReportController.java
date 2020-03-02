@@ -30,7 +30,7 @@ public class ReportController {
         return reports;
     }
 
-    @PostMapping("/{taskId}/createReport")
+    @PostMapping("/createReport/{taskId}")
     public List<ReportDto> createReport(@PathVariable("taskId") Integer taskId, @RequestBody ReportDto reportDto) {
 
         final List<ReportDto> reports = reportService.createReport(taskId, reportDto);

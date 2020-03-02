@@ -38,7 +38,7 @@ public class ReportServiceImpl implements ReportService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<ReportDto> createReport(Integer taskId, ReportDto reportDto) {
         TaskEntity taskEntity = taskRepository.findById(taskId);
-        taskEntity.getReports().add(new ReportEntity(reportDto.getDeparture(), reportDto.getWeight(), reportDto.getDistance(),
+        taskEntity.getReports().add(new ReportEntity(reportDto.getDeparture(), taskEntity.getWeight(), reportDto.getDistance(),
             reportDto.getArrival()));
         taskEntity = taskRepository.save(taskEntity);
         return taskEntity.getReports().stream().map(DtoMapper::toReportDto).collect(Collectors.toList());
