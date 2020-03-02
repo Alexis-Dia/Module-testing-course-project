@@ -1,6 +1,7 @@
 package com.moduleTesting.portal.service.task.impl;
 
 import com.moduleTesting.portal.dto.TaskDto;
+import com.moduleTesting.portal.dto.TaskStatus;
 import com.moduleTesting.portal.dto.UserDto;
 import com.moduleTesting.portal.entity.TaskEntity;
 import com.moduleTesting.portal.entity.TaskStatusEntity;
@@ -62,7 +63,7 @@ public class TaskServiceImpl implements TaskService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<TaskDto> createNewTask(TaskDto taskDto) {
         taskRepository.save(new TaskEntity(taskDto.getName(), taskDto.getSummaryDistance(), taskDto.getWeight(),
-            new TaskStatusEntity(taskDto.getTaskStatus().getId(), taskDto.getTaskStatus().getName()), taskDto.getReward()));
+            new TaskStatusEntity(TaskStatus.FREE.getId(), TaskStatus.FREE.getName()), taskDto.getReward()));
         final List<TaskDto> allTasks = findAll();
         return allTasks;
     }
