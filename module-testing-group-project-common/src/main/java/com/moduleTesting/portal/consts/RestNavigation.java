@@ -16,7 +16,8 @@ public interface RestNavigation {
    String PATH_TASK_ALL_MINE = "/task/allMine";
    String PATH_TASK_ALL = "/task/all";
    String PATH_TASK_BY_STATUS = "/task/byStatus";
-   String PATH_TASK_CHANGE_TASK_STATUS = "/task/changeTaskStatus";
+   String PATH_TASK_CHANGE_TASK_TO_VALIDATED_STATUS = "/task/changeTaskStatusToValidated";
+   String PATH_TASK_CHANGE_TASK_TO_REJECTED_OR_FINISHED_STATUS = "/task/changeTaskStatusToFinish";
    String PATH_TASK_TAKE_TASK = "/task/takeTask";
    String PATH_TASK_CREATE_NEW = "/task/createNew";
    String PATH_REPORT_GET_BY_TASK_ID = "/report/getByTaskId";

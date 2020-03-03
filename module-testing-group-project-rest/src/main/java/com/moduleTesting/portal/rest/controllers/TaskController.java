@@ -44,8 +44,8 @@ public class TaskController {
         return allTask;
     }
 
-    @PutMapping("/changeTaskStatus")
-    public Integer changeTaskStatus(@RequestParam("taskId") Integer taskId, @RequestParam("statusId") Integer statusId) {
+    @PutMapping("/changeTaskStatusToValidated")
+    public Integer changeTaskStatusToValidated(@RequestParam("taskId") Integer taskId, @RequestParam("statusId") Integer statusId) {
         Integer changedRow = taskService.changeTaskStatus(taskId, statusId);
 
         return changedRow;
