@@ -38,8 +38,8 @@ public class AuthenticationController {
         return userByLogin.get();
     }
 
-    @PostMapping("/signUp")
-    public void signUp(@RequestBody UserDto userDto) {
+    @PostMapping("/checkUser")
+    public void checkUser(@RequestBody UserDto userDto) {
 
         Optional<UserDto> userByLogin = userService.findByLogin(userDto.getEmailAddress());
 

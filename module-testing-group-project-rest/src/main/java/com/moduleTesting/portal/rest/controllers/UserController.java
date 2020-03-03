@@ -4,6 +4,7 @@ import com.moduleTesting.portal.dto.UserDto;
 import com.moduleTesting.portal.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -91,9 +92,12 @@ public class UserController {
         return allUsers;
     }
 
-    @PostMapping("/new")
+    @PostMapping("/signUp")
     public void createNew(@RequestBody UserDto userDto) {
 
+        //TODO - Try to create it useing autowiring
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         userService.createNewUser(userDto);
 
     }

@@ -10,10 +10,7 @@ import com.moduleTesting.portal.repository.UserRepository;
 import com.moduleTesting.portal.repository.UserStatusRepository;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.user.UserService;
-import exceptions.NotCurrentUserException;
-import exceptions.NotEnoughPoundsException;
-import exceptions.UserNotFoundException;
-import exceptions.UserStatusNotFoundException;
+import exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -146,7 +143,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void createNewUser(UserDto userDto) {
+
+        //TODO - Try to check working of correct transaction work
+        Optional<UserDto> userByLogin = this.findByLogin(userDto.getEmailAddress());
+        userByLogin.ifPresent(ob -> {throw new UserAlreadyExistsException(MSG_ERR_USER_ALREADY_EXISTS);});
 
         final RoleEntity userRole = roleRepository.findByName(DRIVER).orElseThrow(
             () -> new UserStatusNotFoundException(ROLE_WASN_T_FOUND)

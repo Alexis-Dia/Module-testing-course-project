@@ -64,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
             .and()
                   .authorizeRequests()
-                        .antMatchers(HttpMethod.POST, PATH_USER_NEW).anonymous()
+                        .antMatchers(HttpMethod.POST, PATH_USER_SIGN_UP).anonymous()
                         .antMatchers(HttpMethod.PUT, PATH_USER_EDIT_ME).hasAuthority(ROLE_DRIVER)
                         .antMatchers(HttpMethod.GET, PATH_USER_GET_ME).hasAuthority(ROLE_DRIVER)
                         .antMatchers(HttpMethod.GET, PATH_USER_ALL).hasAuthority(ROLE_ADMIN)
@@ -94,8 +94,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                         .antMatchers(HttpMethod.GET, PATH_BRAND_ALL).hasAuthority(ROLE_ADMIN)
 
-                        .antMatchers(HttpMethod.GET, PATH_AUTH_AUTHENTICATE).anonymous()
-                        .antMatchers(HttpMethod.POST, PATH_AUTH_SIGN_UP).anonymous();
+                        .antMatchers(HttpMethod.GET, PATH_AUTH_AUTHENTICATE).anonymous();
+                        //.antMatchers(HttpMethod.POST, PATH_USER_SIGN_UP).anonymous();
 
                         /* From my point of view it means that any request except all above will demand basic auth
                         Also this line disables object-info with timestamp, status, error, message, path -fields */
