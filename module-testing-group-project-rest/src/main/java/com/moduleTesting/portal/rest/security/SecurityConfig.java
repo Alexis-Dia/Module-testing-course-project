@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             public void addCorsMappings(CorsRegistry registry) {
                 registry
                     .addMapping("/**")
+                    .allowedMethods("*")
                     .allowedHeaders("*")
                     .allowCredentials(false)
                     .allowedOrigins(allowOrigins);
@@ -80,6 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers(HttpMethod.GET, PATH_TASK_BY_STATUS).hasAuthority(ROLE_DRIVER)
                         .antMatchers(HttpMethod.GET, PATH_TASK_ALL).hasAuthority(ROLE_ADMIN)
                         .antMatchers(HttpMethod.PUT, PATH_TASK_CHANGE_TASK_STATUS).hasAuthority(ROLE_ADMIN)
+                        .antMatchers(HttpMethod.PUT, PATH_TASK_TAKE_TASK).hasAnyAuthority(ROLE_DRIVER)
                         .antMatchers(HttpMethod.POST, PATH_TASK_CREATE_NEW).hasAuthority(ROLE_ADMIN)
 
                         .antMatchers(HttpMethod.GET, PATH_REPORT_GET_BY_TASK_ID).authenticated()

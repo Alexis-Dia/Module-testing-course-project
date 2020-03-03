@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +44,11 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<CarDto> findAll() {
         return carRepository.findAll().stream().map(DtoMapper::toCarDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<CarEntity> findById(Integer carId) {
+        return carRepository.findById(carId);
     }
 
     @Override

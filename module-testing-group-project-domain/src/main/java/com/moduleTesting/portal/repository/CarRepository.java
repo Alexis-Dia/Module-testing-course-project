@@ -15,7 +15,7 @@ public interface CarRepository extends JpaRepository<CarEntity, Long> {
 
     List<CarEntity> findAll();
 
-    Optional<CarEntity> findById(Integer brandId);
+    Optional<CarEntity> findById(Integer carId);
 
     List<CarEntity> findByCarStatusEntity_Name(String status);
 

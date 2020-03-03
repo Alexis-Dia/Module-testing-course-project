@@ -2,13 +2,11 @@ package com.moduleTesting.portal.service.task.impl;
 
 import com.moduleTesting.portal.dto.TaskDto;
 import com.moduleTesting.portal.dto.TaskStatus;
-import com.moduleTesting.portal.dto.UserDto;
-import com.moduleTesting.portal.entity.TaskEntity;
-import com.moduleTesting.portal.entity.TaskStatusEntity;
-import com.moduleTesting.portal.repository.TaskRepository;
+import com.moduleTesting.portal.dto.UserStatus;
+import com.moduleTesting.portal.entity.*;
+import com.moduleTesting.portal.repository.*;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.task.TaskService;
-import com.moduleTesting.portal.service.user.UserService;
 import exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.moduleTesting.portal.consts.Common.MSG_ERR_USER_WASN_T_FOUND;
@@ -27,7 +26,16 @@ public class TaskServiceImpl implements TaskService {
     TaskRepository taskRepository;
 
     @Autowired
-    UserService userService;
+    UserRepository userRepository;
+
+    @Autowired
+    CarRepository carRepository;
+
+    @Autowired
+    CarStatusRepository carStatusRepository;
+
+    @Autowired
+    TaskStatusRepository taskStatusRepository;
 
     @Override
     public List<TaskDto> findAll() {
@@ -37,9 +45,9 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<TaskDto> findAllMineTasks(String authenticationName) {
-        UserDto userByLogin = userService.findByLogin(authenticationName).orElseThrow(() -> new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND));
+        UserEntity userByLogin = userRepository.findByLogin(authenticationName).orElseThrow(() -> new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND));
 
-        return taskRepository.findByDriver_Id(userByLogin.getUserID()).stream().map(DtoMapper::toTaskDto).collect(Collectors.toList());
+        return taskRepository.findByDriver_Id(userByLogin.getId()).stream().map(DtoMapper::toTaskDto).collect(Collectors.toList());
     }
 
     @Override
@@ -52,6 +60,30 @@ public class TaskServiceImpl implements TaskService {
     public Integer changeTaskStatus(Integer taskId, Integer statusId) {
         Integer rowNumber = taskRepository.updateStatusById(taskId, statusId);
         return rowNumber;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public Integer takeTask(Integer taskId, Integer carId, String authenticationName) {
+
+        CarStatusEntity carStatusEntityBusy = carStatusRepository.findByName(UserStatus.BUSY.getName());
+        TaskStatusEntity taskStatusInProgress = taskStatusRepository.findById(TaskStatus.IN_PROGRESS.getId());
+        Optional<CarEntity> car = carRepository.findById(carId);
+        Optional<UserEntity> user = userRepository.findByLogin(authenticationName);
+        TaskEntity task = taskRepository.findById(taskId);
+
+        userRepository.updateUserStatus(user.get().getId(), UserStatus.BUSY.getId());
+
+        car.get().setCarStatusEntity(carStatusEntityBusy);
+        carRepository.save(car.get());
+
+        task.setCar(car.get());
+        task.setDriver(user.get());
+        task.setStatus(taskStatusInProgress);
+
+        taskRepository.save(task);
+
+        return null;
     }
 
     /**

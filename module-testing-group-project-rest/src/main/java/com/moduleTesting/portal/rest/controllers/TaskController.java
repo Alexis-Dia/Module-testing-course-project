@@ -51,6 +51,14 @@ public class TaskController {
         return changedRow;
     }
 
+    @PutMapping("/takeTask")
+    public Integer takeTask(@RequestParam("taskId") Integer taskId, @RequestParam("carId") Integer carId) {
+        final String authenticationName = SecurityContextHolder.getContext().getAuthentication().getName();
+        Integer changedRow = taskService.takeTask(taskId, carId, authenticationName);
+
+        return changedRow;
+    }
+
     @PostMapping("/createNew")
     public List<TaskDto> createNewTask(@RequestBody TaskDto taskDto) {
         List<TaskDto> tasks = taskService.createNewTask(taskDto);
