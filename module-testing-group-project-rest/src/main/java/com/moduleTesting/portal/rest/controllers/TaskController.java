@@ -51,6 +51,14 @@ public class TaskController {
         return changedRow;
     }
 
+    @PutMapping("/changeTaskStatusToFinish")
+    public Integer changeTaskStatusToFinish(@RequestParam("taskId") Integer taskId, @RequestParam("statusId") Integer statusId) {
+        final String authenticationName = SecurityContextHolder.getContext().getAuthentication().getName();
+        Integer changedRow = taskService.changeTaskStatusToFinish(taskId, statusId, authenticationName);
+
+        return changedRow;
+    }
+
     @PutMapping("/takeTask")
     public Integer takeTask(@RequestParam("taskId") Integer taskId, @RequestParam("carId") Integer carId) {
         final String authenticationName = SecurityContextHolder.getContext().getAuthentication().getName();

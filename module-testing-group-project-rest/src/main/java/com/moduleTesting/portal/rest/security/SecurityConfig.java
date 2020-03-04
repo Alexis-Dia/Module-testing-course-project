@@ -75,7 +75,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers(HttpMethod.PUT, PATH_USER_EDIT).hasAuthority(ROLE_ADMIN)
                         .antMatchers(HttpMethod.PUT, PATH_USER_CHANGE_STATUS).hasAuthority(ROLE_ADMIN)
                         .antMatchers(HttpMethod.DELETE, PATH_USER_DELETE).hasAuthority(ROLE_ADMIN)
-                        .antMatchers(HttpMethod.PUT, PATH_USER_TRANSFER_MONEY).hasAuthority(ROLE_ADMIN)
 
                         .antMatchers(HttpMethod.GET, PATH_TASK_ALL_MINE).hasAuthority(ROLE_DRIVER)
                         .antMatchers(HttpMethod.GET, PATH_TASK_BY_STATUS).hasAuthority(ROLE_DRIVER)

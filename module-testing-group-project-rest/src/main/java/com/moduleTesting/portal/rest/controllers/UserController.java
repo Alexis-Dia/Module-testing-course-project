@@ -95,17 +95,11 @@ public class UserController {
     @PostMapping("/signUp")
     public void createNew(@RequestBody UserDto userDto) {
 
-        //TODO - Try to create it useing autowiring
+        //TODO - Try to create it using autowiring
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         userService.createNewUser(userDto);
 
-    }
-
-    @PutMapping("/transferMoney")
-    public void transferMoney(@RequestParam("userId") Integer userId, @RequestParam("money") Float money) {
-
-        userService.transferMoney(userId, money);
     }
 
 }

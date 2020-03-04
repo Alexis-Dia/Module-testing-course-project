@@ -167,7 +167,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void transferMoney(Integer userId, Float reward) {
         Float initialAmount = getAdmin().getMoney();
         Float resultAmount = initialAmount - reward;

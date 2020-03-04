@@ -7,6 +7,7 @@ import com.moduleTesting.portal.entity.*;
 import com.moduleTesting.portal.repository.*;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.task.TaskService;
+import com.moduleTesting.portal.service.user.UserService;
 import exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,9 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     TaskStatusRepository taskStatusRepository;
 
+    @Autowired
+    UserService userService;
+
     @Override
     public List<TaskDto> findAll() {
         return taskRepository.findAll().stream().map(DtoMapper::toTaskDto).collect(Collectors.toList());
@@ -59,6 +63,23 @@ public class TaskServiceImpl implements TaskService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Integer changeTaskStatus(Integer taskId, Integer statusId) {
         Integer rowNumber = taskRepository.updateStatusById(taskId, statusId);
+        return rowNumber;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public Integer changeTaskStatusToFinish(Integer taskId, Integer statusId, String authenticationName) {
+
+        TaskEntity task = taskRepository.findById(taskId);
+
+        Integer driverId = task.getDriver().getId();
+        userRepository.updateUserStatus(driverId, UserStatus.FREE.getId());
+        Integer rowNumber = taskRepository.updateStatusById(taskId, statusId);
+
+        if (statusId == TaskStatus.FINISHED.getId()) {
+            userService.transferMoney(driverId, task.getReward());
+        }
+
         return rowNumber;
     }
 

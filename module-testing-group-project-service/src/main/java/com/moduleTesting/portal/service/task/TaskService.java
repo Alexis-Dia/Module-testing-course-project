@@ -14,6 +14,8 @@ public interface TaskService {
 
     Integer changeTaskStatus(Integer taskId, Integer statusId);
 
+    Integer changeTaskStatusToFinish(Integer taskId, Integer statusId, String authenticationName);
+
     Integer takeTask(Integer taskId, Integer carId, String authenticationName);
 
     List<TaskDto> createNewTask(TaskDto taskDto);

@@ -12,7 +12,6 @@ public interface RestNavigation {
    String PATH_USER_EDIT = "/user/edit";
    String PATH_USER_CHANGE_STATUS = "/user/changeStatus";
    String PATH_USER_DELETE = "/user/delete";
-   String PATH_USER_TRANSFER_MONEY = "/user/transferMoney";
    String PATH_TASK_ALL_MINE = "/task/allMine";
    String PATH_TASK_ALL = "/task/all";
    String PATH_TASK_BY_STATUS = "/task/byStatus";
