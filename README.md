@@ -188,6 +188,9 @@ Password for any driver - user
             throw new BadCredentialsException("Bad Credentials");
         }
         }
+
+https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockito-junit-example/
+https://dzone.com/articles/unit-testing-java-streams-and-lambdas
         
 Artickle about adding oAuth2.0:        
 https://javarush.ru/groups/posts/2269-druzhim-obihchnihy-vkhod-cherez-email-i-oauth2-v-spring-security-na-primere-servisa-zametok#%D0%A1%D1%83%D1%89%D0%BD%D0%BE%D1%81%D1%82%D0%B8
