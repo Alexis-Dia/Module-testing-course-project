@@ -73,6 +73,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(propagation=Propagation.REQUIRED)
+    public void getDriverByNameNew_testMandotaryRequiredNewTransaction() {
+        Optional<UserEntity> user = userRepository.findByLogin("sidorov@tut.by");
+        user.get().setLastName("adsasdasdasds");
+    }
+
+    @Override
     public UserDto getAdmin() {
         final String admin = UserRole.ADMIN.getName();
         return DtoMapper.toUserDto(userRepository.findAllByRoleEntity_NameContains(admin).stream().findAny().get());

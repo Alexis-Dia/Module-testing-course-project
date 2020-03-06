@@ -41,13 +41,13 @@ public class UserController {
     }
 
     @GetMapping("/getMe")
-    public UserDto getMe(@RequestParam("id") Integer userId) {
+    public String getMe(@RequestParam("id") Integer userId) {
 
         final String authenticationName = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        final UserDto userDto = userService.getMe(userId, authenticationName);
+        userService.getDriverByNameNew_testMandotaryRequiredNewTransaction();
 
-        return userDto;
+        return "userDto";
     }
 
     @GetMapping("/getAdmin")

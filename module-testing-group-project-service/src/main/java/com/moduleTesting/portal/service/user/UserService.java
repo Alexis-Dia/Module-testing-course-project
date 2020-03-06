@@ -15,6 +15,8 @@ public interface UserService {
 
     UserDto getMe(Integer userId, String authenticationName);
 
+    void getDriverByNameNew_testMandotaryRequiredNewTransaction();
+
     UserDto getAdmin();
 
     Optional<UserDto> findByLogin(String login);
