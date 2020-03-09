@@ -48,7 +48,7 @@ public class BrandServiceImplTest {
     }
 
     @Test
-    public void findAll() {
+    public void findAll_Ok() {
         brandService.findAll();
 
         verify(brandRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE)).findAll();

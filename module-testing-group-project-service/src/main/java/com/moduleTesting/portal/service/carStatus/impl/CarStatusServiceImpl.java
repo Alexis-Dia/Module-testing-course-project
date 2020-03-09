@@ -13,6 +13,9 @@ public class CarStatusServiceImpl implements CarStatusService {
 
     CarStatusRepository carStatusRepository;
 
+    public CarStatusServiceImpl() {
+    }
+
     @Autowired
     public CarStatusServiceImpl(CarStatusRepository carStatusRepository) {
         this.carStatusRepository = carStatusRepository;
