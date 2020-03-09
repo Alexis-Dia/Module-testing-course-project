@@ -36,10 +36,10 @@ public class CarServiceImpl implements CarService {
     @Autowired
     CarStatusRepository carStatusRepository;
 
-    @Autowired
+/*    @Autowired
     public CarServiceImpl(CarRepository carRepository) {
         this.carRepository = carRepository;
-    }
+    }*/
 
     @Override
     public List<CarDto> findAll() {
