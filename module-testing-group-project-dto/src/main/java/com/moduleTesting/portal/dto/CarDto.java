@@ -33,6 +33,15 @@ public class CarDto {
         this.carStatus = carStatus;
     }
 
+    public CarDto(BrandDto brand, @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date year,
+                  String number, @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date dateOfReceipt, CarStatus carStatus) {
+        this.brand = brand;
+        this.year = year;
+        this.number = number;
+        this.dateOfReceipt = dateOfReceipt;
+        this.carStatus = carStatus;
+    }
+
     public Integer getId() {
         return id;
     }

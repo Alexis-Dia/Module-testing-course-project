@@ -20,6 +20,12 @@ public class BrandDto {
         this.model = model;
     }
 
+    public BrandDto(String brand, Float carryingCapacity, String model) {
+        this.brand = brand;
+        this.carryingCapacity = carryingCapacity;
+        this.model = model;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -4,6 +4,7 @@ import com.moduleTesting.portal.dto.*;
 import com.moduleTesting.portal.entity.*;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -34,11 +35,17 @@ public class DtoMapper {
     }
 
     public static CarStatus toCarStatus(CarStatusEntity carStatusEntity) {
+        if (Objects.isNull(carStatusEntity)) {
+            return null;
+        }
         return Arrays.stream(CarStatus.values()).filter(carStatus ->
             carStatus.getName().equals(carStatusEntity.getName())).findAny().get();
     }
 
     public static BrandDto toBrandDto (BrandEntity brandEntity) {
+        if (Objects.isNull(brandEntity)) {
+            return null;
+        }
         return new BrandDto(brandEntity.getId(), brandEntity.getBrand(),
             brandEntity.getCarryingCapacity(), brandEntity.getModel());
     }

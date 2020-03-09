@@ -36,10 +36,22 @@ public class CarServiceImpl implements CarService {
     @Autowired
     CarStatusRepository carStatusRepository;
 
-/*    @Autowired
-    public CarServiceImpl(CarRepository carRepository) {
+    /**
+     * For mockito testing service layer there are at lest two ways:
+     * 1. Using @TestConfiguration
+     * 2. Using setters in service layers and manually create CarServiceImpl and using setters set  carRepository, brandRepository and so on.
+     */
+    public void setCarRepository(CarRepository carRepository) {
         this.carRepository = carRepository;
-    }*/
+    }
+
+    public void setBrandRepository(BrandRepository brandRepository) {
+        this.brandRepository = brandRepository;
+    }
+
+    public void setCarStatusRepository(CarStatusRepository carStatusRepository) {
+        this.carStatusRepository = carStatusRepository;
+    }
 
     @Override
     public List<CarDto> findAll() {
@@ -53,16 +65,17 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<CarDto> getAllFreeCars(String statusName) {
-        return carRepository.findByCarStatusEntity_Name(statusName).stream().map(DtoMapper::toCarDto).collect(Collectors.toList());
+    public List<CarDto> getCarsByStatusName(String statusName) {
+        List<CarEntity> byCarStatusEntity_name = carRepository.findByCarStatusEntity_Name(statusName);
+        return byCarStatusEntity_name.stream().map(DtoMapper::toCarDto).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<CarDto> addNewCar(CarDto carDto) {
 
-        final BrandEntity brandEntity = brandRepository.findById(carDto.getBrand().getId()).orElseThrow(() -> new BrandNotFoundException("Brand not found"));
-        final CarStatusEntity carStatusEntity = carStatusRepository.findByName(CarStatus.FREE.getName());
+        BrandEntity brandEntity = brandRepository.findById(carDto.getBrand().getId()).orElseThrow(() -> new BrandNotFoundException("Brand not found"));
+        CarStatusEntity carStatusEntity = carStatusRepository.findByName(CarStatus.FREE.getName());
 
         CarEntity carEntity = new CarEntity(brandEntity, carDto.getYear(), carDto.getNumber(), carDto.getDateOfReceipt(), carStatusEntity);
         carRepository.save(carEntity);

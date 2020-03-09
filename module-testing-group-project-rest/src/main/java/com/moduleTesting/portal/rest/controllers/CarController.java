@@ -30,7 +30,7 @@ public class CarController {
     @GetMapping("/allFree")
     public List<CarDto> getAllFreeCars() {
 
-        final List<CarDto> allCars = carService.getAllFreeCars(CarStatus.FREE.getName());
+        final List<CarDto> allCars = carService.getCarsByStatusName(CarStatus.FREE.getName());
 
         return allCars;
     }

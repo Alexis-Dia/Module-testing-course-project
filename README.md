@@ -215,7 +215,10 @@ In this article there is a helpful comment how to check performance:
         after = System.currentTimeMillis();
 
         System.out.println(after-before);
-        
+
+How to inject test repository to test service articles:        
+https://www.baeldung.com/spring-boot-testing
+https://github.com/Codearte/catch-exception    
         
 Ещё насчёт пропуска сервисного слоя: нежелательно так делать еще по той причине, что именно на уровне сервисов должны управляться транзакции, а так транзакции в
  репозитории работают по auto-commit=true считай (на самом деле флажок в JDBC не стоит, но реализация репов спринговских как раз такая), ведь каждый метод репозитория - 
