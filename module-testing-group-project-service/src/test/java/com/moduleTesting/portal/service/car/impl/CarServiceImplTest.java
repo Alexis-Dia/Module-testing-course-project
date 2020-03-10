@@ -53,6 +53,7 @@ public class CarServiceImplTest {
     private static final int EXPECTED_SIZE_OF_LIST = 1;
     private static final int TO_BE_RETURNED_OK_RESULT = 1;
     private static final String BRAND_NOT_FOUND = "BRAND_NOT_FOUND";
+    public static final int NUMBER_OF_ROW = 1;
 
     private CarService carService;
 
@@ -104,7 +105,7 @@ public class CarServiceImplTest {
         doReturn(Optional.ofNullable(
             new BrandEntity(EXISTED_BRAND.getBrand(), EXISTED_BRAND.getCarryingCapacity(), EXISTED_BRAND.getModel()))
         ).when(brandRepository).findById(EXISTED_BRAND_ID);
-        doReturn(Integer.valueOf(1)).when(carRepository).save(new CarEntity());
+        doReturn(NUMBER_OF_ROW).when(carRepository).save(new CarEntity());
         given(carRepository.findById(NOT_EXISTED_CAR_ID)).willThrow(new CarNotFoundException(CAR_NOT_FOUND));
         doReturn(TO_BE_RETURNED_OK_RESULT).when(carRepository).removeCarById(EXISTED_CAR_ID);
         given(carRepository.removeCarById(NOT_EXISTED_CAR_ID)).willThrow(new CarNotFoundException(CAR_NOT_FOUND));
@@ -155,6 +156,7 @@ public class CarServiceImplTest {
         verifyNoMoreInteractions(carRepository);
     }
 
+    //FIXME Add case when template already exists
     @Test
     public void testAddNewCar_ByExistedBrand_Ok() {
         carService.addNewCar(NEW_CAR_DTO_WITH_EXISTED_BRAND);

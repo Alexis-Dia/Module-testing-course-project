@@ -10,4 +10,5 @@ public interface Common {
     String MSG_ERR_USER_WASN_T_FOUND = "User wasn't found";
     String MSG_ERR_USER_ALREADY_EXISTS = "User with the same email already exists";
     String MSG_ERR_INCORRECT_PASSORD = "Password or username is incorrect";
+    String MSG_ERR_TASK_NOT_FOUND = "Task not found!";
 }

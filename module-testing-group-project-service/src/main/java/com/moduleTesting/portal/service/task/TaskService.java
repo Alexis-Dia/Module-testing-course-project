@@ -10,7 +10,7 @@ public interface TaskService {
 
     List<TaskDto> findAllMineTasks(String authenticationName);
 
-    List<TaskDto> findAllActiveTasks(String statusName);
+    List<TaskDto> findAllByStatusTasks(String statusName);
 
     Integer changeTaskStatus(Integer taskId, Integer statusId);
 

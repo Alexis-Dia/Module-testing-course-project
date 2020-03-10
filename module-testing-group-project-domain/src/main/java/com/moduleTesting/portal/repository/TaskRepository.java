@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TaskRepository extends JpaRepository<TaskEntity, Long> {
 
@@ -23,7 +24,7 @@ public interface TaskRepository extends JpaRepository<TaskEntity, Long> {
     @Query("UPDATE TaskEntity task SET task.status.id = ?2 WHERE task.id = ?1")
     Integer updateStatusById(Integer taskId, Integer statusId);
 
-    TaskEntity findById(Integer taskId);
+    Optional <TaskEntity> findById(Integer taskId);
 
     List<TaskEntity> findByDriver_Id(Integer driverId);
 }

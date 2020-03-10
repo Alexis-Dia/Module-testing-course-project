@@ -38,8 +38,7 @@ public class TaskController {
     @GetMapping("/byStatus")
     public List<TaskDto> getAllActiveTasks(@RequestParam("taskStatus") String taskStatus) {
 
-        final List<TaskDto> allTask = taskService.findAllActiveTasks(taskStatus);
-        System.out.println(allTask);
+        final List<TaskDto> allTask = taskService.findAllByStatusTasks(taskStatus);
 
         return allTask;
     }

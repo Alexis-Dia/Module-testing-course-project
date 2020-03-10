@@ -51,6 +51,19 @@ public class UserEntity {
         this.id = id;
     }
 
+    public UserEntity(Integer id, String lastName, String firstName, String patronymic, Date birthday, String login, String password, Float money, RoleEntity roleEntity, UserStatusEntity status) {
+        this.id = id;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.patronymic = patronymic;
+        this.birthday = birthday;
+        this.login = login;
+        this.password = password;
+        this.money = money;
+        this.roleEntity = roleEntity;
+        this.status = status;
+    }
+
     public UserEntity(String lastName, String firstName, String patronymic, Date birthday, String login, String password, Float money, RoleEntity roleEntity, UserStatusEntity status) {
         this.lastName = lastName;
         this.firstName = firstName;

@@ -7,6 +7,7 @@ import com.moduleTesting.portal.repository.ReportRepository;
 import com.moduleTesting.portal.repository.TaskRepository;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.report.ReportService;
+import exceptions.TaskNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.moduleTesting.portal.consts.Common.MSG_ERR_TASK_NOT_FOUND;
 
 @Service
 public class ReportServiceImpl implements ReportService {
@@ -31,13 +34,14 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<ReportDto> getReportsByTaskId(Integer taskId) {
-        return taskRepository.findById(taskId).getReports().stream().map(DtoMapper::toReportDto).collect(Collectors.toList());
+        TaskEntity taskEntity = taskRepository.findById(taskId).orElseThrow(() -> new TaskNotFoundException(MSG_ERR_TASK_NOT_FOUND));
+        return taskEntity.getReports().stream().map(DtoMapper::toReportDto).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<ReportDto> createReport(Integer taskId, ReportDto reportDto) {
-        TaskEntity taskEntity = taskRepository.findById(taskId);
+        TaskEntity taskEntity = taskRepository.findById(taskId).orElseThrow(() -> new TaskNotFoundException(MSG_ERR_TASK_NOT_FOUND));;
         taskEntity.getReports().add(new ReportEntity(reportDto.getDeparture(), taskEntity.getWeight(), reportDto.getDistance(),
             reportDto.getArrival()));
         taskEntity = taskRepository.save(taskEntity);

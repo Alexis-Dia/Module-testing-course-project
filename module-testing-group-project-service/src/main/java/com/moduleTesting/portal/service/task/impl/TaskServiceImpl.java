@@ -8,6 +8,7 @@ import com.moduleTesting.portal.repository.*;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.task.TaskService;
 import com.moduleTesting.portal.service.user.UserService;
+import exceptions.TaskNotFoundException;
 import exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.moduleTesting.portal.consts.Common.MSG_ERR_TASK_NOT_FOUND;
 import static com.moduleTesting.portal.consts.Common.MSG_ERR_USER_WASN_T_FOUND;
 
 @Service
@@ -55,7 +57,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<TaskDto> findAllActiveTasks(String statusName) {
+    public List<TaskDto> findAllByStatusTasks(String statusName) {
         return taskRepository.findByStatusNameContaining(statusName).stream().map(DtoMapper::toTaskDto).collect(Collectors.toList());
     }
 
@@ -70,7 +72,7 @@ public class TaskServiceImpl implements TaskService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Integer changeTaskStatusToFinish(Integer taskId, Integer statusId, String authenticationName) {
 
-        TaskEntity task = taskRepository.findById(taskId);
+        TaskEntity task = taskRepository.findById(taskId).orElseThrow(() -> new TaskNotFoundException(MSG_ERR_TASK_NOT_FOUND));
 
         Integer driverId = task.getDriver().getId();
         userRepository.updateUserStatus(driverId, UserStatus.FREE.getId());
@@ -81,6 +83,7 @@ public class TaskServiceImpl implements TaskService {
         }
 
         return rowNumber;
+
     }
 
     @Override
@@ -91,7 +94,7 @@ public class TaskServiceImpl implements TaskService {
         TaskStatusEntity taskStatusInProgress = taskStatusRepository.findById(TaskStatus.IN_PROGRESS.getId());
         Optional<CarEntity> car = carRepository.findById(carId);
         Optional<UserEntity> user = userRepository.findByLogin(authenticationName);
-        TaskEntity task = taskRepository.findById(taskId);
+        TaskEntity task = taskRepository.findById(taskId).orElseThrow(() -> new TaskNotFoundException(MSG_ERR_TASK_NOT_FOUND));
 
         userRepository.updateUserStatus(user.get().getId(), UserStatus.BUSY.getId());
 
