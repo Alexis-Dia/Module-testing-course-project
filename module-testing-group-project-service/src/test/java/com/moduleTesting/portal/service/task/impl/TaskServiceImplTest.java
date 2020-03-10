@@ -59,10 +59,10 @@ public class TaskServiceImplTest {
     private static final RoleEntity USER_ROLE = new RoleEntity("DRIVER", 1);
     private static final String FREE = "FREE";
     private static final UserStatusEntity USER_STATUS = new UserStatusEntity(FREE);
-    private static final UserEntity DRIVER = new UserEntity(1, "Alex", "Alexey","Alexeyevich", new Date(), "alex@tut.by", "alex", 100.0f, USER_ROLE, USER_STATUS);
+    private static final UserEntity USER_ENTITY = new UserEntity(1, "Alex", "Alexey","Alexeyevich", new Date(), "alex@tut.by", "alex", 100.0f, USER_ROLE, USER_STATUS);
     private static final TaskEntity TASK_ENTITY = new TaskEntity(
         "Minsk-Gomel", 1000.0f, 500.0f,
-        DRIVER, CAR_ENTITY, FREE_TASK_STATUS_ENTITY, 500.0f);
+        USER_ENTITY, CAR_ENTITY, FREE_TASK_STATUS_ENTITY, 500.0f);
     private static final Integer EXISTED_USER_ID = 1;
     private static final int NOT_EXISTED_USER_ID = 100;
     private static final int ROW_HAS_NOT_CHANGED = 0;
@@ -93,7 +93,7 @@ public class TaskServiceImplTest {
     @Before
     public void setUp() {
         doReturn(Collections.singletonList(TASK_ENTITY)).when(taskRepository).findAll();
-        doReturn(Optional.ofNullable(DRIVER)).when(userRepository).findByLogin(EXISTED_EMAIL);
+        doReturn(Optional.ofNullable(USER_ENTITY)).when(userRepository).findByLogin(EXISTED_EMAIL);
         given(userRepository.findByLogin(NOT_EXISTED_EMAIL)).willThrow(new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND));
         doReturn(Collections.singletonList(TASK_ENTITY)).when(taskRepository).findByStatusNameContaining(EXISTED_TASK_STATUS);
         doReturn(Collections.emptyList()).when(taskRepository).findByStatusNameContaining(NOT_EXISTED_TASK_STATUS);
@@ -148,7 +148,7 @@ public class TaskServiceImplTest {
         taskService.findAllMineTasks(EXISTED_EMAIL);
 
         verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findByLogin(EXISTED_EMAIL);
-        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findByDriver_Id(null);
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findByDriver_Id(EXISTED_USER_ID);
         verifyNoMoreInteractions(userRepository);
         verifyNoMoreInteractions(taskRepository);
     }
