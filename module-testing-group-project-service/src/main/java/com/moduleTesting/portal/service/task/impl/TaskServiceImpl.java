@@ -8,6 +8,7 @@ import com.moduleTesting.portal.repository.*;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.task.TaskService;
 import com.moduleTesting.portal.service.user.UserService;
+import exceptions.CarNotFoundException;
 import exceptions.TaskNotFoundException;
 import exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.moduleTesting.portal.consts.Common.MSG_ERR_TASK_NOT_FOUND;
-import static com.moduleTesting.portal.consts.Common.MSG_ERR_USER_WASN_T_FOUND;
+import static com.moduleTesting.portal.consts.Common.*;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -92,8 +92,8 @@ public class TaskServiceImpl implements TaskService {
 
         CarStatusEntity carStatusEntityBusy = carStatusRepository.findByName(UserStatus.BUSY.getName());
         TaskStatusEntity taskStatusInProgress = taskStatusRepository.findById(TaskStatus.IN_PROGRESS.getId());
-        Optional<CarEntity> car = carRepository.findById(carId);
-        Optional<UserEntity> user = userRepository.findByLogin(authenticationName);
+        Optional<CarEntity> car = Optional.of(carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException(MSG_ERR_CAR_NOT_FOUND)));
+        Optional<UserEntity> user = Optional.of(userRepository.findByLogin(authenticationName).orElseThrow(() -> new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND)));
         TaskEntity task = taskRepository.findById(taskId).orElseThrow(() -> new TaskNotFoundException(MSG_ERR_TASK_NOT_FOUND));
 
         userRepository.updateUserStatus(user.get().getId(), UserStatus.BUSY.getId());

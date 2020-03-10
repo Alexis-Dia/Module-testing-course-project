@@ -1,13 +1,11 @@
 package com.moduleTesting.portal.service.task.impl;
 
-import com.moduleTesting.portal.dto.CarStatus;
-import com.moduleTesting.portal.dto.TaskDto;
-import com.moduleTesting.portal.dto.TaskStatus;
-import com.moduleTesting.portal.dto.UserStatus;
+import com.moduleTesting.portal.dto.*;
 import com.moduleTesting.portal.entity.*;
 import com.moduleTesting.portal.repository.*;
 import com.moduleTesting.portal.service.task.TaskService;
 import com.moduleTesting.portal.service.user.UserService;
+import exceptions.CarNotFoundException;
 import exceptions.NotEnoughPoundsException;
 import exceptions.TaskNotFoundException;
 import exceptions.UserNotFoundException;
@@ -42,6 +40,7 @@ public class TaskServiceImplTest {
     private static final String NOT_EXISTED_EMAIL = "notexistet@mail.ru";
     private static final String EXISTED_TASK_STATUS = "FREE";
     private static final String NOT_EXISTED_TASK_STATUS = "NOT_EXISTED_STATUS";
+    private static final int NOT_EXISTED_CAR_ID = 100;
     private static final int EXISTED_TASK_ID = 1;
     private static final int NOT_EXISTED_TASK_ID = 100;
     private static final int NOT_EXISTED_TASK_STATUS_ID = 100;
@@ -56,25 +55,28 @@ public class TaskServiceImplTest {
         new Date(),
         new CarStatusEntity(CarStatus.FREE.getName())
     );
-    public static final TaskStatusEntity FREE_TASK_STATUS_ENTITY = new TaskStatusEntity(1, "FREE");
-    public static final RoleEntity USER_ROLE = new RoleEntity("DRIVER", 1);
-    public static final String FREE = "FREE";
-    public static final UserStatusEntity USER_STATUS = new UserStatusEntity(FREE);
-    public static final UserEntity DRIVER = new UserEntity(1, "Alex", "Alexey","Alexeyevich", new Date(), "alex@tut.by", "alex", 100.0f, USER_ROLE, USER_STATUS);
-    public static final TaskEntity TASK_ENTITY = new TaskEntity(
+    private static final TaskStatusEntity FREE_TASK_STATUS_ENTITY = new TaskStatusEntity(1, "FREE");
+    private static final RoleEntity USER_ROLE = new RoleEntity("DRIVER", 1);
+    private static final String FREE = "FREE";
+    private static final UserStatusEntity USER_STATUS = new UserStatusEntity(FREE);
+    private static final UserEntity DRIVER = new UserEntity(1, "Alex", "Alexey","Alexeyevich", new Date(), "alex@tut.by", "alex", 100.0f, USER_ROLE, USER_STATUS);
+    private static final TaskEntity TASK_ENTITY = new TaskEntity(
         "Minsk-Gomel", 1000.0f, 500.0f,
         DRIVER, CAR_ENTITY, FREE_TASK_STATUS_ENTITY, 500.0f);
-    public static final Integer EXISTED_USER_ID = 1;
-    public static final int NOT_EXISTED_USER_ID = 100;
-    public static final int ROW_HAS_NOT_CHANGED = 0;
-    public static final float REWARD = 300.0f;
-    public static final float REWARD_500 = 500.0f;
+    private static final Integer EXISTED_USER_ID = 1;
+    private static final int NOT_EXISTED_USER_ID = 100;
+    private static final int ROW_HAS_NOT_CHANGED = 0;
+    private static final float REWARD = 300.0f;
+    private static final float REWARD_500 = 500.0f;
     private static final String NOT_ENOUGH_POUNDS_ON_ADMIN_ACCOUNT = "Not enough pounds on admin account!";
     private static final String CAR_STATUS_FREE = "FREE";
     private static final int EXISTED_CAR_ID = 4;
     private static final int EXPECTED_SIZE_OF_EMPTY_LIST = 0;
-    public static final int PROGRESS_STATUS_ID = 4;
-    public static final int FINSISHED_STATUS_ID = 5;
+    private static final int PROGRESS_STATUS_ID = 4;
+    private static final int FINISHED_STATUS_ID = 5;
+    private static final TaskDto TASK_DTO = new TaskDto(
+        1, 100f, 100f, new UserDto(), new CarDto(), TaskStatus.IN_PROGRESS,
+        "Alex", null, 100f);
 
     @Autowired
     private TaskService taskService;
@@ -110,7 +112,7 @@ public class TaskServiceImplTest {
         doReturn(NUMBER_OF_ROW_NOT_SUCCESS).when(userRepository).updateBalance(NOT_EXISTED_USER_ID, REWARD_500);
         doReturn(new CarStatusEntity(CAR_STATUS_FREE)).when(carStatusRepository).findByName(CarStatus.FREE.getName());
         doReturn(new TaskStatusEntity(TaskStatus.IN_PROGRESS.getName())).when(taskStatusRepository).findById(TaskStatus.IN_PROGRESS.getId());
-        doReturn(Optional.ofNullable(TASK_ENTITY)).when(carRepository).findById(EXISTED_CAR_ID);
+        doReturn(Optional.ofNullable(CAR_ENTITY)).when(carRepository).findById(EXISTED_CAR_ID);
         doReturn(new CarEntity()).when(carRepository).save(new CarEntity());
         doReturn(TASK_ENTITY).when(taskRepository).save(ArgumentMatchers.any(TaskEntity.class));
     }
@@ -188,11 +190,11 @@ public class TaskServiceImplTest {
 
     @Test
     public void testChangeTaskStatusToFinish_Ok_Finished() {
-        taskService.changeTaskStatusToFinish(EXISTED_TASK_ID, FINSISHED_STATUS_ID, EXISTED_EMAIL);
+        taskService.changeTaskStatusToFinish(EXISTED_TASK_ID, FINISHED_STATUS_ID, EXISTED_EMAIL);
 
         verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(EXISTED_TASK_ID);
         verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateUserStatus(EXISTED_USER_ID, UserStatus.FREE.getId());
-        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateStatusById(EXISTED_TASK_ID, FINSISHED_STATUS_ID);
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateStatusById(EXISTED_TASK_ID, FINISHED_STATUS_ID);
         verify(userService, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).transferMoney(EXISTED_USER_ID, REWARD_500);
         verifyNoMoreInteractions(taskRepository);
         verifyNoMoreInteractions(userRepository);
@@ -230,11 +232,85 @@ public class TaskServiceImplTest {
     public void testTakeTask_Ok() {
         taskService.takeTask(EXISTED_TASK_ID, EXISTED_CAR_ID, EXISTED_EMAIL);
 
+        verify(carStatusRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findByName(UserStatus.BUSY.getName());
+        verify(taskStatusRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(TaskStatus.IN_PROGRESS.getId());
+        verify(carRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(EXISTED_CAR_ID);
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findByLogin(EXISTED_EMAIL);
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(EXISTED_TASK_ID);
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateUserStatus(EXISTED_USER_ID, UserStatus.BUSY.getId());
+        verify(carRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).save(ArgumentMatchers.any(CarEntity.class));
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).save(ArgumentMatchers.any(TaskEntity.class));
+        verifyNoMoreInteractions(taskRepository);
+        verifyNoMoreInteractions(userRepository);
+        verifyNoMoreInteractions(userService);
+        verifyNoMoreInteractions(carStatusRepository);
+        verifyNoMoreInteractions(taskStatusRepository);
+    }
 
+    @Test(expected= CarNotFoundException.class)
+    public void testTakeTask_Exception_CarNotFound() {
+        taskService.takeTask(EXISTED_TASK_ID, NOT_EXISTED_CAR_ID, EXISTED_EMAIL);
+
+        verify(carStatusRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findByName(UserStatus.BUSY.getName());
+        verify(taskStatusRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(TaskStatus.IN_PROGRESS.getId());
+        verify(carRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).findById(EXISTED_CAR_ID);
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).findByLogin(EXISTED_EMAIL);
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).findById(EXISTED_TASK_ID);
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateUserStatus(EXISTED_USER_ID, UserStatus.BUSY.getId());
+        verify(carRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).save(ArgumentMatchers.any(CarEntity.class));
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).save(ArgumentMatchers.any(TaskEntity.class));
+        verifyNoMoreInteractions(taskRepository);
+        verifyNoMoreInteractions(userRepository);
+        verifyNoMoreInteractions(userService);
+        verifyNoMoreInteractions(carStatusRepository);
+        verifyNoMoreInteractions(taskStatusRepository);
+    }
+
+    @Test(expected= UserNotFoundException.class)
+    public void testTakeTask_Exception_UserNotFound() {
+        taskService.takeTask(EXISTED_TASK_ID, EXISTED_CAR_ID, NOT_EXISTED_EMAIL);
+
+        verify(carStatusRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findByName(UserStatus.BUSY.getName());
+        verify(taskStatusRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(TaskStatus.IN_PROGRESS.getId());
+        verify(carRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(EXISTED_CAR_ID);
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).findByLogin(EXISTED_EMAIL);
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).findById(EXISTED_TASK_ID);
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateUserStatus(EXISTED_USER_ID, UserStatus.BUSY.getId());
+        verify(carRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).save(ArgumentMatchers.any(CarEntity.class));
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).save(ArgumentMatchers.any(TaskEntity.class));
+        verifyNoMoreInteractions(taskRepository);
+        verifyNoMoreInteractions(userRepository);
+        verifyNoMoreInteractions(userService);
+        verifyNoMoreInteractions(carStatusRepository);
+        verifyNoMoreInteractions(taskStatusRepository);
+    }
+
+    @Test(expected= TaskNotFoundException.class)
+    public void testTakeTask_Exception_TaskNotFound() {
+        taskService.takeTask(NOT_EXISTED_TASK_ID, EXISTED_CAR_ID, EXISTED_EMAIL);
+
+        verify(carStatusRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findByName(UserStatus.BUSY.getName());
+        verify(taskStatusRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(TaskStatus.IN_PROGRESS.getId());
+        verify(carRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(EXISTED_CAR_ID);
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findByLogin(EXISTED_EMAIL);
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).findById(EXISTED_TASK_ID);
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateUserStatus(EXISTED_USER_ID, UserStatus.BUSY.getId());
+        verify(carRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).save(ArgumentMatchers.any(CarEntity.class));
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).save(ArgumentMatchers.any(TaskEntity.class));
+        verifyNoMoreInteractions(taskRepository);
+        verifyNoMoreInteractions(userRepository);
+        verifyNoMoreInteractions(userService);
+        verifyNoMoreInteractions(carStatusRepository);
+        verifyNoMoreInteractions(taskStatusRepository);
     }
 
     @Test
-    public void testCreateNewTask() {
+    public void testCreateNewTask_Ok() {
+        taskService.createNewTask(TASK_DTO);
 
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).save(ArgumentMatchers.any(TaskEntity.class));
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findAll();
+
+        verifyNoMoreInteractions(taskRepository);
     }
 }
