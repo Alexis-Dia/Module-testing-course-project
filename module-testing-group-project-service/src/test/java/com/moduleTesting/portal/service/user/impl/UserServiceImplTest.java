@@ -324,6 +324,7 @@ public class UserServiceImplTest {
         verifyNoMoreInteractions(userRepository);
     }
 
+    //FIXME - I don't know how to test fork with orElse -operator in UserServiceImpl class in createNewUser method
     @Test
     public void testCreateNewUser_Ok() {
         userService.createNewUser(
