@@ -4,14 +4,20 @@ import java.util.Arrays;
 
 public enum UserRole {
 
-    ADMIN("ADMIN", 1), USER("DRIVER", 2);
+    ADMIN(1, "ADMIN", 1), USER(2, "DRIVER", 2);
 
+    private final Integer id;
     private final String name;
     private final int securityLevel;
 
-    UserRole(String name, int securityLevel) {
+    UserRole(Integer id, String name, int securityLevel) {
+        this.id = id;
         this.name = name;
         this.securityLevel = securityLevel;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {

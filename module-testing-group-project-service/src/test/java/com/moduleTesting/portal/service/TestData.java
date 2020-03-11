@@ -39,6 +39,18 @@ public interface TestData {
         USER_ROLE,
         USER_STATUS
     );
+    UserEntity NOT_EXISTED_USER_ENTITY = new UserEntity(
+        1,
+        "Alex",
+        "Alexey",
+        "Alexeyevich",
+        new Date(),
+        NOT_EXISTED_EMAIL,
+        "alex",
+        100.0f,
+        USER_ROLE,
+        USER_STATUS
+    );
     CarEntity CAR_ENTITY = new CarEntity(
         new BrandEntity(),
         new Date(),

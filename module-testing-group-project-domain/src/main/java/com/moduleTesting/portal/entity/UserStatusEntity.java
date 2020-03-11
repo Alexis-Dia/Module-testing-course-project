@@ -20,6 +20,11 @@ public class UserStatusEntity {
         this.name = name;
     }
 
+    public UserStatusEntity(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }
