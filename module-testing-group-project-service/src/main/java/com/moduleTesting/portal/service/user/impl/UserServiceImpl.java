@@ -29,11 +29,7 @@ public class UserServiceImpl implements UserService {
     private static final float INITIAL_MONEY_VALUE = 0f;
     private static final int ADMIN_ID = 1;
     private static final String DRIVER = "DRIVER";
-    private static final String USER_STATUS_WASN_T_FOUND = "User status wasn't found";
-    private static final String ROLE_WASN_T_FOUND = "Role wasn't found";
-    private static final String FREE = "FREE";
     private static final String NOT_ENOUGH_POUNDS_ON_ADMIN_ACCOUNT = "Not enough pounds on admin account!";
-    public static final int DRIVER_ID = 2;
 
     @Autowired
     UserRepository userRepository;
@@ -152,9 +148,9 @@ public class UserServiceImpl implements UserService {
         Optional<UserDto> userByLogin = this.findByLogin(userDto.getEmailAddress());
         userByLogin.ifPresent(ob -> {throw new UserAlreadyExistsException(MSG_ERR_USER_ALREADY_EXISTS);});
 
-        final RoleEntity userRole = new RoleEntity(UserRole.USER.getId(), UserRole.USER.getName(),  UserRole.USER.getSecurityLevel());
+        final RoleEntity userRole = new RoleEntity(UserRole.USER.getId());
 
-        final UserStatusEntity userStatusEntity = new UserStatusEntity(UserStatus.FREE.getId(), UserStatus.FREE.getName());
+        final UserStatusEntity userStatusEntity = new UserStatusEntity(UserStatus.FREE.getId());
 
         UserEntity userEntity = userRepository.getUserByIdAndRoleEntity_Name(userDto.getUserID(), DRIVER).orElse(
             new UserEntity(userDto.getLastName(), userDto.getFirstName(), userDto.getPatronymic(), userDto.getBirthday(),

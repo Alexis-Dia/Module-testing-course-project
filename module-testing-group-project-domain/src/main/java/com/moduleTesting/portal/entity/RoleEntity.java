@@ -19,6 +19,10 @@ public class RoleEntity {
     public RoleEntity() {
     }
 
+    public RoleEntity(Integer id) {
+        this.id = id;
+    }
+
     public RoleEntity(String name, Integer securityLevel) {
         this.name = name;
         this.securityLevel = securityLevel;

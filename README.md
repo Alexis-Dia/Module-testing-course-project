@@ -188,10 +188,7 @@ Password for any driver - user
             throw new BadCredentialsException("Bad Credentials");
         }
         }
-
-https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockito-junit-example/
-https://dzone.com/articles/unit-testing-java-streams-and-lambdas
-        
+       
 Artickle about adding oAuth2.0:        
 https://javarush.ru/groups/posts/2269-druzhim-obihchnihy-vkhod-cherez-email-i-oauth2-v-spring-security-na-primere-servisa-zametok#%D0%A1%D1%83%D1%89%D0%BD%D0%BE%D1%81%D1%82%D0%B8
 In this article there is a helpful comment how to check performance:
@@ -219,6 +216,8 @@ In this article there is a helpful comment how to check performance:
 How to inject test repository to test service articles:        
 https://www.baeldung.com/spring-boot-testing
 https://hellokoding.com/spring-boot-test-service-layer-example-with-mockitos-mock-and-injectmock/    
+https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockito-junit-example/
+https://dzone.com/articles/unit-testing-java-streams-and-lambdas
         
 Ещё насчёт пропуска сервисного слоя: нежелательно так делать еще по той причине, что именно на уровне сервисов должны управляться транзакции, а так транзакции в
  репозитории работают по auto-commit=true считай (на самом деле флажок в JDBC не стоит, но реализация репов спринговских как раз такая), ведь каждый метод репозитория - 
