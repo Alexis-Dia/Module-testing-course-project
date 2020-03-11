@@ -36,8 +36,16 @@ public class ReportServiceImplTest {
     private static final UserStatusEntity USER_STATUS = new UserStatusEntity(FREE);
     private static final RoleEntity USER_ROLE = new RoleEntity("DRIVER", 1);
     private static final ReportEntity REPORT_ENTITY = new ReportEntity(new Date(), 100f, 100f, new Date());
-    private static final UserEntity USER_ENTITY = new UserEntity(1, "Alex", "Alexey",
-        "Alexeyevich", new Date(), "alex@tut.by", "alex", 100.0f, USER_ROLE, USER_STATUS);
+    private static final UserEntity USER_ENTITY = new UserEntity(
+        1,
+        "Alex",
+        "Alexey",
+        "Alexeyevich",
+        new Date(),
+        "alex@tut.by",
+        "alex",
+        100.0f,
+        USER_ROLE, USER_STATUS);
     private static final CarEntity CAR_ENTITY = new CarEntity(
         new BrandEntity(),
         new Date(),

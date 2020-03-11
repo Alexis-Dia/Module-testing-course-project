@@ -12,4 +12,5 @@ public interface Common {
     String MSG_ERR_INCORRECT_PASSORD = "Password or username is incorrect";
     String MSG_ERR_TASK_NOT_FOUND = "Task not found!";
     String MSG_ERR_CAR_NOT_FOUND = "Car not found!";
+    String MSG_ERR_NOT_ENOUGH_POUNDS_ON_ADMIN_ACCOUNT = "Not enough pounds on admin account!";
 }

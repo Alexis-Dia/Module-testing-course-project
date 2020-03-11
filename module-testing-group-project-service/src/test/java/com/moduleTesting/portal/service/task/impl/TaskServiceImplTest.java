@@ -1,7 +1,10 @@
 package com.moduleTesting.portal.service.task.impl;
 
 import com.moduleTesting.portal.dto.*;
-import com.moduleTesting.portal.entity.*;
+import com.moduleTesting.portal.entity.CarEntity;
+import com.moduleTesting.portal.entity.CarStatusEntity;
+import com.moduleTesting.portal.entity.TaskEntity;
+import com.moduleTesting.portal.entity.TaskStatusEntity;
 import com.moduleTesting.portal.repository.*;
 import com.moduleTesting.portal.service.task.TaskService;
 import com.moduleTesting.portal.service.user.UserService;
@@ -21,12 +24,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static com.moduleTesting.portal.consts.Common.MSG_ERR_TASK_NOT_FOUND;
-import static com.moduleTesting.portal.consts.Common.MSG_ERR_USER_WASN_T_FOUND;
+import static com.moduleTesting.portal.consts.Common.*;
+import static com.moduleTesting.portal.service.TestData.*;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
@@ -34,49 +36,16 @@ import static org.mockito.Mockito.*;
 @RunWith(SpringRunner.class)
 public class TaskServiceImplTest {
 
-    private static final int WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME = 1;
-    private static final int WANTED_NUMBER_OF_INVOCATIONS_ZERO = 0;
-    private static final String EXISTED_EMAIL = "sidorov@tut.by";
-    private static final String NOT_EXISTED_EMAIL = "notexistet@mail.ru";
-    private static final String EXISTED_TASK_STATUS = "FREE";
-    private static final String NOT_EXISTED_TASK_STATUS = "NOT_EXISTED_STATUS";
     private static final int NOT_EXISTED_CAR_ID = 100;
     private static final int EXISTED_TASK_ID = 1;
     private static final int NOT_EXISTED_TASK_ID = 100;
     private static final int NOT_EXISTED_TASK_STATUS_ID = 100;
     private static final int EXISTED_TASK_STATUS_ID = 1;
-    private static final int NUMBER_OF_ROW_SUCCESS = 1;
-    private static final int NUMBER_OF_ROW_NOT_SUCCESS = 0;
-    private static final String CAR_NUMBER_JX_1234 = "JX-1234";
-    private static final CarEntity CAR_ENTITY = new CarEntity(
-        new BrandEntity(),
-        new Date(),
-        CAR_NUMBER_JX_1234,
-        new Date(),
-        new CarStatusEntity(CarStatus.FREE.getName())
-    );
-    private static final TaskStatusEntity FREE_TASK_STATUS_ENTITY = new TaskStatusEntity(1, "FREE");
-    private static final RoleEntity USER_ROLE = new RoleEntity("DRIVER", 1);
-    private static final String FREE = "FREE";
-    private static final UserStatusEntity USER_STATUS = new UserStatusEntity(FREE);
-    private static final UserEntity USER_ENTITY = new UserEntity(1, "Alex", "Alexey","Alexeyevich", new Date(), "alex@tut.by", "alex", 100.0f, USER_ROLE, USER_STATUS);
-    private static final TaskEntity TASK_ENTITY = new TaskEntity(
-        "Minsk-Gomel", 1000.0f, 500.0f,
-        USER_ENTITY, CAR_ENTITY, FREE_TASK_STATUS_ENTITY, 500.0f);
-    private static final Integer EXISTED_USER_ID = 1;
-    private static final int NOT_EXISTED_USER_ID = 100;
     private static final int ROW_HAS_NOT_CHANGED = 0;
-    private static final float REWARD = 300.0f;
-    private static final float REWARD_500 = 500.0f;
-    private static final String NOT_ENOUGH_POUNDS_ON_ADMIN_ACCOUNT = "Not enough pounds on admin account!";
-    private static final String CAR_STATUS_FREE = "FREE";
     private static final int EXISTED_CAR_ID = 4;
     private static final int EXPECTED_SIZE_OF_EMPTY_LIST = 0;
     private static final int PROGRESS_STATUS_ID = 4;
     private static final int FINISHED_STATUS_ID = 5;
-    private static final TaskDto TASK_DTO = new TaskDto(
-        1, 100f, 100f, new UserDto(), new CarDto(), TaskStatus.IN_PROGRESS,
-        "Alex", null, 100f);
 
     @Autowired
     private TaskService taskService;
@@ -108,7 +77,7 @@ public class TaskServiceImplTest {
         doReturn(null).when(userRepository).updateUserStatus(NOT_EXISTED_USER_ID, UserStatus.FREE.getId());
         doNothing().when(userService).transferMoney(EXISTED_USER_ID, REWARD);
         doReturn(NUMBER_OF_ROW_SUCCESS).when(userRepository).updateBalance(EXISTED_USER_ID, REWARD_500);
-        given(userRepository.updateBalance(NOT_EXISTED_USER_ID, REWARD_500)).willThrow(new NotEnoughPoundsException(NOT_ENOUGH_POUNDS_ON_ADMIN_ACCOUNT));
+        given(userRepository.updateBalance(NOT_EXISTED_USER_ID, REWARD_500)).willThrow(new NotEnoughPoundsException(MSG_ERR_NOT_ENOUGH_POUNDS_ON_ADMIN_ACCOUNT));
         doReturn(NUMBER_OF_ROW_NOT_SUCCESS).when(userRepository).updateBalance(NOT_EXISTED_USER_ID, REWARD_500);
         doReturn(new CarStatusEntity(CAR_STATUS_FREE)).when(carStatusRepository).findByName(CarStatus.FREE.getName());
         doReturn(new TaskStatusEntity(TaskStatus.IN_PROGRESS.getName())).when(taskStatusRepository).findById(TaskStatus.IN_PROGRESS.getId());

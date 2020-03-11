@@ -74,6 +74,10 @@ public class UserDto {
         return userID;
     }
 
+    public void setUserID(Integer userID) {
+        this.userID = userID;
+    }
+
     public String getLastName() {
         return lastName;
     }
