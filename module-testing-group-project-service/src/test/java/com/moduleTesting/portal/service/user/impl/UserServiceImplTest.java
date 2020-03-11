@@ -9,6 +9,7 @@ import com.moduleTesting.portal.repository.UserRepository;
 import com.moduleTesting.portal.repository.UserStatusRepository;
 import com.moduleTesting.portal.service.user.UserService;
 import exceptions.NotCurrentUserException;
+import exceptions.NotEnoughPoundsException;
 import exceptions.UserAlreadyExistsException;
 import exceptions.UserNotFoundException;
 import org.junit.Before;
@@ -32,6 +33,7 @@ import static org.mockito.Mockito.*;
 @RunWith(SpringRunner.class)
 public class UserServiceImplTest {
 
+    private static final int ADMIN_ID = 1;
     private static final String DRIVER = "DRIVER";
 
     @Autowired
@@ -330,21 +332,38 @@ public class UserServiceImplTest {
                 USER_DTO.getLastName(),
                 USER_DTO.getFirstName(),
                 USER_DTO.getPatronymic(),
-                USER_DTO.getBirthday(),
+                null,
                 NOT_EXISTED_EMAIL,
                 USER_DTO.getPassword(),
                 USER_DTO.getMoney()
             )
         );
 
-        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findByLogin(ArgumentMatchers.anyString());
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findByLogin(NOT_EXISTED_EMAIL);
         verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).getUserByIdAndRoleEntity_Name(NOT_EXISTED_USER_ID, DRIVER);
         verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).save(ArgumentMatchers.any(UserEntity.class));
-        verifyNoMoreInteractions(userRepository);
     }
 
 
     @Test
-    public void testTransferMoney() {
+    public void testTransferMoney_Ok() {
+        userService.transferMoney(EXISTED_USER_ID, REWARD);
+
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findAllByRoleEntity_NameContains(UserRole.ADMIN.getName());
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateBalance(EXISTED_USER_ID, REWARD);
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateBalance(ADMIN_ID, RESULT_AMOUNT);
+
+        verifyNoMoreInteractions(userRepository);
+    }
+
+    @Test(expected= NotEnoughPoundsException.class)
+    public void testTransferMoney_Err_NotEnoughPounds() {
+        userService.transferMoney(EXISTED_USER_ID, REWARD_500);
+
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findAllByRoleEntity_NameContains(UserRole.ADMIN.getName());
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateBalance(EXISTED_USER_ID, REWARD_500);
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateBalance(ADMIN_ID, RESULT_AMOUNT);
+
+        verifyNoMoreInteractions(userRepository);
     }
 }

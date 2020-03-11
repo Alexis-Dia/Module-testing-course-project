@@ -11,9 +11,9 @@ public interface TestData {
     int WANTED_NUMBER_OF_INVOCATIONS_ZERO = 0;
     int NUMBER_OF_ROW_SUCCESS = 1;
     int NUMBER_OF_ROW_NOT_SUCCESS = 0;
-    float REWARD = 300.0f;
+    float REWARD = 30.0f;
     float REWARD_500 = 500.0f;
-    float RESULT_AMOUNT = 9700f;
+    float RESULT_AMOUNT = 70f;
     String CAR_STATUS_FREE = "FREE";
     String EXISTED_EMAIL = "sidorov@tut.by";
     String EXISTED_EMAIL_2 = "ivanov@tut.by";
@@ -25,8 +25,8 @@ public interface TestData {
     Integer EXISTED_USER_ID = 1;
     Integer EXISTED_ADMIN_ID = 1;
     Integer NOT_EXISTED_USER_ID = 100;
-    RoleEntity USER_ROLE = new RoleEntity("DRIVER", 1);
-    UserStatusEntity USER_STATUS = new UserStatusEntity(FREE);
+    RoleEntity USER_ROLE = new RoleEntity(2,"DRIVER", 1);
+    UserStatusEntity USER_STATUS = new UserStatusEntity(1, FREE);
     UserEntity USER_ENTITY = new UserEntity(
         1,
         "Alex",
@@ -40,15 +40,15 @@ public interface TestData {
         USER_STATUS
     );
     UserEntity NOT_EXISTED_USER_ENTITY = new UserEntity(
-        1,
+        null,
         "Alex",
-        "Alexey",
-        "Alexeyevich",
-        new Date(),
+        "Alexeev",
+        "Alexeevich",
+        null,
         NOT_EXISTED_EMAIL,
-        "alex",
-        100.0f,
-        USER_ROLE,
+        "1234",
+        0.0f,
+        new RoleEntity(2,"DRIVER", 2),
         USER_STATUS
     );
     CarEntity CAR_ENTITY = new CarEntity(
