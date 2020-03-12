@@ -51,10 +51,13 @@ public class DtoMapper {
     }
 
     public static CarDto toCarDto(CarEntity carEntity) {
-            final CarStatus carStatus = DtoMapper.toCarStatus(carEntity.getCarStatusEntity());
-            final BrandDto brandDto = DtoMapper.toBrandDto(carEntity.getBrandEntity());
-            return new CarDto(carEntity.getId(), brandDto, carEntity.getYear(), carEntity.getNumber(),
-                carEntity.getDateOfReceipt(), carStatus);
+        if (Objects.isNull(carEntity)) {
+            return null;
+        }
+        final CarStatus carStatus = DtoMapper.toCarStatus(carEntity.getCarStatusEntity());
+        final BrandDto brandDto = DtoMapper.toBrandDto(carEntity.getBrandEntity());
+        return new CarDto(carEntity.getId(), brandDto, carEntity.getYear(), carEntity.getNumber(),
+            carEntity.getDateOfReceipt(), carStatus);
     }
 
     public static TaskStatus toTaskStatus(TaskStatusEntity taskStatusEntity) {
