@@ -184,7 +184,7 @@ public class TaskServiceImplTest {
     }
 
     @Test(expected= TaskNotFoundException.class)
-    public void testChangeTaskStatusToFinish_Error() {
+    public void testChangeTaskStatusToFinish_Fail() {
         taskService.changeTaskStatusToFinish(NOT_EXISTED_TASK_ID, PROGRESS_STATUS_ID, EXISTED_EMAIL);
 
         verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).findById(EXISTED_TASK_ID);

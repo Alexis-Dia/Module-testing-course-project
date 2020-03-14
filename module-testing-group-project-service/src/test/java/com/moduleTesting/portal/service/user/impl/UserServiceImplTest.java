@@ -112,7 +112,7 @@ public class UserServiceImplTest {
     }
 
     @Test(expected= UserNotFoundException.class)
-    public void testGetDriverById_Err_UserWasNotFound() {
+    public void testGetDriverById_UserWasNotFound() {
         userService.getDriverById(NOT_EXISTED_USER_ID);
 
         verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).getUserByIdAndRoleEntity_Name(EXISTED_USER_ID, DRIVER);
@@ -128,7 +128,7 @@ public class UserServiceImplTest {
     }
 
     @Test(expected= UserNotFoundException.class)
-    public void testGetMe_Err_UserWasNotFound() {
+    public void testGetMe_UserWasNotFound() {
         userService.getMe(NOT_EXISTED_USER_ID, EXISTED_EMAIL);
 
         verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).getUserByIdAndRoleEntity_Name(NOT_EXISTED_USER_ID, DRIVER);
@@ -136,7 +136,7 @@ public class UserServiceImplTest {
     }
 
     @Test(expected= NotCurrentUserException.class)
-    public void testGetMe_Err_NotCurrentUser() {
+    public void testGetMe_NotCurrentUser() {
         userService.getMe(EXISTED_USER_ID, EXISTED_EMAIL_2);
 
         verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).getUserByIdAndRoleEntity_Name(NOT_EXISTED_USER_ID, DRIVER);
@@ -187,7 +187,7 @@ public class UserServiceImplTest {
     }
 
     @Test(expected= UserNotFoundException.class)
-    public void testEditUser_Err_UserNotFound() {
+    public void testEditUser_UserNotFound() {
         userService.editUser(new UserDto(
             NOT_EXISTED_USER_ID,
             USER_DTO.getLastName(),
@@ -232,7 +232,7 @@ public class UserServiceImplTest {
     }
 
     @Test(expected= NotCurrentUserException.class)
-    public void testEditMe_Err_NotCurrentUser() {
+    public void testEditMe_NotCurrentUser() {
         userService.editMe(USER_DTO, NOT_EXISTED_EMAIL);
 
         verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).updateUser(
@@ -250,7 +250,7 @@ public class UserServiceImplTest {
     }
 
     @Test(expected= UserNotFoundException.class)
-    public void testEditMe_Err_UserNotFound() {
+    public void testEditMe_UserNotFound() {
         userService.editMe(new UserDto(
             NOT_EXISTED_USER_ID,
             USER_DTO.getLastName(),
@@ -358,7 +358,7 @@ public class UserServiceImplTest {
     }
 
     @Test(expected= NotEnoughPoundsException.class)
-    public void testTransferMoney_Err_NotEnoughPounds() {
+    public void testTransferMoney_NotEnoughPounds() {
         userService.transferMoney(EXISTED_USER_ID, REWARD_500);
 
         verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findAllByRoleEntity_NameContains(UserRole.ADMIN.getName());

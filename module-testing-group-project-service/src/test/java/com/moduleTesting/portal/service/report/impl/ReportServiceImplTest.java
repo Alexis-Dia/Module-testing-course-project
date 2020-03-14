@@ -101,7 +101,7 @@ public class ReportServiceImplTest {
     }
 
     @Test(expected= TaskNotFoundException.class)
-    public void getReportsByTaskId_Exception_TaskNotFound() {
+    public void getReportsByTaskId_TaskNotFound() {
         reportService.getReportsByTaskId(NOT_EXISTED_TASK_ID);
 
         verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).findById(EXISTED_TASK_ID);
@@ -118,7 +118,7 @@ public class ReportServiceImplTest {
     }
 
     @Test(expected= TaskNotFoundException.class)
-    public void createReport_Exception_TaskNotFound() {
+    public void createReport_TaskNotFound() {
         reportService.createReport(NOT_EXISTED_TASK_ID, REPORT_DTO);
 
         verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).findById(EXISTED_TASK_ID);
