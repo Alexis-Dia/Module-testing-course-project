@@ -158,7 +158,7 @@ public class TaskServiceImplTest {
     }
 
     @Test
-    public void testChangeTaskStatusToFinish_Ok_Finished() {
+    public void testChangeTaskStatusToFinish_Finished() {
         taskService.changeTaskStatusToFinish(EXISTED_TASK_ID, FINISHED_STATUS_ID, EXISTED_EMAIL);
 
         verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(EXISTED_TASK_ID);
@@ -171,7 +171,7 @@ public class TaskServiceImplTest {
     }
 
     @Test
-    public void testChangeTaskStatusToFinish_Ok_NotFinished() {
+    public void testChangeTaskStatusToFinish_NotFinished() {
         taskService.changeTaskStatusToFinish(EXISTED_TASK_ID, PROGRESS_STATUS_ID, EXISTED_EMAIL);
 
         verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(EXISTED_TASK_ID);

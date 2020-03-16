@@ -212,13 +212,7 @@ In this article there is a helpful comment how to check performance:
         after = System.currentTimeMillis();
 
         System.out.println(after-before);
-
-How to inject test repository to test service articles:        
-https://www.baeldung.com/spring-boot-testing
-https://hellokoding.com/spring-boot-test-service-layer-example-with-mockitos-mock-and-injectmock/    
-https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockito-junit-example/
-https://dzone.com/articles/unit-testing-java-streams-and-lambdas
-        
+      
 Ещё насчёт пропуска сервисного слоя: нежелательно так делать еще по той причине, что именно на уровне сервисов должны управляться транзакции, а так транзакции в
  репозитории работают по auto-commit=true считай (на самом деле флажок в JDBC не стоит, но реализация репов спринговских как раз такая), ведь каждый метод репозитория - 
  отдельная транзакция (репы помечены по-умолчанию @Transactional аннотациями, класс JpaRepository так же обладает @Transactional(readonly=true) аннотацией, 
@@ -230,3 +224,14 @@ https://dzone.com/articles/unit-testing-java-streams-and-lambdas
 
 Потому транзакциями нужно управлять вручную. Слишком много капканов, на которые можно встать. Ситуация ещё сильнее усугубляется, когда есть сущность со связями с другими сущностями, 
 с LAZY связями. Если мы вычитали эту сущность через репо. а потом попробовали получить доступ к LAZY сущности внутри этой сущности, мы падаем с ошибкой LazyInitializationException.
+
+
+How to inject test repository to test service articles:        
+https://www.baeldung.com/spring-boot-testing
+https://hellokoding.com/spring-boot-test-service-layer-example-with-mockitos-mock-and-injectmock/    
+https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockito-junit-example/
+https://dzone.com/articles/unit-testing-java-streams-and-lambdas
+
+Как правильно выбрать название для юнит-теста?
+https://ru.stackoverflow.com/questions/471343/%D0%9A%D0%B0%D0%BA-%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D1%8C%D0%BD%D0%BE-%D0%B2%D1%8B%D0%B1%D1%80%D0%B0%D1%82%D1%8C-%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B4%D0%BB%D1%8F-%D1%8E%D0%BD%D0%B8%D1%82-%D1%82%D0%B5%D1%81%D1%82%D0%B0
+https://stackoverflow.com/questions/155436/unit-test-naming-best-practices

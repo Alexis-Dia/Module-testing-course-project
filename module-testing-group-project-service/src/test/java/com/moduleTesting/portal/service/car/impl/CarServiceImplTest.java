@@ -115,7 +115,7 @@ public class CarServiceImplTest {
     }
 
     @Test
-    public void testFindAllIsCalled() {
+    public void testFindAll_IsCalled() {
         carService.findAll();
 
         verify(carRepository).findAll();
