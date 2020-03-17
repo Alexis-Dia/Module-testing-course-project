@@ -74,7 +74,7 @@ public class CarServiceImpl implements CarService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<CarDto> addNewCar(CarDto carDto) {
 
-        BrandEntity brandEntity = brandRepository.findById(carDto.getBrand().getId()).orElseThrow(() -> new BrandNotFoundException("Brand not found"));
+        BrandEntity brandEntity = brandRepository.findById(carDto.getBrand().getId()).orElseThrow(() -> new BrandNotFoundException(BRAND_NOT_FOUND));
         CarStatusEntity carStatusEntity = carStatusRepository.findByName(CarStatus.FREE.getName());
 
         CarEntity carEntity = new CarEntity(brandEntity, carDto.getYear(), carDto.getNumber(), carDto.getDateOfReceipt(), carStatusEntity);

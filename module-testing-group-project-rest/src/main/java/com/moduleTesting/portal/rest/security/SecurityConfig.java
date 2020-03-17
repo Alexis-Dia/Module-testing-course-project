@@ -140,7 +140,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers(HttpMethod.GET, PATH_TASK_ALL_MINE).hasAuthority(ROLE_DRIVER)
                         .antMatchers(HttpMethod.GET, PATH_TASK_BY_STATUS).hasAuthority(ROLE_DRIVER)
                         .antMatchers(HttpMethod.GET, PATH_TASK_ALL).hasAuthority(ROLE_ADMIN)
-                        .antMatchers(HttpMethod.PUT, PATH_TASK_CHANGE_TASK_TO_VALIDATED_STATUS).hasAuthority(ROLE_DRIVER)
+                        .antMatchers(HttpMethod.PUT, PATH_TASK_CHANGE_TASK_BY_TASK_ID).hasAuthority(ROLE_DRIVER)
                         .antMatchers(HttpMethod.PUT, PATH_TASK_CHANGE_TASK_TO_REJECTED_OR_FINISHED_STATUS).hasAuthority(ROLE_ADMIN)
                         .antMatchers(HttpMethod.PUT, PATH_TASK_TAKE_TASK).hasAnyAuthority(ROLE_DRIVER)
                         .antMatchers(HttpMethod.POST, PATH_TASK_CREATE_NEW).hasAuthority(ROLE_ADMIN)

@@ -19,7 +19,6 @@ public class TaskController {
     public List<TaskDto> getAllTasks() {
 
         final List<TaskDto> allTask = taskService.findAll();
-        System.out.println(allTask);
 
         return allTask;
     }
@@ -43,8 +42,8 @@ public class TaskController {
         return allTask;
     }
 
-    @PutMapping("/changeTaskStatusToValidated")
-    public Integer changeTaskStatusToValidated(@RequestParam("taskId") Integer taskId, @RequestParam("statusId") Integer statusId) {
+    @PutMapping("/changeTaskStatusByTaskId")
+    public Integer changeTaskStatusByTaskId(@RequestParam("taskId") Integer taskId, @RequestParam("statusId") Integer statusId) {
         Integer changedRow = taskService.changeTaskStatus(taskId, statusId);
 
         return changedRow;
