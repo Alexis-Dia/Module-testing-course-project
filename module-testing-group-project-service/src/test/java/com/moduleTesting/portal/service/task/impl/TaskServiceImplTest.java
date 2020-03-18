@@ -254,16 +254,6 @@ public class TaskServiceImplTest {
         verifyNoMoreInteractions(taskStatusRepository);
     }
 
-    @Test
-    public void testCreateNewTask_Ok() {
-        taskService.createNewTask(TASK_DTO);
-
-        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).save(ArgumentMatchers.any(TaskEntity.class));
-        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findAll();
-
-        verifyNoMoreInteractions(taskRepository);
-    }
-
     @Test(expected= TaskNotFoundException.class)
     public void testTakeTask_Exception_TaskNotFound() {
         taskService.takeTask(NOT_EXISTED_TASK_ID, EXISTED_CAR_ID, EXISTED_EMAIL);
@@ -281,6 +271,16 @@ public class TaskServiceImplTest {
         verifyNoMoreInteractions(userService);
         verifyNoMoreInteractions(carStatusRepository);
         verifyNoMoreInteractions(taskStatusRepository);
+    }
+
+    @Test
+    public void testCreateNewTask_Ok() {
+        taskService.createNewTask(TASK_DTO);
+
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).save(ArgumentMatchers.any(TaskEntity.class));
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findAll();
+
+        verifyNoMoreInteractions(taskRepository);
     }
 
 }
