@@ -14,6 +14,7 @@ public interface TestData {
     float REWARD = 30.0f;
     float REWARD_500 = 500.0f;
     float RESULT_AMOUNT = 70f;
+    float RESULT_DRIVER_AMOUNT = 130f;
     String CAR_STATUS_FREE = "FREE";
     String EXISTED_EMAIL = "sidorov@tut.by";
     String EXISTED_EMAIL_2 = "ivanov@tut.by";

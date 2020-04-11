@@ -74,13 +74,12 @@ public class TaskServiceImpl implements TaskService {
 
         TaskEntity task = taskRepository.findById(taskId).orElseThrow(() -> new TaskNotFoundException(MSG_ERR_TASK_NOT_FOUND));
 
-        Integer driverId = task.getDriver().getId();
-        userRepository.updateUserStatus(driverId, UserStatus.FREE.getId());
-        Integer rowNumber = taskRepository.updateStatusById(taskId, statusId);
-
         if (statusId == TaskStatus.FINISHED.getId()) {
+            Integer driverId = task.getDriver().getId();
             userService.transferMoney(driverId, task.getReward());
         }
+
+        Integer rowNumber = taskRepository.updateStatusById(taskId, statusId);
 
         return rowNumber;
 

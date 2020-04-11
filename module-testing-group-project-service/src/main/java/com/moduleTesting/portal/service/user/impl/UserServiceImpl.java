@@ -161,16 +161,36 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
-    public void transferMoney(Integer userId, Float reward) {
-        Float initialAmount = getAdmin().getMoney();
-        Float resultAmount = initialAmount - reward;
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void transferMoney(Integer userId, Float amount) {
+        userRepository.updateUserStatus(userId, UserStatus.FREE.getId());
+        withdraw(ADMIN_ID, amount);
+        deposit(userId, amount);
+    }
 
-        if (reward < initialAmount ) {
-            userRepository.updateBalance(userId, reward);
-            userRepository.updateBalance(ADMIN_ID, resultAmount);
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void withdraw(Integer fromUser, Float amount) {
+        Float adminInitialAmount = getAdmin().getMoney();
+        Float resultAdminAmount = adminInitialAmount - amount;
+        if (amount < adminInitialAmount ) {
+            userRepository.updateBalance(fromUser, resultAdminAmount);
         } else {
             throw new NotEnoughPoundsException(NOT_ENOUGH_POUNDS_ON_ADMIN_ACCOUNT);
         }
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void deposit(Integer toUser, Float amount) {
+        Float userInitialAmount = getDriverById(toUser).getMoney();
+        Float resultUserAmount = userInitialAmount + amount;
+        userRepository.updateBalance(toUser, resultUserAmount);
+        informBankManager();
+    }
+
+    // FIX ME - it needs to add framework for sending email.
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void informBankManager() {
+        System.out.println("Send email to the manager.");
+        //throw new RuntimeException();
     }
 }

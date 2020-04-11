@@ -350,8 +350,10 @@ public class UserServiceImplTest {
     public void testTransferMoney_Ok() {
         userService.transferMoney(EXISTED_USER_ID, REWARD);
 
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateUserStatus(EXISTED_USER_ID, UserStatus.FREE.getId());
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).getUserByIdAndRoleEntity_Name(EXISTED_USER_ID, DRIVER);
         verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findAllByRoleEntity_NameContains(UserRole.ADMIN.getName());
-        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateBalance(EXISTED_USER_ID, REWARD);
+        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateBalance(EXISTED_USER_ID, RESULT_DRIVER_AMOUNT);
         verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateBalance(ADMIN_ID, RESULT_AMOUNT);
 
         verifyNoMoreInteractions(userRepository);

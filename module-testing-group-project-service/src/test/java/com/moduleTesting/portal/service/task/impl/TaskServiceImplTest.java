@@ -162,9 +162,8 @@ public class TaskServiceImplTest {
         taskService.changeTaskStatusToFinish(EXISTED_TASK_ID, FINISHED_STATUS_ID, EXISTED_EMAIL);
 
         verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(EXISTED_TASK_ID);
-        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateUserStatus(EXISTED_USER_ID, UserStatus.FREE.getId());
-        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateStatusById(EXISTED_TASK_ID, FINISHED_STATUS_ID);
         verify(userService, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).transferMoney(EXISTED_USER_ID, REWARD_500);
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateStatusById(EXISTED_TASK_ID, FINISHED_STATUS_ID);
         verifyNoMoreInteractions(taskRepository);
         verifyNoMoreInteractions(userRepository);
         verifyNoMoreInteractions(userService);
@@ -175,9 +174,8 @@ public class TaskServiceImplTest {
         taskService.changeTaskStatusToFinish(EXISTED_TASK_ID, PROGRESS_STATUS_ID, EXISTED_EMAIL);
 
         verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(EXISTED_TASK_ID);
-        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateUserStatus(EXISTED_USER_ID, UserStatus.FREE.getId());
-        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateStatusById(EXISTED_TASK_ID, PROGRESS_STATUS_ID);
         verify(userService, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).transferMoney(EXISTED_USER_ID, REWARD_500);
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateStatusById(EXISTED_TASK_ID, PROGRESS_STATUS_ID);
         verifyNoMoreInteractions(taskRepository);
         verifyNoMoreInteractions(userRepository);
         verifyNoMoreInteractions(userService);
@@ -188,9 +186,8 @@ public class TaskServiceImplTest {
         taskService.changeTaskStatusToFinish(NOT_EXISTED_TASK_ID, PROGRESS_STATUS_ID, EXISTED_EMAIL);
 
         verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).findById(EXISTED_TASK_ID);
-        verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).updateUserStatus(EXISTED_USER_ID, UserStatus.FREE.getId());
-        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).updateStatusById(EXISTED_TASK_ID, PROGRESS_STATUS_ID);
         verify(userService, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).transferMoney(EXISTED_USER_ID, REWARD_500);
+        verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).updateStatusById(EXISTED_TASK_ID, PROGRESS_STATUS_ID);
         verifyNoMoreInteractions(taskRepository);
         verifyNoMoreInteractions(userRepository);
         verifyNoMoreInteractions(userService);
