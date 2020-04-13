@@ -212,7 +212,8 @@ public class UserServiceImpl implements UserService {
         System.out.println("Send email to the manager.");
 /*        final int existedCarId = 8;
         final int existedBrandId = 6;
-        carRepository.updateCar(existedCarId, existedBrandId, new Date(), "VVV23", new Date(), 1);*/
+        final String newNumber = "HT-8323";
+        carRepository.updateCar(existedCarId, existedBrandId, new Date(), newNumber, new Date(), CarStatus.FREE);*/
         //throw new Exception();
         //throw new RuntimeException();
     }
