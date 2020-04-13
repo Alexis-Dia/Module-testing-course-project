@@ -181,14 +181,14 @@ public class UserServiceImpl implements UserService {
      * @throws Exception
      */
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW, noRollbackFor = {RuntimeException.class})
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {RuntimeException.class})
     public void transferMoney(Integer userId, Float amount) throws Exception {
         userRepository.updateUserStatus(userId, UserStatus.FREE.getId());
         userServiceProxy.withdraw(ADMIN_ID, amount);
         userServiceProxy.deposit(userId, amount);
     }
 
-    @Transactional(propagation = Propagation.MANDATORY, noRollbackFor = {RuntimeException.class})
+    @Transactional(propagation = Propagation.MANDATORY)
     public void withdraw(Integer fromUser, Float amount) throws Exception {
         Float adminInitialAmount = getAdmin().getMoney();
         Float resultAdminAmount = adminInitialAmount - amount;
@@ -199,7 +199,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, noRollbackFor = {RuntimeException.class})
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deposit(Integer toUser, Float amount) throws Exception {
         Float userInitialAmount = getDriverById(toUser).getMoney();
         Float resultUserAmount = userInitialAmount + amount;
@@ -214,19 +214,20 @@ public class UserServiceImpl implements UserService {
      *     this transaction for some reason will be rolled back.
      *     I found one answer, but I don't sure that it's the right reason:
      *     https://stackoverflow.com/questions/19349898/unexpectedrollbackexception-transaction-rolled-back-because-it-has-been-marked
+     *     Great article about transactional - https://akorsa.ru/2017/01/sovety-i-oshibki-v-spring-transactions/
      * @throws Exception
      */
-    @Transactional(propagation = Propagation.REQUIRES_NEW, noRollbackFor = {Exception.class, RuntimeException.class})
+    @Transactional(propagation = Propagation.REQUIRES_NEW, noRollbackFor = {RuntimeException.class})
     public void informBankManager() throws Exception {
         System.out.println("Send email to the manager.");
 /*        final int existedCarId = 8;
         final int existedBrandId = 6;
         final int unExistedBrandId = 111;
-        final String newNumber = "HT-8324";
+        final String newNumber = "HT-8333";
         final int existedUserId = 9;
-        final String newLastName = "Vasilev5";
-        userRepository.updateLastName(existedUserId, newLastName);
-        carRepository.updateCar(existedCarId, unExistedBrandId, new Date(), newNumber, new Date(), CarStatus.FREE.getId());*/
+        final String newLastName = "Vasilev9";*/
+        //userRepository.updateLastName(existedUserId, newLastName);
+        //carRepository.updateCar(existedCarId, existedBrandId, new Date(), newNumber, new Date(), CarStatus.FREE.getId());
         //final int i = 1/0;
         //throw new Exception();
         //throw new RuntimeException();
