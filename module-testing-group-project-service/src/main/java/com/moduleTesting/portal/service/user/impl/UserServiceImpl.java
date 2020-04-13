@@ -213,7 +213,7 @@ public class UserServiceImpl implements UserService {
 /*        final int existedCarId = 8;
         final int existedBrandId = 6;
         final String newNumber = "HT-8323";
-        carRepository.updateCar(existedCarId, existedBrandId, new Date(), newNumber, new Date(), CarStatus.FREE);*/
+        carRepository.updateCar(existedCarId, existedBrandId, new Date(), newNumber, new Date(), CarStatus.FREE.getId());*/
         //throw new Exception();
         //throw new RuntimeException();
     }
