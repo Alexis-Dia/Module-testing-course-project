@@ -217,17 +217,17 @@ public class UserServiceImpl implements UserService {
      *     Great article about transactional - https://akorsa.ru/2017/01/sovety-i-oshibki-v-spring-transactions/
      * @throws Exception
      */
-    @Transactional(propagation = Propagation.REQUIRES_NEW, noRollbackFor = {RuntimeException.class})
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {Exception.class})
     public void informBankManager() throws Exception {
         System.out.println("Send email to the manager.");
 /*        final int existedCarId = 8;
         final int existedBrandId = 6;
         final int unExistedBrandId = 111;
-        final String newNumber = "HT-8333";
+        final String newNumber = "HT-8338";
         final int existedUserId = 9;
-        final String newLastName = "Vasilev9";*/
+        final String newLastName = "Vasilev9";
         //userRepository.updateLastName(existedUserId, newLastName);
-        //carRepository.updateCar(existedCarId, existedBrandId, new Date(), newNumber, new Date(), CarStatus.FREE.getId());
+        carRepository.updateCar(existedCarId, existedBrandId, new Date(), newNumber, new Date(), CarStatus.FREE.getId());*/
         //final int i = 1/0;
         //throw new Exception();
         //throw new RuntimeException();
