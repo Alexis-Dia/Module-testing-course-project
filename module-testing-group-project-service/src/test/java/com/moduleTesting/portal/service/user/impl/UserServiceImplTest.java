@@ -347,7 +347,7 @@ public class UserServiceImplTest {
 
 
     @Test
-    public void testTransferMoney_Ok() {
+    public void testTransferMoney_Ok() throws Exception {
         userService.transferMoney(EXISTED_USER_ID, REWARD);
 
         verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).updateUserStatus(EXISTED_USER_ID, UserStatus.FREE.getId());
@@ -360,7 +360,7 @@ public class UserServiceImplTest {
     }
 
     @Test(expected= NotEnoughPoundsException.class)
-    public void testTransferMoney_NotEnoughPounds() {
+    public void testTransferMoney_NotEnoughPounds() throws Exception {
         userService.transferMoney(EXISTED_USER_ID, REWARD_500);
 
         verify(userRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findAllByRoleEntity_NameContains(UserRole.ADMIN.getName());

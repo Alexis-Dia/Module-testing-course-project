@@ -6,12 +6,17 @@ import com.moduleTesting.portal.dto.UserStatus;
 import com.moduleTesting.portal.entity.RoleEntity;
 import com.moduleTesting.portal.entity.UserEntity;
 import com.moduleTesting.portal.entity.UserStatusEntity;
+import com.moduleTesting.portal.repository.CarRepository;
 import com.moduleTesting.portal.repository.RoleRepository;
 import com.moduleTesting.portal.repository.UserRepository;
 import com.moduleTesting.portal.repository.UserStatusRepository;
+import com.moduleTesting.portal.service.annotations.SelfInject;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.user.UserService;
-import exceptions.*;
+import exceptions.NotCurrentUserException;
+import exceptions.NotEnoughPoundsException;
+import exceptions.UserAlreadyExistsException;
+import exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -39,6 +44,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    CarRepository carRepository;
+
+    @SelfInject
+    public UserService userServiceProxy;
 
     @Override
     public List<UserDto> findAll() {
@@ -160,16 +171,25 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userEntity);
     }
 
+    /**
+     * This is the case from Eugene Borisov report with self-inject problem in Spring.
+     * By default Spring makes rollbackFor RunTimeException. Therefore we have to consider it.
+     * Using noRollbackFor = {RuntimeException.class} I just want to say that I don't need default behaviour in transaction.
+     * The helpful article about @Transaction - https://akorsa.ru/2017/01/sovety-i-oshibki-v-spring-transactions/
+     * @param userId
+     * @param amount
+     * @throws Exception
+     */
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void transferMoney(Integer userId, Float amount) {
+    @Transactional(propagation = Propagation.REQUIRES_NEW, noRollbackFor = {RuntimeException.class})
+    public void transferMoney(Integer userId, Float amount) throws Exception {
         userRepository.updateUserStatus(userId, UserStatus.FREE.getId());
-        withdraw(ADMIN_ID, amount);
-        deposit(userId, amount);
+        userServiceProxy.withdraw(ADMIN_ID, amount);
+        userServiceProxy.deposit(userId, amount);
     }
 
-    @Transactional(propagation = Propagation.MANDATORY)
-    public void withdraw(Integer fromUser, Float amount) {
+    @Transactional(propagation = Propagation.MANDATORY, noRollbackFor = {RuntimeException.class})
+    public void withdraw(Integer fromUser, Float amount) throws Exception {
         Float adminInitialAmount = getAdmin().getMoney();
         Float resultAdminAmount = adminInitialAmount - amount;
         if (amount < adminInitialAmount ) {
@@ -179,18 +199,22 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void deposit(Integer toUser, Float amount) {
+    @Transactional(propagation = Propagation.REQUIRED, noRollbackFor = {RuntimeException.class})
+    public void deposit(Integer toUser, Float amount) throws Exception {
         Float userInitialAmount = getDriverById(toUser).getMoney();
         Float resultUserAmount = userInitialAmount + amount;
         userRepository.updateBalance(toUser, resultUserAmount);
-        informBankManager();
+        userServiceProxy.informBankManager();
     }
 
-    // FIX ME - it needs to add framework for sending email.
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void informBankManager() {
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {Exception.class, RuntimeException.class})
+    public void informBankManager() throws Exception {
         System.out.println("Send email to the manager.");
+/*        final int existedCarId = 8;
+        final int existedBrandId = 6;
+        carRepository.updateCar(existedCarId, existedBrandId, new Date(), "VVV23", new Date(), 1);*/
+        //throw new Exception();
         //throw new RuntimeException();
     }
+
 }

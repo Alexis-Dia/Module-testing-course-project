@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -108,6 +109,13 @@ public class CarServiceImpl implements CarService {
 
         final List<CarDto> allCars = findAll();
         return allCars;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void informBankManager() {
+        System.out.println("Send email to the manager.");
+        carRepository.updateCar(8, 6, new Date(), "VVV15", new Date(), 1);
+        int i = 1/0;
     }
 
 }

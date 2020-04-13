@@ -76,7 +76,11 @@ public class TaskServiceImpl implements TaskService {
 
         if (statusId == TaskStatus.FINISHED.getId()) {
             Integer driverId = task.getDriver().getId();
-            userService.transferMoney(driverId, task.getReward());
+            try {
+                userService.transferMoney(driverId, task.getReward());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         Integer rowNumber = taskRepository.updateStatusById(taskId, statusId);

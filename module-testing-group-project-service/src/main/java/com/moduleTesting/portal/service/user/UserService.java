@@ -29,5 +29,11 @@ public interface UserService {
 
     void createNewUser(UserDto userDto);
 
-    void transferMoney(Integer userId, Float money);
+    void transferMoney(Integer userId, Float money) throws Exception;
+
+    void informBankManager() throws Exception;
+
+    void withdraw(Integer fromUser, Float amount) throws Exception;
+
+    void deposit(Integer toUser, Float amount) throws Exception;
 }

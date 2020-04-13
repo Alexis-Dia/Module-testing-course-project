@@ -60,7 +60,7 @@ public class TaskServiceImplTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         doReturn(Collections.singletonList(TASK_ENTITY)).when(taskRepository).findAll();
         doReturn(Optional.ofNullable(USER_ENTITY)).when(userRepository).findByLogin(EXISTED_EMAIL);
         given(userRepository.findByLogin(NOT_EXISTED_EMAIL)).willThrow(new UserNotFoundException(MSG_ERR_USER_WASN_T_FOUND));
@@ -158,7 +158,7 @@ public class TaskServiceImplTest {
     }
 
     @Test
-    public void testChangeTaskStatusToFinish_Finished() {
+    public void testChangeTaskStatusToFinish_Finished() throws Exception {
         taskService.changeTaskStatusToFinish(EXISTED_TASK_ID, FINISHED_STATUS_ID, EXISTED_EMAIL);
 
         verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(EXISTED_TASK_ID);
@@ -170,7 +170,7 @@ public class TaskServiceImplTest {
     }
 
     @Test
-    public void testChangeTaskStatusToFinish_NotFinished() {
+    public void testChangeTaskStatusToFinish_NotFinished() throws Exception {
         taskService.changeTaskStatusToFinish(EXISTED_TASK_ID, PROGRESS_STATUS_ID, EXISTED_EMAIL);
 
         verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ONE_TIME)).findById(EXISTED_TASK_ID);
@@ -182,7 +182,7 @@ public class TaskServiceImplTest {
     }
 
     @Test(expected= TaskNotFoundException.class)
-    public void testChangeTaskStatusToFinish_Fail() {
+    public void testChangeTaskStatusToFinish_Fail() throws Exception {
         taskService.changeTaskStatusToFinish(NOT_EXISTED_TASK_ID, PROGRESS_STATUS_ID, EXISTED_EMAIL);
 
         verify(taskRepository, Mockito.times(WANTED_NUMBER_OF_INVOCATIONS_ZERO)).findById(EXISTED_TASK_ID);
