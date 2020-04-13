@@ -188,6 +188,8 @@ Password for any driver - user
             throw new BadCredentialsException("Bad Credentials");
         }
         }
+        
+       http://localhost:8080/task/changeTaskStatusToFinish?taskId=1&statusId=5
        
 Artickle about adding oAuth2.0:        
 https://javarush.ru/groups/posts/2269-druzhim-obihchnihy-vkhod-cherez-email-i-oauth2-v-spring-security-na-primere-servisa-zametok#%D0%A1%D1%83%D1%89%D0%BD%D0%BE%D1%81%D1%82%D0%B8

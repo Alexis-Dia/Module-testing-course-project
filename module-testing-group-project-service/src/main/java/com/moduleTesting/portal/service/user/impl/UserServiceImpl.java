@@ -207,13 +207,27 @@ public class UserServiceImpl implements UserService {
         userServiceProxy.informBankManager();
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {Exception.class, RuntimeException.class})
+    /**
+     *     In case when noRollbackFor = {Exception.class, IllegalStateException.class} and we have two queries: userRepository.updateUser,
+     *     carRepository.updateCar here and when second one will throw an exception (existedBrandId - doesn't exist), for some reason Spring will throw:
+     *     org.springframework.transaction.UnexpectedRollbackException - "Transaction silently rolled back because it has been marked as rollback-only"
+     *     this transaction for some reason will be rolled back.
+     *     I found one answer, but I don't sure that it's the right reason:
+     *     https://stackoverflow.com/questions/19349898/unexpectedrollbackexception-transaction-rolled-back-because-it-has-been-marked
+     * @throws Exception
+     */
+    @Transactional(propagation = Propagation.REQUIRES_NEW, noRollbackFor = {Exception.class, RuntimeException.class})
     public void informBankManager() throws Exception {
         System.out.println("Send email to the manager.");
 /*        final int existedCarId = 8;
         final int existedBrandId = 6;
-        final String newNumber = "HT-8323";
-        carRepository.updateCar(existedCarId, existedBrandId, new Date(), newNumber, new Date(), CarStatus.FREE.getId());*/
+        final int unExistedBrandId = 111;
+        final String newNumber = "HT-8324";
+        final int existedUserId = 9;
+        final String newLastName = "Vasilev5";
+        userRepository.updateLastName(existedUserId, newLastName);
+        carRepository.updateCar(existedCarId, unExistedBrandId, new Date(), newNumber, new Date(), CarStatus.FREE.getId());*/
+        //final int i = 1/0;
         //throw new Exception();
         //throw new RuntimeException();
     }
