@@ -61,7 +61,7 @@ ALTER DATABASE [carriages_system] SET DELAYED_DURABILITY = DISABLED
 GO
 USE [carriages_system]
 GO
-/****** Object:  Table [dbo].[brand]    Script Date: 2/19/2020 12:01:34 PM ******/
+/****** Object:  Table [dbo].[brand]    Script Date: 4/18/2020 8:39:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -69,7 +69,7 @@ GO
 SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[brand](
-	[id] [int] NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL,
 	[brand] [varchar](250) NOT NULL,
 	[carrying_capacity] [float] NOT NULL,
 	[model] [varchar](250) NULL,
@@ -82,7 +82,7 @@ CREATE TABLE [dbo].[brand](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[car]    Script Date: 2/19/2020 12:01:34 PM ******/
+/****** Object:  Table [dbo].[car]    Script Date: 4/18/2020 8:39:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -105,7 +105,7 @@ CREATE TABLE [dbo].[car](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[car_status]    Script Date: 2/19/2020 12:01:34 PM ******/
+/****** Object:  Table [dbo].[car_status]    Script Date: 4/18/2020 8:39:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -113,7 +113,7 @@ GO
 SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[car_status](
-	[id] [int] NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](100) NOT NULL,
  CONSTRAINT [PK_car_status] PRIMARY KEY CLUSTERED
 (
@@ -124,19 +124,19 @@ CREATE TABLE [dbo].[car_status](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[DATABASECHANGELOG]    Script Date: 2/19/2020 12:01:34 PM ******/
+/****** Object:  Table [dbo].[DATABASECHANGELOG]    Script Date: 4/18/2020 8:39:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 
 GO
-/****** Object:  Table [dbo].[DATABASECHANGELOGLOCK]    Script Date: 2/19/2020 12:01:34 PM ******/
+/****** Object:  Table [dbo].[DATABASECHANGELOGLOCK]    Script Date: 4/18/2020 8:39:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 
 GO
-/****** Object:  Table [dbo].[long_report]    Script Date: 2/19/2020 12:01:34 PM ******/
+/****** Object:  Table [dbo].[long_report]    Script Date: 4/18/2020 8:39:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -164,7 +164,7 @@ CREATE TABLE [dbo].[long_report](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[report]    Script Date: 2/19/2020 12:01:34 PM ******/
+/****** Object:  Table [dbo].[report]    Script Date: 4/18/2020 8:39:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -182,7 +182,7 @@ CREATE TABLE [dbo].[report](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[role]    Script Date: 2/19/2020 12:01:34 PM ******/
+/****** Object:  Table [dbo].[role]    Script Date: 4/18/2020 8:39:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -202,7 +202,7 @@ CREATE TABLE [dbo].[role](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[task]    Script Date: 2/19/2020 12:01:34 PM ******/
+/****** Object:  Table [dbo].[task]    Script Date: 4/18/2020 8:39:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -227,7 +227,7 @@ CREATE TABLE [dbo].[task](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[task_report]    Script Date: 2/19/2020 12:01:34 PM ******/
+/****** Object:  Table [dbo].[task_report]    Script Date: 4/18/2020 8:39:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -238,7 +238,7 @@ CREATE TABLE [dbo].[task_report](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[task_status]    Script Date: 2/19/2020 12:01:34 PM ******/
+/****** Object:  Table [dbo].[task_status]    Script Date: 4/18/2020 8:39:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -246,7 +246,7 @@ GO
 SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[task_status](
-	[id] [int] NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](50) NOT NULL,
  CONSTRAINT [PK_task_status] PRIMARY KEY CLUSTERED
 (
@@ -257,7 +257,7 @@ CREATE TABLE [dbo].[task_status](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[user]    Script Date: 2/19/2020 12:01:34 PM ******/
+/****** Object:  Table [dbo].[user]    Script Date: 4/18/2020 8:39:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -284,7 +284,7 @@ CREATE TABLE [dbo].[user](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[user_status]    Script Date: 2/19/2020 12:01:34 PM ******/
+/****** Object:  Table [dbo].[user_status]    Script Date: 4/18/2020 8:39:37 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -292,7 +292,7 @@ GO
 SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[user_status](
-	[id] [int] NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](50) NOT NULL,
  CONSTRAINT [PK_driver_status] PRIMARY KEY CLUSTERED
 (
@@ -303,11 +303,14 @@ CREATE TABLE [dbo].[user_status](
 GO
 SET ANSI_PADDING OFF
 GO
+SET IDENTITY_INSERT [dbo].[brand] ON
+
 INSERT [dbo].[brand] ([id], [brand], [carrying_capacity], [model]) VALUES (2, N'VW', 3540.5, N'Crafter')
 INSERT [dbo].[brand] ([id], [brand], [carrying_capacity], [model]) VALUES (3, N'VW', 1240.5, N'Caddy')
 INSERT [dbo].[brand] ([id], [brand], [carrying_capacity], [model]) VALUES (4, N'Ford', 1240.5, N'Transit')
 INSERT [dbo].[brand] ([id], [brand], [carrying_capacity], [model]) VALUES (5, N'Ford', 4500, N'F650')
 INSERT [dbo].[brand] ([id], [brand], [carrying_capacity], [model]) VALUES (6, N'Scania', 18000, N'R500')
+SET IDENTITY_INSERT [dbo].[brand] OFF
 SET IDENTITY_INSERT [dbo].[car] ON
 
 INSERT [dbo].[car] ([id], [brand_id], [year], [number], [date_of_receipt], [status_id]) VALUES (4, 4, CAST(N'1999-06-23' AS Date), N'OP-1871', CAST(N'2001-06-23' AS Date), 1)
@@ -316,8 +319,11 @@ INSERT [dbo].[car] ([id], [brand_id], [year], [number], [date_of_receipt], [stat
 INSERT [dbo].[car] ([id], [brand_id], [year], [number], [date_of_receipt], [status_id]) VALUES (7, 5, CAST(N'2019-03-11' AS Date), N'JZ-4915', CAST(N'2021-03-11' AS Date), 1)
 INSERT [dbo].[car] ([id], [brand_id], [year], [number], [date_of_receipt], [status_id]) VALUES (8, 6, CAST(N'2007-10-07' AS Date), N'AA-1357', CAST(N'2009-10-07' AS Date), 1)
 SET IDENTITY_INSERT [dbo].[car] OFF
+SET IDENTITY_INSERT [dbo].[car_status] ON
+
 INSERT [dbo].[car_status] ([id], [name]) VALUES (1, N'FREE')
 INSERT [dbo].[car_status] ([id], [name]) VALUES (2, N'BUSY')
+SET IDENTITY_INSERT [dbo].[car_status] OFF
 INSERT [dbo].[long_report] ([id], [carId], [driver_id], [departure], [weight], [distance], [arrival], [departure_date], [departure_time], [arrival_date], [arrival_time]) VALUES (1, 4, 1, CAST(N'2019-12-30 11:00:00.000' AS DateTime), CAST(1345 AS Decimal(18, 0)), CAST(1528 AS Decimal(18, 0)), CAST(N'2020-01-07 06:00:00.000' AS DateTime), N'2019-08-27', N'07:00:00.0000000', N'2020-01-07', N'06:00:00.0000000')
 INSERT [dbo].[long_report] ([id], [carId], [driver_id], [departure], [weight], [distance], [arrival], [departure_date], [departure_time], [arrival_date], [arrival_time]) VALUES (2, 6, 5, CAST(N'2019-10-01 07:00:00.000' AS DateTime), CAST(2500 AS Decimal(18, 0)), CAST(400 AS Decimal(18, 0)), CAST(N'2019-10-11 14:00:00.000' AS DateTime), N'2019-10-05', N'07:00:00.0000000', N'2019-10-11', N'14:00:00.0000000')
 INSERT [dbo].[long_report] ([id], [carId], [driver_id], [departure], [weight], [distance], [arrival], [departure_date], [departure_time], [arrival_date], [arrival_time]) VALUES (3, 6, 5, CAST(N'2019-10-07 07:00:00.000' AS DateTime), CAST(2900 AS Decimal(18, 0)), CAST(2111 AS Decimal(18, 0)), CAST(N'2019-10-15 14:00:00.000' AS DateTime), N'2019-10-07', N'07:00:00.0000000', N'2019-10-15', N'14:00:00.0000000')
@@ -431,12 +437,15 @@ INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (6, 45)
 INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (7, 46)
 INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (7, 47)
 INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (7, 48)
+SET IDENTITY_INSERT [dbo].[task_status] ON
+
 INSERT [dbo].[task_status] ([id], [name]) VALUES (1, N'FREE')
 INSERT [dbo].[task_status] ([id], [name]) VALUES (2, N'IN_PROGRESS')
 INSERT [dbo].[task_status] ([id], [name]) VALUES (3, N'VALIDATING')
 INSERT [dbo].[task_status] ([id], [name]) VALUES (4, N'REJECTED')
 INSERT [dbo].[task_status] ([id], [name]) VALUES (5, N'FINISHED')
 INSERT [dbo].[task_status] ([id], [name]) VALUES (6, N'PARTIALLY')
+SET IDENTITY_INSERT [dbo].[task_status] OFF
 SET IDENTITY_INSERT [dbo].[user] ON
 
 INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id]) VALUES (1, N'Admin', N'Admin', N'Admin', CAST(N'1990-04-04 00:00:00.000' AS DateTime), N'admin@tut.by', N'$2a$10$J0A7uh8cH6Y.FWsKnNgChusy2dG/EBDGCQPalZikLQu31jY0y/4te', 1000000, 1, 1)
@@ -446,17 +455,21 @@ INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], 
 INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id]) VALUES (7, N'Ivanov', N'Afanasiy', N'Konstantinovich', CAST(N'1978-06-05 00:00:00.000' AS DateTime), N'ivanov@gmail.com', N'$2a$10$TaL53CBJ7.yeJkni7NjqF.jHOCQ1jjY.rLxqf.yBLD/qdfOa4Cukm', 0, 2, 1)
 INSERT [dbo].[user] ([id], [last_name], [first_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id]) VALUES (9, N'Vasilev', N'Arkadiy', N'Arkkadievich', CAST(N'1923-04-04 00:00:00.000' AS DateTime), N'vasiliev@tut.by', N'$2a$10$TaL53CBJ7.yeJkni7NjqF.jHOCQ1jjY.rLxqf.yBLD/qdfOa4Cukm', 0, 2, 1)
 SET IDENTITY_INSERT [dbo].[user] OFF
+SET IDENTITY_INSERT [dbo].[user_status] ON
+
 INSERT [dbo].[user_status] ([id], [name]) VALUES (1, N'FREE')
 INSERT [dbo].[user_status] ([id], [name]) VALUES (2, N'BUSY')
-/****** Object:  Index [IX_task_report]    Script Date: 2/19/2020 12:01:34 PM ******/
+SET IDENTITY_INSERT [dbo].[user_status] OFF
+/****** Object:  Index [IX_task_report]    Script Date: 4/18/2020 8:39:37 PM ******/
 ALTER TABLE [dbo].[task_report] ADD  CONSTRAINT [IX_task_report] UNIQUE NONCLUSTERED
 (
 	[reports_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_user]    Script Date: 2/20/2020 10:44:54 AM ******/
+/****** Object:  Index [IX_user]    Script Date: 4/18/2020 8:39:37 PM ******/
 ALTER TABLE [dbo].[user] ADD  CONSTRAINT [IX_user] UNIQUE NONCLUSTERED
 (
 	[login] ASC
@@ -506,4 +519,11 @@ ALTER TABLE [dbo].[user]  WITH CHECK ADD  CONSTRAINT [FK_user_user_status] FOREI
 REFERENCES [dbo].[user_status] ([id])
 GO
 ALTER TABLE [dbo].[user] CHECK CONSTRAINT [FK_user_user_status]
+GO
+CREATE VIEW FullUserView([id], [last_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id], [name]) AS
+SELECT u.id, u.id, u.id, u.id, u.id, u.id, u.id, u.id, u.id, s.name FROM
+[carriages_system].[dbo].[user] AS u
+left join
+user_status AS s
+ON u.status_id = s.id
 GO
