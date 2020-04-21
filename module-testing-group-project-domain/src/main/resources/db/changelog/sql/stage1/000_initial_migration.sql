@@ -390,6 +390,8 @@ INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], 
 INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (5, 469, 231, NULL, NULL, 1, 290, N'Baranovichi-Svetlogorsk')
 INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (6, 579, 1200, 9, 4, 5, 290, N'Brest-Vitebsk')
 INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (7, 469, 981, 9, 4, 5, 290, N'Grodno-Kiev')
+INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (8, 400, 250, NULL, NULL, 1, 200, N'Brest-Gomel')
+INSERT [dbo].[task] ([id], [summary_distance], [weight], [driver_id], [car_id], [status_id], [reward], [name]) VALUES (9, 500, 350, NULL, NULL, 1, 300, N'Lunenets-Dokcshizy')
 SET IDENTITY_INSERT [dbo].[task] OFF
 INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 1)
 INSERT [dbo].[task_report] ([task_id], [reports_id]) VALUES (1, 2)
@@ -519,6 +521,7 @@ ALTER TABLE [dbo].[user]  WITH CHECK ADD  CONSTRAINT [FK_user_user_status] FOREI
 REFERENCES [dbo].[user_status] ([id])
 GO
 ALTER TABLE [dbo].[user] CHECK CONSTRAINT [FK_user_user_status]
+
 GO
 CREATE VIEW FullUserView([id], [last_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id], [name]) AS
 SELECT u.id, u.id, u.id, u.id, u.id, u.id, u.id, u.id, u.id, s.name FROM
@@ -526,4 +529,66 @@ SELECT u.id, u.id, u.id, u.id, u.id, u.id, u.id, u.id, u.id, s.name FROM
 left join
 user_status AS s
 ON u.status_id = s.id
+
 GO
+CREATE FUNCTION GetFreeTasks()
+RETURNS TABLE
+AS
+RETURN
+SELECT *
+FROM [task] AS t
+WHERE t.status_id = 1
+
+GO
+CREATE FUNCTION GetMineFinishedTasks(@driver_id int)
+RETURNS TABLE
+AS
+RETURN
+SELECT *
+FROM [task] AS t
+WHERE t.driver_id = @driver_id AND t.status_id = 5
+
+GO
+CREATE FUNCTION GetMineCurrentTasks(@driver_id int)
+RETURNS TABLE
+AS
+RETURN
+SELECT *
+FROM [task] AS t
+WHERE t.driver_id = @driver_id AND t.status_id = 2
+
+GO
+CREATE FUNCTION GetReportsByDrivarIdAndTaskId(@driver_id int, @task_id int)
+RETURNS TABLE
+AS
+RETURN
+SELECT *
+FROM [task_report] AS tr
+LEFT JOIN
+[task] as t
+ON t.id = tr.task_id
+WHERE t.driver_id = @driver_id AND t.id = @task_id
+
+GO
+CREATE FUNCTION GetReportsForActiveTask(@driver_id int)
+RETURNS TABLE
+AS
+RETURN
+SELECT * FROM report WHERE id IN
+(SELECT reports_id FROM task_report where task_id = (SELECT top 1 id FROM task WHERE driver_id = @driver_id AND status_id = 2))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
