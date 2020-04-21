@@ -577,23 +577,6 @@ RETURN
 SELECT * FROM report WHERE id IN
 (SELECT reports_id FROM task_report where task_id = (SELECT top 1 id FROM task WHERE driver_id = @driver_id AND status_id = 2))
 
-GO
-CREATE PROCEDURE ADD_REPORT
-(@current_task_id int OUTPUT, @current_user_id int OUTPUT, @departure DATETIME OUTPUT,  @weight int OUTPUT,  @distance int OUTPUT, @arrival DATETIME OUTPUT)
-AS
-BEGIN
-DECLARE @current_report_id int;
-SET @current_report_id = (SELECT IDENT_CURRENT('report') + 1);
-SET IDENTITY_INSERT report ON;
-INSERT INTO [dbo].[report] ([id],[departure],[weight],[distance], [arrival])
-     VALUES (@current_report_id, @departure, @weight, @distance, @arrival);
-INSERT INTO [dbo].[task_report] ([task_id],[reports_id])
-VALUES (@current_task_id, @current_report_id);
-SET IDENTITY_INSERT report OFF ;
-SELECT * FROM dbo.GetReportsForActiveTask(@current_user_id)  ORDER BY id
-END
-
-
 
 
 

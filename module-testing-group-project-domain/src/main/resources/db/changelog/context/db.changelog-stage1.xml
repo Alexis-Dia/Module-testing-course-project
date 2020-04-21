@@ -9,4 +9,9 @@
         <sqlFile path="/db/changelog/sql/stage1/000_initial_migration.sql"/>
     </changeSet>
 
+<!--    <changeSet id="001_stored_procedures.sql" author="adruzik">
+        <comment>Initial schema migration</comment>
+        <sqlFile path="/db/changelog/sql/stage1/001_stored_procedures.sql"/>
+    </changeSet>-->
+
 </databaseChangeLog>
