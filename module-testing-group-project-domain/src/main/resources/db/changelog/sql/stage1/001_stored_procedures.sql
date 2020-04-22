@@ -6,7 +6,7 @@ BEGIN
 DECLARE @random_free_car_id int;
 SET @random_free_car_id = (SELECT TOP 1 id FROM car WHERE status_id = 1);
 UPDATE task SET status_id = 2, car_id = @random_free_car_id, driver_id = @current_user_id WHERE id = @chosen_task_id;
-UPDATE [carriages_system].[dbo].[user] SET status_id = 2;
+UPDATE [carriages_system].[dbo].[user] SET status_id = 2 WHERE id = @current_user_id;
 SELECT * FROM dbo.GetFreeTasks() ORDER BY id;
 END
 
@@ -40,7 +40,10 @@ CREATE PROCEDURE VALIDATE_TASK_TO_REJECTED
 (@chosen_task_id int OUTPUT)
 AS
 BEGIN
+DECLARE @current_user_id int;
+SET @current_user_id = (SELECT TOP 1 driver_id FROM task WHERE id = @chosen_task_id);
 UPDATE task SET status_id = 4 WHERE id = @chosen_task_id;
+UPDATE [carriages_system].[dbo].[user] SET status_id = 1 WHERE id = @current_user_id;
 SELECT * FROM task ORDER BY id;
 END
 
@@ -49,6 +52,20 @@ CREATE PROCEDURE VALIDATE_TASK_TO_FINISHED
 (@chosen_task_id int OUTPUT)
 AS
 BEGIN
+DECLARE @reward float;
+DECLARE @adminAmount float;
+DECLARE @driverAmount float;
+DECLARE @newAdminAmount float;
+DECLARE @newDriverAmount float;
+DECLARE @current_user_id int;
+SET @current_user_id = (SELECT TOP 1 driver_id FROM task WHERE id = @chosen_task_id);
+SET @reward = (SELECT t.reward FROM task as t WHERE t.id = @chosen_task_id);
+SET @adminAmount = (SELECT u.money FROM [carriages_system].[dbo].[user] as u WHERE u.id = 1);
+SET @driverAmount = (SELECT u.money FROM [carriages_system].[dbo].[user] as u WHERE u.id = @current_user_id);
+SET @newAdminAmount = @adminAmount - @reward;
+SET @newDriverAmount = @driverAmount + @reward;
 UPDATE task SET status_id = 5 WHERE id = @chosen_task_id;
+UPDATE [carriages_system].[dbo].[user] SET money = @newAdminAmount WHERE id = 1;
+UPDATE [carriages_system].[dbo].[user] SET status_id = 1, money = @newDriverAmount WHERE id = @current_user_id;
 SELECT * FROM task ORDER BY id;
 END
