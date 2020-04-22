@@ -26,3 +26,29 @@ SET IDENTITY_INSERT report OFF ;
 SELECT * FROM dbo.GetReportsForActiveTask(@current_user_id)  ORDER BY id
 END
 
+GO
+CREATE PROCEDURE SEND_TO_VALIDATION_TASK
+(@chosen_task_id int OUTPUT)
+AS
+BEGIN
+UPDATE task SET status_id = 3 WHERE id = @chosen_task_id;
+SELECT * FROM dbo.GetFreeTasks() ORDER BY id;
+END
+
+GO
+CREATE PROCEDURE VALIDATE_TASK_TO_REJECTED
+(@chosen_task_id int OUTPUT)
+AS
+BEGIN
+UPDATE task SET status_id = 4 WHERE id = @chosen_task_id;
+SELECT * FROM task ORDER BY id;
+END
+
+GO
+CREATE PROCEDURE VALIDATE_TASK_TO_FINISHED
+(@chosen_task_id int OUTPUT)
+AS
+BEGIN
+UPDATE task SET status_id = 5 WHERE id = @chosen_task_id;
+SELECT * FROM task ORDER BY id;
+END
