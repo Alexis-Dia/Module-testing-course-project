@@ -548,8 +548,8 @@ CREATE TABLE [carriages_system].[dbo].[audit_report_data](
 
 --1. Создать представление, содержащее полную информацию о водителе.
 GO
-CREATE VIEW FullUserView([id], [last_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id], [name]) AS
-SELECT u.id, u.first_name, u.last_name, u.birthday, u.login, u.password, u.money, u.role_id, u.status_id, s.name FROM
+CREATE VIEW FullUserView([id], [first_name], [last_name], [patronymic], [birthday], [login], [password], [money], [role_id], [status_id], [name]) AS
+SELECT u.id, u.first_name, u.last_name, u.patronymic, u.birthday, u.login, u.password, u.money, u.role_id, u.status_id, s.name FROM
 [carriages_system].[dbo].[user] AS u
 left join
 user_status AS s
