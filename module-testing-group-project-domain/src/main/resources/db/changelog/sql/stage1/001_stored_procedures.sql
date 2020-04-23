@@ -1,16 +1,4 @@
 GO
-CREATE PROCEDURE TAKE_TASK
-(@chosen_task_id int OUTPUT, @current_user_id int OUTPUT)
-AS
-BEGIN
-DECLARE @random_free_car_id int;
-SET @random_free_car_id = (SELECT TOP 1 id FROM car WHERE status_id = 1);
-UPDATE task SET status_id = 2, car_id = @random_free_car_id, driver_id = @current_user_id WHERE id = @chosen_task_id;
-UPDATE [carriages_system].[dbo].[user] SET status_id = 2 WHERE id = @current_user_id;
-SELECT * FROM dbo.GetFreeTasks() ORDER BY id;
-END
-
-GO
 CREATE PROCEDURE ADD_REPORT
 (@current_task_id int OUTPUT, @current_user_id int OUTPUT, @departure DATETIME OUTPUT,  @weight int OUTPUT,  @distance int OUTPUT, @arrival DATETIME OUTPUT)
 AS
@@ -26,6 +14,26 @@ SET IDENTITY_INSERT report OFF ;
 SELECT * FROM dbo.GetReportsForActiveTask(@current_user_id)  ORDER BY id
 END
 
+--GO
+--DROP PROCEDURE ADD_REPORT
+--GO
+--EXECUTE ADD_REPORT @current_task_id=3, @current_user_id=2, @departure='1/15/2020 7:00 AM', @weight=3, @distance=99, @arrival='1/15/2020 7:00 AM'
+
+GO
+CREATE PROCEDURE TAKE_TASK
+(@chosen_task_id int OUTPUT, @current_user_id int OUTPUT)
+AS
+BEGIN
+DECLARE @random_free_car_id int;
+SET @random_free_car_id = (SELECT TOP 1 id FROM car WHERE status_id = 1);
+UPDATE task SET status_id = 2, car_id = @random_free_car_id, driver_id = @current_user_id WHERE id = @chosen_task_id;
+UPDATE [carriages_system].[dbo].[user] SET status_id = 2 WHERE id = @current_user_id;
+SELECT * FROM dbo.GetFreeTasks() ORDER BY id;
+END
+
+--GO
+--DROP PROCEDURE TAKE_TASK
+
 GO
 CREATE PROCEDURE SEND_TO_VALIDATION_TASK
 (@chosen_task_id int OUTPUT)
@@ -34,6 +42,8 @@ BEGIN
 UPDATE task SET status_id = 3 WHERE id = @chosen_task_id;
 SELECT * FROM dbo.GetFreeTasks() ORDER BY id;
 END
+
+--DROP PROCEDURE SEND_TO_VALIDATION_TASK
 
 GO
 CREATE PROCEDURE VALIDATE_TASK_TO_REJECTED
@@ -46,6 +56,7 @@ UPDATE task SET status_id = 4 WHERE id = @chosen_task_id;
 UPDATE [carriages_system].[dbo].[user] SET status_id = 1 WHERE id = @current_user_id;
 SELECT * FROM task ORDER BY id;
 END
+--DROP PROCEDURE VALIDATE_TASK_TO_REJECTED
 
 GO
 CREATE PROCEDURE VALIDATE_TASK_TO_FINISHED
@@ -69,3 +80,7 @@ UPDATE [carriages_system].[dbo].[user] SET money = @newAdminAmount WHERE id = 1;
 UPDATE [carriages_system].[dbo].[user] SET status_id = 1, money = @newDriverAmount WHERE id = @current_user_id;
 SELECT * FROM task ORDER BY id;
 END
+
+--DROP PROCEDURE VALIDATE_TASK_TO_FINISHED
+
+
