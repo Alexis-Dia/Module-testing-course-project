@@ -9,9 +9,24 @@
         <sqlFile path="/db/changelog/sql/stage1/000_initial_migration.sql"/>
     </changeSet>
 
-<!--    <changeSet id="001_stored_procedures.sql" author="adruzik">
-        <comment>Initial schema migration</comment>
-        <sqlFile path="/db/changelog/sql/stage1/001_stored_procedures.sql"/>
+    <changeSet id="001_views.sql" author="adruzik">
+        <comment>Initial schema for views</comment>
+        <sqlFile path="/db/changelog/sql/stage1/001_views.sql"/>
+    </changeSet>
+
+    <changeSet id="002_functions.sql" author="adruzik">
+        <comment>Initial schema for functions</comment>
+        <sqlFile path="/db/changelog/sql/stage1/002_functions.sql"/>
+    </changeSet>
+
+<!--    <changeSet id="003_stored_procedures.sql" author="adruzik">
+        <comment>Initial schema migration3</comment>
+        <sqlFile path="/db/changelog/sql/stage1/003_stored_procedures.sql"/>
+    </changeSet>
+
+    <changeSet id="004_triggers.sql" author="adruzik">
+        <comment>Initial schema migration4</comment>
+        <sqlFile path="/db/changelog/sql/stage1/004_triggers.sql"/>
     </changeSet>-->
 
 </databaseChangeLog>
