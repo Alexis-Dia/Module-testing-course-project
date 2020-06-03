@@ -4,6 +4,7 @@ import com.moduleTesting.portal.dto.UserDto;
 import com.moduleTesting.portal.dto.UserRole;
 import com.moduleTesting.portal.dto.UserStatus;
 import com.moduleTesting.portal.entity.UserEntity;
+import com.moduleTesting.portal.repository.CarRepository;
 import com.moduleTesting.portal.repository.RoleRepository;
 import com.moduleTesting.portal.repository.UserRepository;
 import com.moduleTesting.portal.repository.UserStatusRepository;
@@ -43,7 +44,7 @@ public class UserServiceImplTest {
     static class userServiceImplTestContextConfiguration {
 
         @Bean
-        public UserService reportService() {
+        public UserService userService() {
             return new UserServiceImpl();
         }
     }
@@ -56,6 +57,9 @@ public class UserServiceImplTest {
 
     @MockBean
     RoleRepository roleRepository;
+
+    @MockBean
+    CarRepository carRepository;
 
     @Before
     public void setUp() {
