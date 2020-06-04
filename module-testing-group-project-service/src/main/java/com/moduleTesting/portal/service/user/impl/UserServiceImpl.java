@@ -13,6 +13,7 @@ import com.moduleTesting.portal.repository.UserStatusRepository;
 import com.moduleTesting.portal.service.annotations.SelfInject;
 import com.moduleTesting.portal.service.mapper.DtoMapper;
 import com.moduleTesting.portal.service.user.UserService;
+import com.moduleTesting.portal.service.validators.Validator;
 import exceptions.NotCurrentUserException;
 import exceptions.NotEnoughPoundsException;
 import exceptions.UserAlreadyExistsException;
@@ -157,6 +158,28 @@ public class UserServiceImpl implements UserService {
 
         //TODO - Try to check working of correct transaction work
         Optional<UserDto> userByLogin = this.findByLogin(userDto.getEmailAddress());
+
+        //FIXME - Ugly solution, try to use Java8 lambda and think about checking it on the controller or interceptor layer.
+        boolean firstNameIsValid = Validator.isUserNameValid(userDto.getFirstName());
+        if (!firstNameIsValid) {
+            throw new RuntimeException(MSG_ERR_FIRST_NAME_IS_NOT_VALID);
+        }
+
+        boolean lastNameIsValid = Validator.isUserLastNameValid(userDto.getFirstName());
+        if (!lastNameIsValid) {
+            throw new RuntimeException(MSG_ERR_LAST_NAME_IS_NOT_VALID);
+        }
+
+        boolean birthDateIsValid = Validator.isBirthDateValid(userDto.getBirthday());
+        if (!birthDateIsValid) {
+            throw new RuntimeException(MSG_ERR_BIRTHDAY_IS_NOT_VALID);
+        }
+
+        boolean emailAddressIsValid = Validator.isEmailValid(userDto.getEmailAddress());
+        if (!emailAddressIsValid) {
+            throw new RuntimeException(MSG_ERR_EMAIL_IS_NOT_VALID);
+        }
+
         userByLogin.ifPresent(ob -> {throw new UserAlreadyExistsException(MSG_ERR_USER_ALREADY_EXISTS);});
 
         final RoleEntity userRole = new RoleEntity(UserRole.USER.getId());
