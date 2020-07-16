@@ -13,9 +13,15 @@ public class Validator {
         if (lastName == null) {
             return false;
         }
-        if (lastName.trim().length() < 3 || lastName.trim().length() > 30) {
+        if (lastName.trim().length() < 4 || lastName.trim().length() > 25) {
             return false;
         }
+        Pattern pattern = Pattern.compile("[A-Za-z0-9_-]{4,25}$");
+        Matcher mat = pattern.matcher(lastName);
+        if(!mat.matches()){
+            return false;
+        }
+
         return true;
     }
 
@@ -23,9 +29,15 @@ public class Validator {
         if (name == null) {
             return false;
         }
-        if (name.trim().length() < 2 || name.trim().length() > 15) {
+        if (name.trim().length() < 4 || name.trim().length() > 25) {
             return false;
         }
+        Pattern pattern = Pattern.compile("[A-Za-z0-9_-]{4,25}$");
+        Matcher mat = pattern.matcher(name);
+        if(!mat.matches()){
+            return false;
+        }
+
         return true;
     }
 
