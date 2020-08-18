@@ -215,6 +215,8 @@ public class UserServiceImpl implements UserService {
      *     I found one answer, but I don't sure that it's the right reason:
      *     https://stackoverflow.com/questions/19349898/unexpectedrollbackexception-transaction-rolled-back-because-it-has-been-marked
      *     Great article about transactional - https://akorsa.ru/2017/01/sovety-i-oshibki-v-spring-transactions/
+     *     Update from 18.08.2020 - По умолчанию транзакцкия откатывается при возникновении ошибки, но параметором rollbackFor
+     *         можно уточнить, при возникновении какой именно откатывать транзакцию.
      * @throws Exception
      */
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {Exception.class})
