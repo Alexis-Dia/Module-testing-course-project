@@ -9,7 +9,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <some.version>5.0.4.RELEASE</some.version>
+        <some.version>5.2.10.RELEASE</some.version>
     </properties>
 
     <parent>
